@@ -1,0 +1,310 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: "MonitoRSS — Free RSS Feed Delivery Bot",
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    callToAction={{ text: 'Invite Me', href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456', icon: 'tabler:user-plus' }}
+    callToAction2={{ text: 'Control Panel', href: 'https://monitorss.xyz/cp' }}
+    image={{ src: import('~/assets/images/discord.png'), alt: 'MonitoRSS articles in Discord' }}
+  >
+    <Fragment slot="title">
+      Get news delivered, automagically.
+      <!-- Free template for <span class="hidden xl:inline">creating websites with</span>
+      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS -->
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        <span class="font-semibold">MonitoRSS</span> is a free and open-source bot that delivers customized news straight to your Discord server.</span
+      >
+      Connect popular news sources like YouTube, Reddit, Crunchyroll, or even traditional news outlets to keep your communities up to date.
+    </Fragment>
+  </Hero>
+
+  <!-- Note Widget ******************* -->
+
+  <!-- <Note /> -->
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    items={[
+      { name: 'Communities', value: '70k' },
+      { name: 'Sources of news registered', value: '75k' },
+      { name: 'Articles delivered', value: '500m' },
+    ]}
+  />
+
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    tagline="Features"
+    title="What you get with MonitoRSS"
+    subtitle="A taste of what you can do"
+    items={[
+      {
+        title: 'Article Filtering',
+        description:
+          'Use filters to filter out articles you don\'t want in your feed.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'Notifications',
+        description:
+          'Mention users or roles when an article of their liking comes in with the use of filters.',
+        icon: 'tabler:at',
+      },
+      {
+        title: 'Property Placeholders',
+        description:
+          'Extract information from each articles to add article-specific information into each message.',
+        icon: 'tabler:copy',
+      },
+      {
+        title: 'Filtered Message Formats',
+        description:
+          'Customize the message of any given article based on the contents of the article.',
+        icon: 'tabler:tools',
+      },
+      {
+        title: 'Reliability',
+        description:
+          'Active for over 6 years, you can count on your articles getting delivered.',
+        icon: 'tabler:shield-check-filled',
+      },
+      {
+        title: 'Open Source',
+        description:
+          'Host the bot on your own. The source code is openly available under the MIT license for anyone to use and host. Spread the love!',
+        icon: 'tabler:brand-github',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="Common news feeds"
+    subtitle="Used by various communities right this moment!"
+    tagline="Use cases"
+    items={[
+      {
+        title: 'Social Media',
+        description:
+          'Get notified when someone creates a new post on Reddit or uploads a YouTube video that you are interested in.',
+        icon: 'flat-color-icons:reddit',
+      },
+      {
+        title: 'Investments',
+        description:
+          'Make informed financial decisions by receiving updates on the latest news and trends in the stock market or cryptocurrencies.',
+        icon: 'flat-color-icons:bullish',
+      },
+      {
+        title: 'Traditional News',
+        description:
+          'Stay up to date on everything that\'s happening in your local community, or just the world in general.',
+        icon: 'flat-color-icons:news',
+      },
+      {
+        title: 'Games',
+        description:
+          'Get notified of updates, releases, or discounts from your favorite game developers and publishers.',
+        icon: 'flat-color-icons:steam',
+      },
+      {
+        title: 'Weather',
+        description:
+          'Plan ahead by getting weather forecasts or alerts to stay safe.',
+        icon: 'flat-color-icons:landscape',
+      },
+      {
+        title: 'Anime',
+        description:
+          'Get notified when a new episode of your favorite anime is released.',
+        icon: 'flat-color-icons:reading-ebook',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Content Widget **************** -->
+
+  <!-- <Content
+    tagline="Inside template"
+    title="And what's inside? ..."
+    items={[
+      {
+        title: 'Per ei quaeque sensibus',
+        description:
+          'Ex usu illum iudico molestie. Pro ne agam facete mediocritatem, ridens labore facete mea ei. Pro id apeirian dignissim.',
+      },
+      {
+        title: 'Cu imperdiet posidonium sed',
+        description:
+          'Amet utinam aliquando ut mea, malis admodum ocurreret nec et, elit tibique cu nec. Nec ex maluisset inciderint, ex quis.',
+      },
+      {
+        title: 'Nulla omittam sadipscing mel ne',
+        description:
+          'At sed possim oporteat probatus, justo graece ne nec, minim commodo legimus ut vix. Ut eos iudico quando soleat, nam modus.',
+      },
+    ]}
+    image={{
+      src: import('~/assets/images/caos.jpg'),
+      alt: 'Colorful Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Ad vix debet docendi</h3>
+      Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod
+      tacimates.
+    </Fragment>
+  </Content> -->
+
+  <!-- Content Widget **************** -->
+
+  <!-- <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Per ei quaeque sensibus',
+      },
+      {
+        title: 'Cu imperdiet posidonium sed',
+      },
+      {
+        title: 'Nulla omittam sadipscing mel ne',
+      },
+      {
+        title: 'Per ei quaeque sensibus',
+      },
+      {
+        title: 'Cu imperdiet posidonium sed',
+      },
+      {
+        title: 'Nulla omittam sadipscing mel ne',
+      },
+    ]}
+    image={{
+      src: import('~/assets/images/vintage.jpg'),
+      alt: 'Vintage Image',
+    }}
+  /> -->
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    title="Set up your feeds in no time."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Invite me</span>',
+        description:
+          'Click <a class="text-blue-300" href="https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456" target="_blank" rel="noopener noreferrer">this link</a> to invite me to your server .',
+        icon: 'tabler:user-plus',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Find a valid RSS feed</em>',
+        description:
+          'All it takes is some Googling - an example feed would be https://www.gameinformer.com/news.xml.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Add the feed</span>',
+        description:
+          'Log into the control panel and add the feed to a server channel.',
+        icon: 'tabler:plus',
+      },
+      {
+        title: 'Done!',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: import('~/assets/images/creativity.jpg'),
+      alt: 'Steps image',
+    }}
+  />
+  <!-- HighlightedPosts Widget ******* -->
+
+  <!-- <BlogLatestPosts
+    title="Find out more content in our Blog"
+    information={`The blog is used to display AstroWind documentation.
+                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
+                        Astro is a very interesting technology. Thanks.
+                `}
+  /> -->
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle=""
+    tagline="FAQs"
+    items={[
+      {
+        title: 'How much will it cost me to use?',
+        description:
+          'Nothing! It\'s completely free for up to 5 feeds, forever.',
+      },
+      {
+        title: 'How do I use the bot?',
+        description:
+          "You can explore all the controls for managing your feeds can be found within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!",
+      },
+      {
+        title: "Are there any restrictions if I self-host?",
+        description:
+          "Nope! You can host the bot on your own server and have as many feeds as you want.",
+      },
+      {
+        title: "I have a suggestion and/or feedback! Where can I post it?",
+        description:
+          "We'd love to hear it! You can join the Discord Server and post your suggestion, submit it via the Help button at the bottom right of this very page, or create an issue on GitHub.",
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    callToAction={{
+      text: 'Invite Me',
+      href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
+      icon: 'tabler:user-plus',
+    }}
+  >
+    <Fragment slot="title">
+      Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap"> started?</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      It only take a couple of minutes to start getting your news delivered!
+    </Fragment>
+  </CallToAction>
+</Layout>

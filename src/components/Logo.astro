@@ -1,0 +1,12 @@
+---
+import { SITE_CONFIG } from '~/utils/config';
+import logoSvg from '../assets/images/monitorss-logo.svg'
+import { Picture } from '@astrojs/image/components';
+---
+
+<span class="self-center ml-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+  <span class="pr-2 align-text-bottom">
+  <Picture style="display: inline-block" src={logoSvg.src} alt="MonitoRSS logo" widths={[24, 32]} aspectRatio="1:1" sizes="(max-width: 768px) 32px, 24px" />
+  </span>
+  {SITE_CONFIG?.name}
+</span>
