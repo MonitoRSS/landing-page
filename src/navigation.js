@@ -90,7 +90,7 @@ export const headerData = {
       href: '#',
     },
   ],
-  actions: [{ type: 'button', text: 'Control Panel', href: 'https://monitorss.xyz/cp' }],
+  actions: [{ type: 'button', text: 'Control Panel', href: 'https://my.monitorss.xyz' }],
 };
 
 export const footerData = {
