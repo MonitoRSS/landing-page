@@ -270,12 +270,12 @@ const metadata = {
       {
         title: 'How much will it cost me to use?',
         description:
-          'Nothing! It\'s completely free for up to 5 feeds, forever.',
+          'Nothing - it\'s completely free for up to 5 feeds.',
       },
       {
         title: 'How do I use the bot?',
         description:
-          "You can explore all the controls for managing your feeds can be found within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!",
+          "You can explore all the controls for managing your feeds within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!",
       },
       {
         title: "Are there any restrictions if I self-host?",
@@ -287,6 +287,10 @@ const metadata = {
         description:
           "We'd love to hear it! You can join the Discord Server and post your suggestion, submit it via the Help button at the bottom right of this very page, or create an issue on GitHub.",
       },
+      {
+        title: 'Are articles delivered automatically?',
+        description: 'Yes! After a feed is added, as soon as a new article is found on the feed, it will automatically be delivered.'
+      }
     ]}
   />
 
@@ -300,7 +304,7 @@ const metadata = {
     }}
   >
     <Fragment slot="title">
-      Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap"> started?</span>
+      Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">{" "}started?</span>
     </Fragment>
 
     <Fragment slot="subtitle">
@@ -308,3 +312,11 @@ const metadata = {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+	window.fwSettings={
+	'widget_id':151000004380
+	};
+	!function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+</script>
+<script type='text/javascript' src='https://widget.freshworks.com/widgets/151000004380.js' async defer></script>

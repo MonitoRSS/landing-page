@@ -87,7 +87,7 @@ export const headerData = {
     },
     {
       text: 'Support',
-      href: '#',
+      href: 'https://discord.gg/pudv7Rx',
     },
   ],
   actions: [{ type: 'button', text: 'Control Panel', href: 'https://my.monitorss.xyz' }],

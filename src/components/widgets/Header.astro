@@ -113,6 +113,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
                     { "aw-link-active": href === currentPath }
                   ]}
                   href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                   {text}
                 </a>
