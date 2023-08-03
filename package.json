@@ -50,8 +50,5 @@
   },
   "engines": {
     "node": ">=16.12.0"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^6.6.2"
   }
 }
