@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Pricing from '~/components/widgets/Pricing.astro';
 import FAQs from '../components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: "Pricing",
@@ -136,5 +137,28 @@ const metadata = {
       }
     ]}
   />
+
+  <CallToAction
+    callToAction={{
+      text: 'Invite Me',
+      href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
+      icon: 'tabler:user-plus',
+    }}
+  >
+    <Fragment slot="title">
+      <span class="block sm:hidden">
+        Ready to get <br/> started?
+      </span>
+      <span class="hidden sm:block">
+        Ready to get started?
+      </span>
+      <!-- Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">{" "}started?</span> -->
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      It only take a couple of minutes to start getting your news delivered!
+    </Fragment>
+  </CallToAction>
+</Layout>
 
 </Layout>
