@@ -3,7 +3,7 @@ title: 'Terms and Conditions'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: August 02, 2023
+_Last updated_: September 28, 2023
 
 These terms and conditions outline the rules and regulations for the use of MonitoRSS's official Website, located at https://monitorss.xyz.
 
@@ -21,7 +21,7 @@ For the purposes of these Terms and Conditions:
 
 - **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to AstroWind LLC, 1 Cupertino, CA 95014.
+- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to MonitoRSS.
 
 - **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
 
@@ -31,7 +31,7 @@ For the purposes of these Terms and Conditions:
 
 - **Service** refers to the Website.
 
-- **Country** refers to: California, United States
+- **Country** refers to: United States
 
 - **Service Provider** means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.
 
@@ -104,7 +104,7 @@ We shall not be hold responsible for any content that appears on your Website. Y
 
 ## Your Privacy
 
-Please read our Privacy Policy.
+Please read our Privacy Policy: https://monitorss.xyz/privacy-policy. By using the Services, you agree to be bound by our privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in the United States. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure hat differ from applicable laws in the United States, then through your continued use of the Services, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.
 
 ## Removal of links from our website
 
@@ -119,6 +119,20 @@ Our Service may contain links to third-party web sites or services that are not 
 The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.
 
 We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.
+
+## Fees and Payments
+
+You may be required to purchase or pay a fee to access some of our services. You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Site. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. We bill you through an online billing account for purchases made via the Site. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time. All fees are stated and payable in United States Dollars (USD), unless otherwise specified.
+
+You agree to pay all charges or fees at the prices then in effect for your purchases, and you authorize us to charge your chosen payment provider for any such amounts upon making your purchase. If your purchase is subject to recurring charges, then you consent to our charging your payment method on a recurring basis without requiring your prior approval for each recurring charge, until you notify us of your cancellation.
+
+All fees are generally non-refundable unless otherwise expressly stated in this Agreement. However, we understand that exceptional circumstances may arise, and refund requests may be considered on a discretionary basis. We appreciate your understanding that refunds are not guaranteed and will be assessed based on the circumstances surrounding each individual case.
+
+We reserve the right to correct any errors or mistakes in pricing, even if we have already requested or received payment. We also reserve the right to modify fees for our Service at any time with prior notice before the start of your next billing cycle for any reason at our discretion. This notice will be provided to the email address associated with your billing account and/or via a notice on the Site interface. If you do not wish to pay the new fees, you may cancel the applicable Service prior to the change going into effect. Your continued use of the Service after the change in fees goes into effect constitutes your agreement to pay the changed amount.
+
+## Cancellation Policy
+
+You can cancel your subscription at any time by logging into your account or contacting us using the contact information provided below. Your cancellation will take effect at the end of the current paid term. If you are unsatisfied with our services, please email us at support@monitorss.xyz.
 
 ## Termination
 

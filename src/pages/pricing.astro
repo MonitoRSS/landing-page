@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Pricing from '~/components/widgets/Pricing.astro';
+import FAQs from '../components/widgets/FAQs.astro';
 
 const metadata = {
   title: "Pricing",
@@ -10,96 +11,130 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <Pricing
-    title="Basic Pricing"
-    tagline="Pricing"
-    subtitle="Our prices"
+    title="Pricing"
+    subtitle="Support the open-source development of MonitoRSS, and get access to better features!"
     prices={[
       {
-        "title": "basic",
-        "price": 29,
+        "title": "Tier 1",
+        "price": "5",
         "period": "Per Month",
         "items": [
           {
-            "description": "Etiam in libero",
+            "description": "Custom usernames/avatars with webhooks",
             "icon": "tabler:check"
           },
           {
-            "description": "Aenean ac nunc",
+            "description": "15 feeds",
             "icon": "tabler:check"
           },
           {
-            "description": "Cras scelerisque accumsan libero, et volutpat dolor tristique at",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "In hac habitasse",
+            "description": "Custom placeholders",
             "icon": "tabler:check"
           }
         ],
-        "callToAction": {
-          "targetBlank": true,
-          "text": "Free 7-day trial",
-          "href": "#"
-        }
-      },
-      {
-        "title": "standard",
-        "price": 69,
-        "period": "Per Month",
-        "items": [
-          {
-            "description": "Proin vel laoreet",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "Ut efficitur egestas",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "Pellentesque ut nibh",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "Donec fringilla sem",
-            "icon": "tabler:check"
-          }
-        ],
-        "callToAction": {
-          "targetBlank": true,
-          "text": "Free 15-day trial",
-          "href": "#"
-        },
+        // "callToAction": {
+        //   "targetBlank": true,
+        //   "text": "Free 15-day trial",
+        //   "href": "#"
+        // },
         "hasRibbon": true,
         "ribbonTitle": "popular"
       },
       {
-        "title": "premium",
-        "price": 199,
+        "title": "Tier 2",
+        "price": 10,
         "period": "Per Month",
         "items": [
           {
-            "description": "Curabitur suscipit risus",
+            "description": "Custom usernames/avatars with webhooks",
             "icon": "tabler:check"
           },
           {
-            "description": "Aliquam blandit malesuada",
+            "description": "2 minute refresh rate",
             "icon": "tabler:check"
           },
           {
-            "description": "Suspendisse sit amet",
+            "description": "1000 article daily limit",
             "icon": "tabler:check"
           },
           {
-            "description": "Suspendisse auctor dui",
+            "description": "40 feeds",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "Custom placeholders",
             "icon": "tabler:check"
           }
         ],
-        "callToAction": {
-          "targetBlank": true,
-          "text": "Free 30-day trial",
-          "href": "#"
-        }
+        // "callToAction": {
+        //   "targetBlank": true,
+        //   "text": "Free 30-day trial",
+        //   "href": "#"
+        // }
+      },
+      {
+        "title": "Tier 3",
+        "price": 20,
+        "period": "Per Month",
+        "items": [
+          {
+            "description": "Custom usernames/avatars with webhooks",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "2 minute refresh rate",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "1000 article daily limit",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "100 feeds",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "Custom placeholders",
+            "icon": "tabler:check"
+          }
+        ],
+        // "callToAction": {
+        //   "targetBlank": true,
+        //   "text": "Free 30-day trial",
+        //   "href": "#"
+        // }
+      },
+    ]}
+  />
+
+  <FAQs
+    title="Pricing FAQs"
+    columns={1}
+    items={[
+      {
+        title: 'Can I switch between plans?',
+        description:
+          'Yes! You can easily upgrade or downgrade your plan, at any time. If you upgrade, the amount you have already paid for the current period will be pro-rated and applied to the new plan. If you downgrade, the amount you have already paid for the current period will be pro-rated and applied as a credit to the new plan.',
+      },
+      {
+        title: "Can I cancel my subscription at any time?",
+        description: "Yes, you can cancel your subscription at any time from your account page. Your subscription will remain active until the end of the period you have paid for, and will then expire with no further charges.",
+      },
+      {
+        title: "Can I get a refund?",
+        description: 'We may offer a refund on a case-by-case basis depending on the situation. For more information, please see our <a class="text-blue-300" href="/terms">Terms and Conditions</a>. In any case, please do not hesitate to contact us if you have any questions or concerns.',
+      },
+      {
+        title: 'How many Discord servers does my subscription apply to?',
+        description:
+          'Your subscription applies to all servers that you own, and all servers that you have the Manage Server permission in.',
+      },
+      {
+        title: 'What if I have more requirements?',
+        description:
+          'If you have more requirements, please contact us and we will be happy to discuss a custom plan.',
       }
     ]}
   />
+
 </Layout>
