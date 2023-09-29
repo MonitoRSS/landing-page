@@ -3,9 +3,9 @@ title: 'Privacy Policy'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: August 02, 2023
+_Last updated_: September 29, 2023
 
-This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You while using MonitoRSS's official Website, located at https://monitorss.xyz.
+This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You while using MonitoRSS's official Website, located at https://monitorss.xyz and all its subdomains.
 
 We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.
 
@@ -23,9 +23,9 @@ For the purposes of this Privacy Policy:
 - **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to MonitoRSS.
 - **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
 - **Account** means a unique account created for You to access our Service or parts of our Service.
-- **Website** refers to AstroWind, accessible from [https://monitorss.xyz](https://monitorss.xyz)
+- **Website** refers to MonitoRSS, accessible from [https://monitorss.xyz](https://monitorss.xyz) and all its subdomains
 - **Service** refers to the Website.
-- **Country** refers to: California, United States
+- **Country** refers to: United States
 - **Service Provider** means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.
 - **Third-party Social Media Service** refers to any website or any social network website through which a User can log in or create an account to use the Service.
 - **Personal Data** is any information that relates to an identified or identifiable individual.

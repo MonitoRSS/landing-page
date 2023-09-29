@@ -3,9 +3,9 @@ title: 'Terms and Conditions'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: September 28, 2023
+_Last updated_: September 29, 2023
 
-These terms and conditions outline the rules and regulations for the use of MonitoRSS's official Website, located at https://monitorss.xyz.
+These terms and conditions outline the rules and regulations for the use of MonitoRSS's official Website, located at https://monitorss.xyz and all its subdomains.
 
 By accessing this website we assume you accept these terms and conditions. Do not continue to use MonitoRSS if you do not agree to take all of the terms and conditions stated on this page.
 
@@ -27,7 +27,7 @@ For the purposes of these Terms and Conditions:
 
 - **Account** means a unique account created for You to access our Service or parts of our Service.
 
-- **Website** refers to MonitoRSS, accessible from [https://monitorss.xyz](https://monitorss.xyz)
+- **Website** refers to MonitoRSS, accessible from [https://monitorss.xyz](https://monitorss.xyz) and all its subdomains.
 
 - **Service** refers to the Website.
 
