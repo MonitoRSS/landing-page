@@ -5,31 +5,29 @@ import { defineConfig } from 'astro/config';
 
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from './src/utils/frontmatter.mjs';
 
-import { SITE_CONFIG, ANALYTICS_CONFIG } from './src/utils/config.ts';
+import { SITE, ANALYTICS } from './src/utils/config.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const whenExternalScripts = (items = []) =>
-  ANALYTICS_CONFIG.vendors.googleAnalytics.isEnabled
+  ANALYTICS.vendors.googleAnalytics.isEnabled
     ? Array.isArray(items)
       ? items.map((item) => item())
       : [items()]
     : [];
 
 export default defineConfig({
-  site: SITE_CONFIG.site,
-  base: SITE_CONFIG.base,
-  trailingSlash: SITE_CONFIG.trailingSlash ? 'always' : 'never',
+  site: SITE.site,
+  base: SITE.base,
+  trailingSlash: SITE.trailingSlash ? 'always' : 'never',
 
   output: 'static',
-
   integrations: [
     tailwind({
       config: {
@@ -37,9 +35,9 @@ export default defineConfig({
       },
     }),
     sitemap(),
-    image({
-      serviceEntryPoint: '@astrojs/image/sharp',
-    }),
+    // image({
+    //   serviceEntryPoint: '@astrojs/image/sharp',
+    // }),
     mdx(),
     icon({
       include: {

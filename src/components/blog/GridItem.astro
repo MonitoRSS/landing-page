@@ -1,8 +1,8 @@
 ---
-import { Picture } from '@astrojs/image/components';
 import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets'
 
-import { APP_BLOG_CONFIG } from '~/utils/config';
+import { APP_BLOG } from '~/utils/config';
 import type { Post } from '~/types';
 
 import { findImage } from '~/utils/images';
@@ -21,17 +21,15 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
     {
       image && (
         <a href={getPermalink(post.permalink, 'post')}>
-          <Picture
+          <Image
             src={image}
-            class="md:object-cover w-full md:w-auto md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
+            class="absolute top-0 left-0 w-full h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+            alt={post.title}
+            loading="lazy"
+            decoding="async"
             width={400}
             height={224}
             sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-            loading="lazy"
-            decoding="async"
           />
         </a>
       )
@@ -39,7 +37,7 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
   </div>
   <h3 class="mb-2 text-xl font-bold leading-tight sm:text-2xl font-heading">
     {
-      !APP_BLOG_CONFIG?.post?.isEnabled ? (
+      !APP_BLOG?.post?.isEnabled ? (
         post.title
       ) : (
         <a

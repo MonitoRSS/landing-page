@@ -13,14 +13,13 @@
     "lint:eslint": "eslint . --ext .js,.ts,.astro"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.17.2",
-    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/mdx": "^1.1.0",
     "@astrojs/partytown": "^1.2.3",
     "@astrojs/rss": "^2.4.3",
     "@astrojs/sitemap": "^2.0.1",
-    "@astrojs/tailwind": "^4.0.0",
-    "@astrolib/analytics": "^0.3.0",
-    "@astrolib/seo": "^0.4.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@astrolib/analytics": "^0.4.2",
+    "@astrolib/seo": "^1.0.0-beta.4",
     "@fontsource-variable/inter": "^5.0.5",
     "@iconify-json/flat-color-icons": "^1.1.6",
     "@iconify-json/ri": "^1.1.10",
@@ -29,7 +28,7 @@
     "@types/lodash.merge": "^4.6.7",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
-    "astro": "^2.9.3",
+    "astro": "^3.2.0",
     "astro-compress": "^1.1.50",
     "astro-icon": "^1.0.0-next.2",
     "eslint": "^8.45.0",
@@ -50,5 +49,8 @@
   },
   "engines": {
     "node": ">=16.12.0"
+  },
+  "dependencies": {
+    "@astrojs/react": "^3.0.2"
   }
 }

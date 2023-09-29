@@ -1,11 +1,11 @@
-import { getImage } from '@astrojs/image';
-import type { OpenGraph } from '@astrolib/seo/src/types';
+import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import type { OpenGraph } from '@astrolib/seo';
 
 const load = async function () {
   let images: Record<string, () => Promise<unknown>> | undefined = undefined;
   try {
-    images = import.meta.glob('~/assets/images/**');
+    images = import.meta.glob('~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}');
   } catch (e) {
     // continue regardless of error
   }
@@ -21,24 +21,29 @@ export const fetchLocalImages = async () => {
 };
 
 /** */
-export const findImage = async (imagePath?: string) => {
+export const findImage = async (
+  imagePath?: string | ImageMetadata | null
+): Promise<string | ImageMetadata | undefined | null> => {
+  // Not string
   if (typeof imagePath !== 'string') {
-    return null;
+    return imagePath;
   }
 
+  // Absolute paths
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://') || imagePath.startsWith('/')) {
     return imagePath;
   }
 
-  if (!imagePath.startsWith('~/assets')) {
-    return null;
-  } // For now only consume images using ~/assets alias (or absolute)
+  // Relative paths or not "~/assets/"
+  if (!imagePath.startsWith('~/assets/images')) {
+    return imagePath;
+  }
 
   const images = await fetchLocalImages();
   const key = imagePath.replace('~/', '/src/');
 
   return images && typeof images[key] === 'function'
-    ? ((await images[key]()) as { default: unknown })['default']
+    ? ((await images[key]()) as { default: ImageMetadata })['default']
     : null;
 };
 
@@ -75,8 +80,8 @@ export const adaptOpenGraphImages = async (
         if (typeof _image === 'object') {
           return {
             url: typeof _image.src === 'string' ? String(new URL(_image.src, astroSite)) : 'pepe',
-            width: typeof _image.width === 'number' ? _image.width : undefined,
-            height: typeof _image.height === 'number' ? _image.height : undefined,
+            width: typeof _image.options.width === 'number' ? _image.options.width : undefined,
+            height: typeof _image.options.height === 'number' ? _image.options.height : undefined,
           };
         }
         return {
