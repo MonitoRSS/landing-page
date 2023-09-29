@@ -4,10 +4,27 @@ import Layout from '~/layouts/PageLayout.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 import FAQs from '../components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import PricingTable from '../components/widgets/PricingTable.astro';
 
 const metadata = {
   title: "Pricing",
 };
+
+enum Price {
+  Free = 'Free',
+  Tier1 = 'Tier 1',
+  Tier2 = 'Tier 2',
+  Tier3 = 'Tier 3',
+}
+
+enum Feature {
+  Webhooks = 'Custom Usernames/Avatars with Webhooks',
+  Feeds = 'Feeds',
+  RefreshRate = 'Refresh Rate',
+  ArticleLimit = 'Daily Article Limit',
+  CustomPlaceholders = 'Custom Placeholders',
+}
+
 ---
 
 <Layout metadata={metadata}>
@@ -16,7 +33,7 @@ const metadata = {
     subtitle="Support the open-source development of MonitoRSS, and get access to better features!"
     prices={[
       {
-        "title": "Tier 1",
+        "title": Price.Tier1,
         "price": "5",
         "period": "Per Month",
         "items": [
@@ -42,7 +59,7 @@ const metadata = {
         "ribbonTitle": "popular"
       },
       {
-        "title": "Tier 2",
+        "title": Price.Tier2,
         "price": 10,
         "period": "Per Month",
         "items": [
@@ -74,7 +91,7 @@ const metadata = {
         // }
       },
       {
-        "title": "Tier 3",
+        "title": Price.Tier3,
         "price": 20,
         "period": "Per Month",
         "items": [
@@ -106,6 +123,46 @@ const metadata = {
         // }
       },
     ]}
+  />
+
+  <PricingTable
+      prices={[{
+        id: Price.Free,
+        name: '<span class="text-slate-400">Free</span>',
+        features: new Map<string, {detail: string} | true>([
+          [Feature.Feeds, {detail: '5'}],
+          [Feature.RefreshRate, {detail: '10 minutes'}],
+          [Feature.ArticleLimit, {detail: '100'}],
+        ])
+      }, {
+        id: Price.Tier1,
+        features: new Map<string, {detail: string} | true>([
+          [Feature.Webhooks, true],
+          [Feature.Feeds, {detail: '15'}],
+          [Feature.RefreshRate, {detail: '10 minutes'}],
+          [Feature.ArticleLimit, {detail: '1000'}],
+        ])
+      }, {
+        id: Price.Tier2,
+        features: new Map<string, {detail: string} | true>([
+          [Feature.Webhooks, true],
+          [Feature.Feeds, {detail: '40'}],
+          [Feature.RefreshRate, {detail: '2 minutes'}],
+          [Feature.ArticleLimit, {detail: '1000'}],
+        ])
+      }, {
+        id: Price.Tier3,
+        features: new Map<string, {detail: string} | true>([
+          [Feature.Webhooks, true],
+          [Feature.Feeds, {detail: '100'}],
+          [Feature.RefreshRate, {detail: '2 minutes'}],
+          [Feature.ArticleLimit, {detail: '1000'}],
+        ])
+      }]}
+      features={Object.values(Feature).map((f) => ({
+        id: f,
+        name: f
+      }))}
   />
 
   <FAQs

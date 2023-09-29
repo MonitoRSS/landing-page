@@ -1,0 +1,51 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { PricingTable } from '~/types';
+
+const {
+  // title = '',
+  // subtitle = '',
+  // tagline = '',
+  features,
+  prices,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props as PricingTable;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`overflow-auto max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <table class="w-full table-auto">
+    <thead class="bg-slate-800">
+      <tr>
+        <th class="text-start py-3 px-4 font-semibold text-sm">Feature</th>
+        {prices.map((p) => (
+          <th class="text-start py-3 px-4 font-semibold text-sm" set:html={p.name || p.id}></th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {features.map((f) => (
+        <tr>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">{f.name}</td>
+          {prices.map((p) => {
+            const featureDetail = p.features?.get(f.id);
+            let cellContent: string | null = null;
+
+            if (typeof featureDetail === 'boolean') {
+              cellContent = 'Yes';
+            } else if (typeof featureDetail?.detail === 'string') {
+              cellContent = featureDetail?.detail;
+            }
+
+            return <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">
+              {cellContent}
+            </td>
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</WidgetWrapper>

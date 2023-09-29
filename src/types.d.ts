@@ -226,6 +226,11 @@ export interface Pricing extends Headline, Widget {
   prices?: Array<Price>;
 }
 
+export interface PricingTable extends Headline, Widget {
+  features: Array<{id: string, name: string}>
+  prices: Array<{id: string; name?: string; features?: Map<string, {detail: string}|true>}>
+}
+
 export interface Testimonials extends Headline, Widget {
   testimonials?: Array<Testimonial>;
   callToAction?: CallToAction;
