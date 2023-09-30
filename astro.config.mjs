@@ -10,7 +10,6 @@ import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from './src/utils/frontmatter.mjs';
 import { SITE, ANALYTICS } from './src/utils/config.ts';
-import vercel from "@astrojs/vercel/serverless";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /**
  * @param {Array<() => any>} items 
@@ -54,6 +53,5 @@ export default defineConfig({
       }
     }
   },
-  output: 'hybrid',
-  adapter: vercel()
+  output: 'static',
 });

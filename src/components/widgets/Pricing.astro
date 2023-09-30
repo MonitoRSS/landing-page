@@ -16,6 +16,7 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props as Pricing;
+
 ---
 <style>
 
@@ -24,39 +25,60 @@ input:checked ~ .dot {
 }
 
 input:checked ~ .monthly-yearly-bg {
-  background: var(--aw-color-primary);
+  background: rgb(34 197 94);
 }
 
 </style>
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
-  
-  
-  <label for="toggleB" class="flex items-center cursor-pointer gap-x-2 justify-center mb-8">
+  <label for="termToggle" class="flex items-center cursor-pointer gap-x-2 justify-center">
     <div>
       Monthly
     </div>
     <!-- toggle -->
     <div class="relative">
       <!-- input -->
-      <input type="checkbox" id="toggleB" class="sr-only">
+      <input type="checkbox" id="termToggle" class="sr-only">
       <!-- line -->
       <div class="monthly-yearly-bg block bg-slate-700 w-14 h-8 rounded-full transition"></div>
       <!-- dot -->
       <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
     </div>
     <!-- label -->
-    <div class="">
+    <div class="flex items-center gap-2">
       Yearly
+      <!-- <span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15%!</span> -->
     </div>
   </label>
+  <div class="flex justify-center text-xs text-green-300 mt-2">
+    Save 15% off with a yearly plan!
+  </div>
 
-
+  <div class="flex flex-col items-center mb-8 mt-8">
+    <div class="hs-dropdown relative inline-flex z-10">
+      <button id="currency-dropdown-btn" type="button" class="hs-dropdown-toggle py-1 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-300 dark:hover:text-white dark:focus:ring-offset-gray-800">
+        <span id="curreny-dropdown-text" class="flex items-center gap-x-1.5"><span class="text-lg pr-4">$</span> <span class="font-semibold">USD</span></span>
+        <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    
+      <div id="currency-list" class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[10rem] bg-white shadow-md rounded-lg p-1 mt-1 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="currency-dropdown-btn">
+        <div class="py-1 first:pt-0 last:pb-0">
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+            <span>
+            <span class="text-lg pr-4">$</span> <span>USD</span>
+          </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="flex items-stretch justify-center">
     <div class="grid grid-cols-3 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
       {
         prices &&
-          prices.map(({ title, subtitle, priceMonthly, priceYearly, items, callToAction, hasRibbon = false, ribbonTitle }) => (
+          prices.map(({ id, title, subtitle, priceMonthly, priceYearly, items, callToAction, hasRibbon = false, ribbonTitle }) => (
             <div class="col-span-3 mx-auto flex w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
               {priceMonthly && priceYearly && (
                 <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
@@ -74,17 +96,17 @@ input:checked ~ .monthly-yearly-bg {
                     {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
                     <div class="my-8 monthly-price">
                       <div class="flex items-center justify-center text-center mb-1">
-                        <span class="text-5xl">$</span>
-                        <span class="text-6xl font-extrabold">{priceMonthly}</span>
+                        
+                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceMonthly}</span>
                       </div>
-                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400">Per Month</span>
+                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Month</span>
                     </div>
                     <div class="my-8 yearly-price hidden">
                       <div class="flex items-center justify-center text-center mb-1">
-                        <span class="text-5xl">$</span>
-                        <span class="text-6xl font-extrabold">{priceYearly}</span>
+                        
+                        <span id={`price-yearly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceYearly}</span>
                       </div>
-                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400">Per Year</span>
+                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Year</span>
                     </div>
                     {items && (
                       <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
@@ -119,17 +141,162 @@ input:checked ~ .monthly-yearly-bg {
     </div>
   </div>
 </WidgetWrapper>
-
+<script is:inline src="./node_modules/preline/dist/preline.js"></script>
 <script>
-  const toggleB = document.querySelector('#toggleB');
+  const ICONS_BY_CURRENCY = {
+    'eur': '€',  
+    'usd': '$',
+    'gbp': '£',
+  }
+  interface Product {
+    id: string,
+    prices: Array<{
+      currency: string,
+      price: number,
+      priceFormatted: string,
+      term: 'month'|'year'
+    }>
+  }
 
-  toggleB?.addEventListener('click', () => {
-    document.querySelectorAll('.monthly-price')?.forEach(e => {
-      e.classList.toggle('hidden');
+  const termToggle = document.querySelector('#termToggle');
+  const currencySelect = document.querySelector('#countries');
+  var currentCurrency: string = 'USD'
+  const cacheData: {
+    products: Array<Product>,
+  } = {
+    products: []
+  }
+
+  termToggle?.addEventListener('change', function() {
+    const isYearly = this.checked
+
+    const monthlyElems = document.querySelectorAll('.monthly-price')
+
+    monthlyElems.forEach((elem) => {
+      if (isYearly) {
+        elem.classList.add('hidden')
+      } else {
+        elem.classList.remove('hidden')
+      }
     })
-    document.querySelectorAll('.yearly-price')?.forEach(e => {
-      e.classList.toggle('hidden');
+
+    const yearlyElems = document.querySelectorAll('.yearly-price')
+
+    yearlyElems.forEach((elem) => {
+      if (isYearly) {
+        elem.classList.remove('hidden')
+      } else {
+        elem.classList.add('hidden')
+      }
     })
   });
+
+  const json = await fetch('http://localhost:8080/products').then((res) => {
+    return res.json()
+  }).then((json) => {
+    const products: Array<{id: string, prices: Array<{currency: string, price: number, priceFormatted: string, term: 'month'|'year'}>}> = json.products
+    const currencies: Array<{symbol: string}> = json.currencies
+    
+    
+    const currencyList = document.querySelector('#currency-list')
+
+    while (currencyList?.firstChild) {
+      currencyList.removeChild(currencyList.lastChild as never)
+    }
+
+    const generateCurrencyIconElem = (symbol: string) => {
+      const toLookUp = symbol.toLowerCase()
+      if (ICONS_BY_CURRENCY[toLookUp]) {
+        const iconElem = document.createElement('span')
+        iconElem.classList.add('text-lg', 'pr-4')
+        iconElem.innerHTML = ICONS_BY_CURRENCY[toLookUp]
+        
+        return iconElem
+      }
+
+      return null
+    }
+
+    const generateCurrencyElem = (symbol: string) => {
+      const containerElem = document.createElement('span')
+      containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
+      const iconElem = generateCurrencyIconElem(symbol)
+
+      const textElem = document.createElement('span')
+      textElem.classList.add('font-semibold')
+      textElem.innerHTML = symbol
+
+      if (iconElem) {
+        containerElem.appendChild(iconElem)
+      }
+
+      containerElem.appendChild(textElem)
+
+      return containerElem
+    }
+
+    // add options to the currency select
+    currencies.forEach((c) => {
+      const option = document.createElement('option')
+      option.value = c.symbol
+      option.innerHTML = c.symbol
+      currencySelect?.appendChild(option)
+
+      const currencyMenuItem = document.createElement('div')
+      currencyMenuItem.classList.add('py-1', 'first:pt-0', 'last:pb-0')
+      const currencyMenuLink = document.createElement('a')
+      currencyMenuLink.classList.add('flex', 'items-center', 'gap-x-3.5', 'py-1', 'px-3', 'rounded-md', 'text-sm', 'text-gray-800', 'hover:bg-gray-100', 'focus:ring-2', 'focus:ring-blue-500', 'dark:text-gray-300', 'dark:hover:bg-gray-700', 'dark:hover:text-gray-300', 'cursor-pointer', 'select-none')
+
+      currencyMenuLink.appendChild(generateCurrencyElem(c.symbol))
+      
+      currencyMenuItem.appendChild(currencyMenuLink)
+
+      currencyList?.appendChild(currencyMenuItem)
+
+      currencyMenuLink.addEventListener('click', function() {
+        currentCurrency = c.symbol
+
+        setPrices()
+
+        const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
+
+        if (currencyDropdownBtn) {
+          currencyDropdownBtn.innerHTML = ''
+          currencyDropdownBtn.appendChild(generateCurrencyElem(c.symbol))
+        }
+      })
+    })
+
+    return {
+      products,
+    }
+  })
+
+  cacheData.products = json.products
+
+
+  function setPrices() {
+    cacheData.products.forEach((product) => {
+      const monthlyPrice = product?.prices.find((p) => p.currency === currentCurrency && p.term === 'month')?.priceFormatted
+      const yearlyPrice = product?.prices.find((p) => p.currency === currentCurrency && p.term === 'year')?.priceFormatted
+      const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
+      const yearlyElem = document.querySelector(`#price-yearly-number-${product.id}`)
+
+      if (monthlyPrice && monthlyElem) {
+        monthlyElem.innerHTML = monthlyPrice
+      }
+
+      if (yearlyPrice && yearlyElem) {
+        yearlyElem.innerHTML = yearlyPrice
+      }
+    })
+  }
+
+
   
+  currencySelect?.addEventListener('change', function () {
+    currentCurrency = this.value
+
+    setPrices()
+  })
 </script>
