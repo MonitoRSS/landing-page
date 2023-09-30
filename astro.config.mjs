@@ -1,3 +1,4 @@
+// @ts-check
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'astro/config';
@@ -11,33 +12,30 @@ import { readingTimeRemarkPlugin } from './src/utils/frontmatter.mjs';
 import { SITE, ANALYTICS } from './src/utils/config.ts';
 import vercel from "@astrojs/vercel/serverless";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const whenExternalScripts = (items = []) => ANALYTICS.vendors.googleAnalytics.isEnabled ? Array.isArray(items) ? items.map(item => item()) : [items()] : [];
+/**
+ * @param {Array<() => any>} items 
+ */
+const whenExternalScripts = (items = []) => ANALYTICS.vendors.googleAnalytics.id ? Array.isArray(items) ? items.map(item => item()) : [items()] : [];
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.site,
   base: SITE.base,
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
-  output: 'static',
   integrations: [tailwind({
-    config: {
-      applyBaseStyles: false
-    }
+    applyBaseStyles: false,
   }), sitemap(),
-  // image({
-  //   serviceEntryPoint: '@astrojs/image/sharp',
-  // }),
   mdx(), icon({
     include: {
       tabler: ['*'],
       'flat-color-icons': ['reddit', 'filled-filter', 'steam', 'start', 'bullish', 'landscape', 'reading-ebook', 'news'],
       ri: ['twitter-fill', 'facebook-box-fill', 'linkedin-box-fill', 'whatsapp-fill', 'mail-fill']
     }
-  }), ...whenExternalScripts(() => partytown({
+  }), ...whenExternalScripts([() => partytown({
     config: {
       forward: ['dataLayer.push']
     }
-  })), compress({
+  })]), compress({
     css: true,
     html: {
       removeAttributeQuotes: false
