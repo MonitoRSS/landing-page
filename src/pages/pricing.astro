@@ -21,7 +21,7 @@ enum Feature {
   Webhooks = 'Custom Usernames/Avatars with Webhooks',
   Feeds = 'Feeds',
   RefreshRate = 'Refresh Rate',
-  ArticleLimit = 'Daily Article Limit',
+  ArticleLimit = 'Maximum Daily Articles',
   CustomPlaceholders = 'Custom Placeholders',
 }
 
@@ -30,12 +30,13 @@ enum Feature {
 <Layout metadata={metadata}>
   <Pricing
     title="Pricing"
+    classes={{container: "pb-0 md:pb-0 lg:pb-0"}}
     subtitle="Support the open-source development of MonitoRSS, and get access to better features!"
     prices={[
       {
         "title": Price.Tier1,
-        "price": "5",
-        "period": "Per Month",
+        "priceMonthly": "5",
+        "priceYearly": "60",
         "items": [
           {
             "description": "Custom usernames/avatars with webhooks",
@@ -55,13 +56,13 @@ enum Feature {
         //   "text": "Free 15-day trial",
         //   "href": "#"
         // },
-        "hasRibbon": true,
-        "ribbonTitle": "popular"
+        // "hasRibbon": true,
+        // "ribbonTitle": "popular"
       },
       {
         "title": Price.Tier2,
-        "price": 10,
-        "period": "Per Month",
+        "priceMonthly": 10,
+        "priceYearly": 120,
         "items": [
           {
             "description": "Custom usernames/avatars with webhooks",
@@ -92,8 +93,8 @@ enum Feature {
       },
       {
         "title": Price.Tier3,
-        "price": 20,
-        "period": "Per Month",
+        "priceMonthly": 20,
+        "priceYearly": 140,
         "items": [
           {
             "description": "Custom usernames/avatars with webhooks",
@@ -126,13 +127,14 @@ enum Feature {
   />
 
   <PricingTable
+      classes={{container: "pt-8 md:pt-8 lg:pt-8"}}
       prices={[{
         id: Price.Free,
         name: '<span class="text-slate-400">Free</span>',
         features: new Map<string, {detail: string} | true>([
           [Feature.Feeds, {detail: '5'}],
           [Feature.RefreshRate, {detail: '10 minutes'}],
-          [Feature.ArticleLimit, {detail: '100'}],
+          [Feature.ArticleLimit, {detail: '50'}],
         ])
       }, {
         id: Price.Tier1,
@@ -140,7 +142,8 @@ enum Feature {
           [Feature.Webhooks, true],
           [Feature.Feeds, {detail: '15'}],
           [Feature.RefreshRate, {detail: '10 minutes'}],
-          [Feature.ArticleLimit, {detail: '1000'}],
+          [Feature.ArticleLimit, {detail: '200'}],
+          [Feature.CustomPlaceholders, true],
         ])
       }, {
         id: Price.Tier2,
@@ -148,7 +151,8 @@ enum Feature {
           [Feature.Webhooks, true],
           [Feature.Feeds, {detail: '40'}],
           [Feature.RefreshRate, {detail: '2 minutes'}],
-          [Feature.ArticleLimit, {detail: '1000'}],
+          [Feature.ArticleLimit, {detail: '500'}],
+          [Feature.CustomPlaceholders, true],
         ])
       }, {
         id: Price.Tier3,
@@ -157,6 +161,7 @@ enum Feature {
           [Feature.Feeds, {detail: '100'}],
           [Feature.RefreshRate, {detail: '2 minutes'}],
           [Feature.ArticleLimit, {detail: '1000'}],
+          [Feature.CustomPlaceholders, true],
         ])
       }]}
       features={Object.values(Feature).map((f) => ({
@@ -216,6 +221,4 @@ enum Feature {
       It only take a couple of minutes to start getting your news delivered!
     </Fragment>
   </CallToAction>
-</Layout>
-
 </Layout>

@@ -1,6 +1,8 @@
 ---
+import { Icon } from 'astro-icon/components';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { PricingTable } from '~/types';
+import Button from '../ui/Button.astro';
 
 const {
   // title = '',
@@ -12,12 +14,12 @@ const {
   id,
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render('bg'),
 } = Astro.props as PricingTable;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`overflow-auto max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <table class="w-full table-auto">
+<WidgetWrapper id={id} isDark={isDark} containerClass={`overflow-auto max-w-7xl mx-auto ${classes?.container ?? ''} items-center`}>
+  <Button text="View Detailed Comparison" variant="link" icon="tabler:chevron-down" class="font-semibold select-none expand-button text-blue-500 hover:text-blue-300 block text-center mb-8" />
+  <table class="w-full table-auto hidden">
     <thead class="bg-slate-800">
       <tr>
         <th class="text-start py-3 px-4 font-semibold text-sm">Feature</th>
@@ -32,12 +34,18 @@ const {
           <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">{f.name}</td>
           {prices.map((p) => {
             const featureDetail = p.features?.get(f.id);
-            let cellContent: string | null = null;
+            let cellContent: any = null;
 
             if (typeof featureDetail === 'boolean') {
-              cellContent = 'Yes';
+              cellContent = <div class="rounded-full bg-primary mt-1 w-min">
+                <Icon name={'tabler:check'} class="w-5 h-5 font-bold p-1 text-white" />
+              </div>
             } else if (typeof featureDetail?.detail === 'string') {
               cellContent = featureDetail?.detail;
+            } else {
+              cellContent = <div class="rounded-full bg-muted mt-1 w-min">
+                <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-white" />
+              </div>
             }
 
             return <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">
@@ -49,3 +57,12 @@ const {
     </tbody>
   </table>
 </WidgetWrapper>
+
+<script>
+  const table = document.querySelector('table')
+  const expandButton = document.querySelector('.expand-button')
+
+  expandButton?.addEventListener('click', () => {
+    table?.classList.toggle('hidden')
+  })
+</script>

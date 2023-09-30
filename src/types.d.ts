@@ -140,8 +140,8 @@ export interface Price {
   title?: string;
   subtitle?: string;
   description?: string;
-  price?: number;
-  period?: string;
+  priceMonthly?: number;
+  priceYearly?: number;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;
