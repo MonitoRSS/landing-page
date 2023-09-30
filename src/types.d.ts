@@ -134,6 +134,8 @@ export interface Item {
   classes?: Record<string, string>;
   callToAction?: CallToAction;
   image?: Image;
+  unavailable?: boolean
+  partlyAvailable?: boolean
 }
 
 export interface Price {

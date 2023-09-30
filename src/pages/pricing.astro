@@ -30,81 +30,123 @@ enum Feature {
 <Layout metadata={metadata}>
   <Pricing
     title="Pricing"
-    classes={{container: "pb-0 md:pb-0 lg:pb-0"}}
     subtitle="Support the open-source development of MonitoRSS, and get access to better features!"
     prices={[
+      {
+        "id": "free",
+        "title": Price.Free,
+        "subtitle": "For plain old news delivery",
+        "priceMonthly": "0",
+        "priceYearly": "0",
+        "items": [
+          {
+            "description": "5 feeds",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "50 article daily limit",
+            "partlyAvailable": true,
+          },
+          {
+            "description": "Custom name/avatar with webhooks",
+            "unavailable": true,
+          },
+          {
+            "description": "Custom placeholders",
+            "unavailable": true,
+          },
+          {
+            "description": "10 minute refresh rate",
+            "unavailable": true,
+          },
+        ],
+        "callToAction": {
+          "target": "_blank",
+          "text": "Get Started",
+          "href": "https://my.monitorss.xyz",
+          "class": "dark:hover:border-slate-600"
+
+        },
+        // "hasRibbon": true,
+        // "ribbonTitle": "popular"
+      },
       {
         "id": "tier1",
         "title": Price.Tier1,
         "priceMonthly": "5",
+        "subtitle": "For customized deliveries",
         "priceYearly": 51,
         "items": [
-          {
-            "description": "Custom usernames/avatars with webhooks",
-            "icon": "tabler:check"
-          },
           {
             "description": "15 feeds",
             "icon": "tabler:check"
           },
           {
+            "description": "200 article daily limit",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "Custom name/avatar with webhooks",
+            "icon": "tabler:check"
+          },
+          {
             "description": "Custom placeholders",
             "icon": "tabler:check"
-          }
+          },
+          {
+            "description": "10 minute refresh rate",
+            "unavailable": true,
+          },
         ],
-        // "callToAction": {
-        //   "targetBlank": true,
-        //   "text": "Free 15-day trial",
-        //   "href": "#"
-        // },
-        // "hasRibbon": true,
-        // "ribbonTitle": "popular"
+        "callToAction": {
+          "text": "Choose Plan",
+          "href": "#"
+        }
       },
       {
         "id": "tier2",
         "title": Price.Tier2,
         "priceMonthly": 10,
+        "subtitle": "For time-sensitive deliveries",
         "priceYearly": 102,
         "items": [
           {
-            "description": "Custom usernames/avatars with webhooks",
+            "description": "40 feeds",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "500 article daily limit",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "Custom name/avatar with webhooks",
+            "icon": "tabler:check"
+          },
+          {
+            "description": "Custom placeholders",
             "icon": "tabler:check"
           },
           {
             "description": "2 minute refresh rate",
             "icon": "tabler:check"
           },
-          {
-            "description": "1000 article daily limit",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "40 feeds",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "Custom placeholders",
-            "icon": "tabler:check"
-          }
         ],
-        // "callToAction": {
-        //   "targetBlank": true,
-        //   "text": "Free 30-day trial",
-        //   "href": "#"
-        // }
+        "hasRibbon": true,
+        "ribbonTitle": "popular",
+        "callToAction": {
+          "text": "Choose Plan",
+          "href": "#"
+        }
       },
       {
         "id": "tier3",
         "title": Price.Tier3,
         "priceMonthly": 20,
         "priceYearly": 204,
+        "subtitle": "For power users",
         "items": [
           {
-            "description": "Custom usernames/avatars with webhooks",
-            "icon": "tabler:check"
-          },
-          {
-            "description": "2 minute refresh rate",
+            "description": "100 feeds",
             "icon": "tabler:check"
           },
           {
@@ -112,24 +154,27 @@ enum Feature {
             "icon": "tabler:check"
           },
           {
-            "description": "100 feeds",
+            "description": "Custom name/avatar with webhooks",
             "icon": "tabler:check"
           },
           {
             "description": "Custom placeholders",
             "icon": "tabler:check"
-          }
+          },
+          {
+            "description": "2 minute refresh rate",
+            "icon": "tabler:check"
+          },
         ],
-        // "callToAction": {
-        //   "targetBlank": true,
-        //   "text": "Free 30-day trial",
-        //   "href": "#"
-        // }
+        "callToAction": {
+          "text": "Choose Plan",
+          "href": "#"
+        }
       },
     ]}
   />
 
-  <PricingTable
+  <!-- <PricingTable
       classes={{container: "pt-8 md:pt-8 lg:pt-8"}}
       prices={[{
         id: Price.Free,
@@ -171,7 +216,7 @@ enum Feature {
         id: f,
         name: f
       }))}
-  />
+  /> -->
 
   <FAQs
     title="Pricing FAQs"

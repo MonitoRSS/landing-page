@@ -65,7 +65,7 @@ input:checked ~ .monthly-yearly-bg {
     
       <div id="currency-list" class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[10rem] bg-white shadow-md rounded-lg p-1 mt-1 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="currency-dropdown-btn">
         <div class="py-1 first:pt-0 last:pb-0">
-          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300">
             <span>
             <span class="text-lg pr-4">$</span> <span>USD</span>
           </span>
@@ -75,7 +75,7 @@ input:checked ~ .monthly-yearly-bg {
     </div>
   </div>
   <div class="flex items-stretch justify-center">
-    <div class="grid grid-cols-3 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <div class="grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
       {
         prices &&
           prices.map(({ id, title, subtitle, priceMonthly, priceYearly, items, callToAction, hasRibbon = false, ribbonTitle }) => (
@@ -111,12 +111,18 @@ input:checked ~ .monthly-yearly-bg {
                     {items && (
                       <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
                         {items.map(
-                          ({ description, icon }) =>
+                          ({ description, icon, unavailable, partlyAvailable }) =>
                             description && (
                               <li class="mb-1.5 flex items-start space-x-3 leading-7">
-                                <div class="rounded-full bg-primary mt-1">
+                                {!unavailable && !partlyAvailable && <div class="rounded-full bg-primary mt-1">
                                   <Icon name={icon ? icon : 'tabler:check'} class="w-5 h-5 font-bold p-1 text-white" />
-                                </div>
+                                </div>}
+                                {unavailable && <div class="rounded-full bg-muted mt-1 w-min">
+                                  <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-white" />
+                                </div>}
+                                {partlyAvailable && <div class="rounded-full bg-amber-600 mt-1 w-min">
+                                  <Icon name={'tabler:exclamation-mark'} class="w-5 h-5 font-bold p-1 text-white" />
+                                </div>}
                                 <span>{description}</span>
                               </li>
                             )
