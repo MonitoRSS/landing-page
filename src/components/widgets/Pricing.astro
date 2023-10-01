@@ -103,7 +103,7 @@ input:checked ~ .monthly-yearly-bg {
                           </svg>
                           <span class="sr-only">loading...</span>
                         </div>
-                        <span id={`price-monthly-number-${id}`} class={`text-5xl font-extrabold price-number`}>${priceMonthly}</span>
+                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceMonthly}</span>
                       </div>
                       <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Month</span>
                     </div>
@@ -116,7 +116,7 @@ input:checked ~ .monthly-yearly-bg {
                           </svg>
                           <span class="sr-only">loading...</span>
                         </div>
-                        <span id={`price-yearly-number-${id}`} class={`text-5xl font-extrabold price-number`}>${priceYearly}</span>
+                        <span id={`price-yearly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceYearly}</span>
                       </div>
                       <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Year</span>
                     </div>
@@ -180,7 +180,7 @@ input:checked ~ .monthly-yearly-bg {
 
   type Product = ProductsResponse['data']['products'][number]
 
-  const termToggle = document.querySelector('#termToggle');
+  const termToggle = document.querySelector<HTMLInputElement>('#termToggle');
   const currencyList = document.querySelector('#currency-list')
   var initializedCurrencies = false
   const cacheData: {
@@ -189,16 +189,48 @@ input:checked ~ .monthly-yearly-bg {
     productsByCurrency: {}
   }
 
+  const getCurrentTextClass = (elem: Element) => {
+    const currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'))
+
+    return currentTextClass
+  }
+
   function setPriceDisplays(productsOfCurrency?: Product[]) {
     if (!productsOfCurrency?.length) {
       return
     }
+    
+    const maxYearlyCharLength = Math.max(...productsOfCurrency.flatMap((p) => p.prices.filter((p) => p.interval === 'year')).map((p) => p.formattedPrice.length))
+
+    const getTextSizeFromLength = () => {
+      if (maxYearlyCharLength < 9) {
+        return 'text-6xl'
+      } else if (maxYearlyCharLength < 10) {
+        return 'text-5xl'
+      } else {
+        return 'text-4xl'
+      }
+    }
+
+    const idealFontSize = getTextSizeFromLength()
 
     productsOfCurrency.forEach((product) => {
       const monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
       const yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
       const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
       const yearlyElem = document.querySelector(`#price-yearly-number-${product.id}`)
+      const allPriceElems = document.querySelectorAll(`.price-number`)
+
+      allPriceElems.forEach((elem) => {
+        const currentTextClass = getCurrentTextClass(elem)
+
+        if (currentTextClass) {
+          elem.classList.remove(currentTextClass)
+        }
+
+        elem.classList.add(idealFontSize)
+      })
+
 
       if (monthlyPrice && monthlyElem) {
         monthlyElem.innerHTML = monthlyPrice
@@ -211,30 +243,30 @@ input:checked ~ .monthly-yearly-bg {
   }
 
   const generateCurrencyIconElem = (symbol: string) => {
-      const iconElem = document.createElement('span')
-      iconElem.classList.add('text-lg', 'pr-4', 'w-[3rem]')
-      iconElem.innerHTML = symbol
-      
-      return iconElem
+    const iconElem = document.createElement('span')
+    iconElem.classList.add('text-lg', 'pr-4', 'w-[3rem]')
+    iconElem.innerHTML = symbol
+    
+    return iconElem
+  }
+
+  const generateCurrencyElem = (code: string, symbol: string) => {
+    const containerElem = document.createElement('span')
+    containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
+    const iconElem = generateCurrencyIconElem(symbol)
+
+    const textElem = document.createElement('span')
+    textElem.classList.add('font-semibold')
+    textElem.innerHTML = code
+
+    if (iconElem) {
+      containerElem.appendChild(iconElem)
     }
 
-    const generateCurrencyElem = (code: string, symbol: string) => {
-      const containerElem = document.createElement('span')
-      containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
-      const iconElem = generateCurrencyIconElem(symbol)
+    containerElem.appendChild(textElem)
 
-      const textElem = document.createElement('span')
-      textElem.classList.add('font-semibold')
-      textElem.innerHTML = code
-
-      if (iconElem) {
-        containerElem.appendChild(iconElem)
-      }
-
-      containerElem.appendChild(textElem)
-
-      return containerElem
-    }
+    return containerElem
+  }
 
   function populateCurrencies(currencies: Array<{code: string, symbol: string}>) {
     if (currencyList) {
@@ -256,14 +288,10 @@ input:checked ~ .monthly-yearly-bg {
       currencyList?.appendChild(currencyMenuItem)
 
       currencyMenuLink.addEventListener('click', function() {
-        const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
+        fetchAndSetDisplayPrices(c.code, c.symbol)
 
-        if (currencyDropdownBtn) {
-          currencyDropdownBtn.innerHTML = ''
-          currencyDropdownBtn.appendChild(generateCurrencyElem(c.code, c.symbol))
-        }
-
-        fetchAndSetDisplayPrices(c.code)
+        localStorage.setItem('currencyCode', c.code)
+        localStorage.setItem('currencySymbol', c.symbol)
       })
     }
   }
@@ -295,12 +323,19 @@ input:checked ~ .monthly-yearly-bg {
     }
   }
 
-  async function fetchAndSetDisplayPrices(currencyCode: string) {
+  async function fetchAndSetDisplayPrices(currencyCode: string, currencySymbol: string) {
     const productsOfCurrency = cacheData.productsByCurrency[currencyCode]
 
     if (productsOfCurrency) {
       setPriceDisplays(productsOfCurrency)
     } else {
+      const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
+
+      if (currencyDropdownBtn) {
+        currencyDropdownBtn.innerHTML = ''
+        currencyDropdownBtn.appendChild(generateCurrencyElem(currencyCode, currencySymbol))
+      }
+
       document.querySelectorAll('.loading-price').forEach((elem) => {
         elem.classList.remove('hidden')
       })
@@ -323,9 +358,7 @@ input:checked ~ .monthly-yearly-bg {
     }
   }
 
-  termToggle?.addEventListener('change', function() {
-    const isYearly = this.checked
-
+  function changeTerms(isYearly: boolean) {
     const monthlyElems = document.querySelectorAll('.monthly-price')
 
     monthlyElems.forEach((elem) => {
@@ -345,7 +378,23 @@ input:checked ~ .monthly-yearly-bg {
         elem.classList.add('hidden')
       }
     })
+  }
+
+  termToggle?.addEventListener('change', function() {
+    const isYearly = this.checked
+
+    changeTerms(isYearly)
   });
 
-  await fetchPrices('USD')
+  const isSetToYearly = termToggle?.checked
+
+  changeTerms(isSetToYearly || false)
+
+  const storedCurrency = localStorage.getItem('currencyCode')
+  const storedSymbol = localStorage.getItem('currencySymbol')
+  if (storedCurrency && storedSymbol) {
+    await fetchAndSetDisplayPrices(storedCurrency, storedSymbol)
+  } else {
+    await fetchAndSetDisplayPrices('USD', '$')
+  }
 </script>
