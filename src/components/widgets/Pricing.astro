@@ -63,7 +63,7 @@ input:checked ~ .monthly-yearly-bg {
         </svg>
       </button>
     
-      <div id="currency-list" class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[10rem] bg-white shadow-md rounded-lg p-1 mt-1 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="currency-dropdown-btn">
+      <div id="currency-list" class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[10rem] max-h-[300px] overflow-auto bg-white shadow-md rounded-lg p-1 mt-1 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="currency-dropdown-btn">
         <div class="py-1 first:pt-0 last:pb-0">
           <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300">
             <span>
@@ -96,15 +96,27 @@ input:checked ~ .monthly-yearly-bg {
                     {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
                     <div class="my-8 monthly-price">
                       <div class="flex items-center justify-center text-center mb-1">
-                        
-                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceMonthly}</span>
+                        <div role="status" class="loading-price hidden">
+                          <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                          </svg>
+                          <span class="sr-only">loading...</span>
+                        </div>
+                        <span id={`price-monthly-number-${id}`} class={`text-5xl font-extrabold price-number`}>${priceMonthly}</span>
                       </div>
                       <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Month</span>
                     </div>
                     <div class="my-8 yearly-price hidden">
                       <div class="flex items-center justify-center text-center mb-1">
-                        
-                        <span id={`price-yearly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceYearly}</span>
+                        <div role="status" class="loading-price hidden">
+                          <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                          </svg>
+                          <span class="sr-only">loading...</span>
+                        </div>
+                        <span id={`price-yearly-number-${id}`} class={`text-5xl font-extrabold price-number`}>${priceYearly}</span>
                       </div>
                       <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Year</span>
                     </div>
@@ -149,28 +161,166 @@ input:checked ~ .monthly-yearly-bg {
 </WidgetWrapper>
 <script src="../../../node_modules/@preline/dropdown/index.js"></script>
 <script>
-  const ICONS_BY_CURRENCY = {
-    'eur': '€',  
-    'usd': '$',
-    'gbp': '£',
-  }
-  interface Product {
-    id: string,
-    prices: Array<{
-      currency: string,
-      price: number,
-      priceFormatted: string,
-      term: 'month'|'year'
-    }>
+  interface ProductsResponse {
+    data: {
+      products: Array<{
+        id: string;
+        prices: Array<{
+          interval: 'month'|'year'
+          formattedPrice: string
+          currencyCode: string
+        }>
+      }>
+      currencies: Array<{
+        code: string
+        symbol: string
+      }>
+    }
   }
 
+  type Product = ProductsResponse['data']['products'][number]
+
   const termToggle = document.querySelector('#termToggle');
-  const currencySelect = document.querySelector('#countries');
-  var currentCurrency: string = 'USD'
+  const currencyList = document.querySelector('#currency-list')
+  var initializedCurrencies = false
   const cacheData: {
-    products: Array<Product>,
+    productsByCurrency: Record<string, Array<Product>>,
   } = {
-    products: []
+    productsByCurrency: {}
+  }
+
+  function setPriceDisplays(productsOfCurrency?: Product[]) {
+    if (!productsOfCurrency?.length) {
+      return
+    }
+
+    productsOfCurrency.forEach((product) => {
+      const monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
+      const yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
+      const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
+      const yearlyElem = document.querySelector(`#price-yearly-number-${product.id}`)
+
+      if (monthlyPrice && monthlyElem) {
+        monthlyElem.innerHTML = monthlyPrice
+      }
+
+      if (yearlyPrice && yearlyElem) {
+        yearlyElem.innerHTML = yearlyPrice
+      }
+    })
+  }
+
+  const generateCurrencyIconElem = (symbol: string) => {
+      const iconElem = document.createElement('span')
+      iconElem.classList.add('text-lg', 'pr-4', 'w-[3rem]')
+      iconElem.innerHTML = symbol
+      
+      return iconElem
+    }
+
+    const generateCurrencyElem = (code: string, symbol: string) => {
+      const containerElem = document.createElement('span')
+      containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
+      const iconElem = generateCurrencyIconElem(symbol)
+
+      const textElem = document.createElement('span')
+      textElem.classList.add('font-semibold')
+      textElem.innerHTML = code
+
+      if (iconElem) {
+        containerElem.appendChild(iconElem)
+      }
+
+      containerElem.appendChild(textElem)
+
+      return containerElem
+    }
+
+  function populateCurrencies(currencies: Array<{code: string, symbol: string}>) {
+    if (currencyList) {
+      currencyList.innerHTML = ''
+    }
+
+    for (let i = 0; i < currencies.length; ++i) {
+      const c = currencies[i]
+
+      const currencyMenuItem = document.createElement('div')
+      currencyMenuItem.classList.add('py-1', 'first:pt-0', 'last:pb-0')
+      const currencyMenuLink = document.createElement('a')
+      currencyMenuLink.classList.add('flex', 'items-center', 'gap-x-3.5', 'py-1', 'px-3', 'rounded-md', 'text-sm', 'text-gray-800', 'hover:bg-gray-100', 'focus:ring-2', 'focus:ring-blue-500', 'dark:text-gray-300', 'dark:hover:bg-gray-700', 'dark:hover:text-gray-300', 'cursor-pointer', 'select-none')
+
+      currencyMenuLink.appendChild(generateCurrencyElem(c.code, c.symbol))
+      
+      currencyMenuItem.appendChild(currencyMenuLink)
+
+      currencyList?.appendChild(currencyMenuItem)
+
+      currencyMenuLink.addEventListener('click', function() {
+        const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
+
+        if (currencyDropdownBtn) {
+          currencyDropdownBtn.innerHTML = ''
+          currencyDropdownBtn.appendChild(generateCurrencyElem(c.code, c.symbol))
+        }
+
+        fetchAndSetDisplayPrices(c.code)
+      })
+    }
+  }
+
+  async function fetchPrices(currencyCode: string) {
+    const res = await fetch(`https://my.monitorss.xyz/api/v1/supporter-subscriptions?currency=${currencyCode}`)
+    const json: ProductsResponse = await res.json()
+
+    if (!initializedCurrencies) {
+      while (currencyList?.firstChild) {
+        currencyList.removeChild(currencyList.lastChild as never)
+      }
+
+      populateCurrencies(json.data.currencies)
+
+      initializedCurrencies = true
+    }
+
+    cacheData.productsByCurrency[currencyCode] = json.data.products.map((p) => ({
+      ...p,
+      prices: p.prices.map((pr) => ({
+        ...pr,
+        formattedPrice: pr.formattedPrice.endsWith('.00') ? pr.formattedPrice.slice(0, -3) : pr.formattedPrice
+      }))
+    }))
+
+    return {
+      products: json.data.products,
+    }
+  }
+
+  async function fetchAndSetDisplayPrices(currencyCode: string) {
+    const productsOfCurrency = cacheData.productsByCurrency[currencyCode]
+
+    if (productsOfCurrency) {
+      setPriceDisplays(productsOfCurrency)
+    } else {
+      document.querySelectorAll('.loading-price').forEach((elem) => {
+        elem.classList.remove('hidden')
+      })
+
+      document.querySelectorAll('.price-number').forEach((elem) => {
+        elem.classList.add('hidden')
+      })
+
+      const { products } = await fetchPrices(currencyCode)
+
+      document.querySelectorAll('.loading-price').forEach((elem) => {
+        elem.classList.add('hidden')
+      })
+
+      document.querySelectorAll('.price-number').forEach((elem) => {
+        elem.classList.remove('hidden')
+      })
+
+      setPriceDisplays(products)
+    }
   }
 
   termToggle?.addEventListener('change', function() {
@@ -197,112 +347,5 @@ input:checked ~ .monthly-yearly-bg {
     })
   });
 
-  const json = await fetch('http://localhost:8080/products').then((res) => {
-    return res.json()
-  }).then((json) => {
-    const products: Array<{id: string, prices: Array<{currency: string, price: number, priceFormatted: string, term: 'month'|'year'}>}> = json.products
-    const currencies: Array<{symbol: string}> = json.currencies
-    
-    
-    const currencyList = document.querySelector('#currency-list')
-
-    while (currencyList?.firstChild) {
-      currencyList.removeChild(currencyList.lastChild as never)
-    }
-
-    const generateCurrencyIconElem = (symbol: string) => {
-      const toLookUp = symbol.toLowerCase()
-      if (ICONS_BY_CURRENCY[toLookUp]) {
-        const iconElem = document.createElement('span')
-        iconElem.classList.add('text-lg', 'pr-4')
-        iconElem.innerHTML = ICONS_BY_CURRENCY[toLookUp]
-        
-        return iconElem
-      }
-
-      return null
-    }
-
-    const generateCurrencyElem = (symbol: string) => {
-      const containerElem = document.createElement('span')
-      containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
-      const iconElem = generateCurrencyIconElem(symbol)
-
-      const textElem = document.createElement('span')
-      textElem.classList.add('font-semibold')
-      textElem.innerHTML = symbol
-
-      if (iconElem) {
-        containerElem.appendChild(iconElem)
-      }
-
-      containerElem.appendChild(textElem)
-
-      return containerElem
-    }
-
-    // add options to the currency select
-    currencies.forEach((c) => {
-      const option = document.createElement('option')
-      option.value = c.symbol
-      option.innerHTML = c.symbol
-      currencySelect?.appendChild(option)
-
-      const currencyMenuItem = document.createElement('div')
-      currencyMenuItem.classList.add('py-1', 'first:pt-0', 'last:pb-0')
-      const currencyMenuLink = document.createElement('a')
-      currencyMenuLink.classList.add('flex', 'items-center', 'gap-x-3.5', 'py-1', 'px-3', 'rounded-md', 'text-sm', 'text-gray-800', 'hover:bg-gray-100', 'focus:ring-2', 'focus:ring-blue-500', 'dark:text-gray-300', 'dark:hover:bg-gray-700', 'dark:hover:text-gray-300', 'cursor-pointer', 'select-none')
-
-      currencyMenuLink.appendChild(generateCurrencyElem(c.symbol))
-      
-      currencyMenuItem.appendChild(currencyMenuLink)
-
-      currencyList?.appendChild(currencyMenuItem)
-
-      currencyMenuLink.addEventListener('click', function() {
-        currentCurrency = c.symbol
-
-        setPrices()
-
-        const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
-
-        if (currencyDropdownBtn) {
-          currencyDropdownBtn.innerHTML = ''
-          currencyDropdownBtn.appendChild(generateCurrencyElem(c.symbol))
-        }
-      })
-    })
-
-    return {
-      products,
-    }
-  })
-
-  cacheData.products = json.products
-
-
-  function setPrices() {
-    cacheData.products.forEach((product) => {
-      const monthlyPrice = product?.prices.find((p) => p.currency === currentCurrency && p.term === 'month')?.priceFormatted
-      const yearlyPrice = product?.prices.find((p) => p.currency === currentCurrency && p.term === 'year')?.priceFormatted
-      const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
-      const yearlyElem = document.querySelector(`#price-yearly-number-${product.id}`)
-
-      if (monthlyPrice && monthlyElem) {
-        monthlyElem.innerHTML = monthlyPrice
-      }
-
-      if (yearlyPrice && yearlyElem) {
-        yearlyElem.innerHTML = yearlyPrice
-      }
-    })
-  }
-
-
-  
-  currencySelect?.addEventListener('change', function () {
-    currentCurrency = this.value
-
-    setPrices()
-  })
+  await fetchPrices('USD')
 </script>
