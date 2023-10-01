@@ -75,11 +75,11 @@ input:checked ~ .monthly-yearly-bg {
     </div>
   </div>
   <div class="flex items-stretch justify-center">
-    <div class="grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+    <div class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {
         prices &&
           prices.map(({ id, title, subtitle, priceMonthly, priceYearly, items, callToAction, hasRibbon = false, ribbonTitle }) => (
-            <div class="col-span-3 mx-auto flex w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
+            <div class="col-span-3 mx-auto flex sm:w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
               {priceMonthly && priceYearly && (
                 <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
                   {hasRibbon && ribbonTitle && (
