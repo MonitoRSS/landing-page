@@ -297,7 +297,7 @@ input:checked ~ .monthly-yearly-bg {
   }
 
   async function fetchPrices(currencyCode: string) {
-    const res = await fetch(`https://my.monitorss.xyz/api/v1/supporter-subscriptions?currency=${currencyCode}`)
+    const res = await fetch(`https://my.monitorss.xyz/api/v1/subscription-products?currency=${currencyCode}`)
     const json: ProductsResponse = await res.json()
 
     if (!initializedCurrencies) {
