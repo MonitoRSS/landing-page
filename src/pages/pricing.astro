@@ -35,7 +35,6 @@ enum Feature {
       {
         "id": "free",
         "title": Price.Free,
-        "subtitle": "For plain old news delivery",
         "priceMonthly": "0",
         "priceYearly": "0",
         "items": [
@@ -66,14 +65,11 @@ enum Feature {
           "href": "https://my.monitorss.xyz",
           "class": "dark:hover:border-slate-600"
         },
-        // "hasRibbon": true,
-        // "ribbonTitle": "popular"
       },
       {
         "id": "tier1",
         "title": Price.Tier1,
         "priceMonthly": "5",
-        "subtitle": "For customized deliveries",
         "priceYearly": 51,
         "items": [
           {
@@ -81,7 +77,7 @@ enum Feature {
             "icon": "tabler:check"
           },
           {
-            "description": "Limit of 200 articles daily",
+            "description": "Limit of 1000 articles daily",
             "icon": "tabler:check"
           },
           {
@@ -93,20 +89,20 @@ enum Feature {
             "icon": "tabler:check"
           },
           {
-            "description": "10 minute refresh rate",
-            "unavailable": true,
+            "description": "2 minute refresh rate",
           },
         ],
         "callToAction": {
           "text": "Choose Plan",
           "href": "#"
-        }
+        }, 
+        "hasRibbon": true,
+        "ribbonTitle": "popular"
       },
       {
         "id": "tier2",
         "title": Price.Tier2,
         "priceMonthly": 10,
-        "subtitle": "For time-sensitive deliveries",
         "priceYearly": 102,
         "items": [
           {
@@ -114,7 +110,7 @@ enum Feature {
             "icon": "tabler:check"
           },
           {
-            "description": "Limit of 500 articles daily",
+            "description": "Limit of 1000 articles daily",
             "icon": "tabler:check"
           },
           {
@@ -130,8 +126,6 @@ enum Feature {
             "icon": "tabler:check"
           },
         ],
-        "hasRibbon": true,
-        "ribbonTitle": "popular",
         "callToAction": {
           "text": "Choose Plan",
           "href": "#"
@@ -142,7 +136,6 @@ enum Feature {
         "title": Price.Tier3,
         "priceMonthly": 20,
         "priceYearly": 204,
-        "subtitle": "For power users",
         "items": [
           {
             "description": "Track 100 news feeds",
