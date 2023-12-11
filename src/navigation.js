@@ -1,5 +1,7 @@
 // import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
+import { getPermalink } from "./utils/permalinks";
+
 export const headerData = {
   links: [
     // {
@@ -78,16 +80,19 @@ export const headerData = {
     //   ],
     // },
     {
-      text: 'Docs',
-      href: 'https://docs.monitorss.xyz',
-    },
-    {
-      text: 'Patreon',
-      href: 'https://www.patreon.com/monitorss',
+      text: 'Pricing',
+      href: getPermalink('/pricing'),
     },
     {
       text: 'Support',
       href: 'https://discord.gg/pudv7Rx',
+      target: '_blank',
+      external: true,
+    },
+    {
+      text: 'Github',
+      href: 'https://github.com/synzen/monitorss',
+      external: true
     },
   ],
   actions: [{ type: 'button', text: 'Control Panel', href: 'https://my.monitorss.xyz' }],
@@ -107,7 +112,6 @@ export const footerData = {
       title: 'Useful Links',
       links: [
         { text: 'Support Server', href: 'https://discord.gg/pudv7Rx', external: true },
-        { text: 'Documentation', href: 'https://docs.monitorss.xyz', external: true, },
         { text: 'GitHub', href: 'https://github.com/synzen/monitorss', external: true },
       ],
     },

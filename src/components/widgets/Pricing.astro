@@ -50,30 +50,9 @@ input:checked ~ .monthly-yearly-bg {
       <!-- <span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15%!</span> -->
     </div>
   </label>
-  <div class="flex justify-center text-sm text-green-300 mt-2 mb-16">
-    Save 15% off with a yearly plan!
+  <div  class="flex justify-center text-sm text-green-300 mt-2 mb-16">
+    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15% with a yearly plan!</span>
   </div>
-
-  <!-- <div class="flex flex-col items-center mb-8 mt-8">
-    <div class="hs-dropdown relative inline-flex z-10">
-      <button id="currency-dropdown-btn" type="button" class="hs-dropdown-toggle py-1 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-300 dark:hover:text-white dark:focus:ring-offset-gray-800">
-        <span id="curreny-dropdown-text" class="flex items-center gap-x-1.5"><span class="text-lg pr-4">$</span> <span class="font-semibold">USD</span></span>
-        <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    
-      <div id="currency-list" class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[10rem] max-h-[300px] overflow-auto bg-white shadow-md rounded-lg p-1 mt-1 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="currency-dropdown-btn">
-        <div class="py-1 first:pt-0 last:pb-0">
-          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300">
-            <span>
-            <span class="text-lg pr-4">$</span> <span>USD</span>
-          </span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <div class="flex items-stretch justify-center">
     <div class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {
@@ -96,29 +75,16 @@ input:checked ~ .monthly-yearly-bg {
                     {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
                     <div class="my-8 monthly-price">
                       <div class="flex items-center justify-center text-center mb-1">
-                        <div role="status" class="loading-price hidden">
+                        <div role="status" class="loading-price">
                           <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                               <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                           </svg>
                           <span class="sr-only">loading...</span>
                         </div>
-                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceMonthly}</span>
+                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number hidden`}>${priceMonthly}</span>
                       </div>
                       <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Month</span>
-                    </div>
-                    <div class="my-8 yearly-price hidden">
-                      <div class="flex items-center justify-center text-center mb-1">
-                        <div role="status" class="loading-price hidden">
-                          <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                          </svg>
-                          <span class="sr-only">loading...</span>
-                        </div>
-                        <span id={`price-yearly-number-${id}`} class={`text-6xl font-extrabold price-number`}>${priceYearly}</span>
-                      </div>
-                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Year</span>
                     </div>
                     {items && (
                       <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
@@ -147,7 +113,7 @@ input:checked ~ .monthly-yearly-bg {
                       {typeof callToAction === 'string' ? (
                         <Fragment set:html={callToAction} />
                       ) : (
-                        callToAction && callToAction.href && <Button {...hasRibbon ? { variant:'primary' } : {}} {...callToAction}/>
+                        callToAction && callToAction.href && <Button {...hasRibbon ? { variant:'primary' } : {}} {...callToAction} id={`price-cta-${id}`} target="_blank" />
                       )}
                     </div>
                   )}
@@ -157,45 +123,50 @@ input:checked ~ .monthly-yearly-bg {
           ))
       }
     </div>
+    
   </div>
+  
+  <div class="text-center text-muted mt-4">
+    The checkout process is handled by our reseller and Merchant of Record, Paddle.com, who also handles subscription-related inquiries.
+  </div >
+
 </WidgetWrapper>
-<script src="../../../node_modules/@preline/dropdown/index.js"></script>
-<script>
-  interface ProductsResponse {
-    data: {
-      products: Array<{
-        id: string;
-        prices: Array<{
-          interval: 'month'|'year'
-          formattedPrice: string
-          currencyCode: string
-        }>
-      }>
-      currencies: Array<{
-        code: string
-        symbol: string
-      }>
-    }
-  }
+<script is:inline src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 
-  type Product = ProductsResponse['data']['products'][number]
+<script is:inline type="text/javascript">
 
-  const termToggle = document.querySelector<HTMLInputElement>('#termToggle');
-  const currencyList = document.querySelector('#currency-list')
-  var initializedCurrencies = false
-  const cacheData: {
-    productsByCurrency: Record<string, Array<Product>>,
-  } = {
-    productsByCurrency: {}
-  }
+  const PRODUCT_NAMES = {
+    'tier1': "Tier 1",
+    'tier2': "Tier 2",
+    'tier3': "Tier 3",
+  };
 
-  const getCurrentTextClass = (elem: Element) => {
+  const monthlyPriceIds = [
+    'pri_01hb3f68thdjksrra9c9aky680',
+    'pri_01hbnmmra6kxk0k8c8arkqv6xf',
+    'pri_01hbnmp0rzdq7jntqwsqvew3kc'
+  ]
+  const yearlyPriceIds = [
+    'pri_01hbnmkcspvd0nqaw5jecxagna',
+    'pri_01hbnmnb33yp8symhtn9zdvgh3',
+    'pri_01hbnmpc9zh8gyjdsx5qv0g946'
+  ]
+
+  const cachedResponses = {}
+
+  // eslint-disable-next-line no-undef
+  Paddle.Setup({ 
+    token: 'live_fb886090792caaa1fd734939496',
+  });
+  
+
+  const getCurrentTextClass = (elem) => {
     const currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'))
 
     return currentTextClass
   }
 
-  function setPriceDisplays(productsOfCurrency?: Product[]) {
+  function setPriceDisplays(productsOfCurrency) {
     if (!productsOfCurrency?.length) {
       return
     }
@@ -218,7 +189,6 @@ input:checked ~ .monthly-yearly-bg {
       const monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
       const yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
       const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
-      const yearlyElem = document.querySelector(`#price-yearly-number-${product.id}`)
       const allPriceElems = document.querySelectorAll(`.price-number`)
 
       allPriceElems.forEach((elem) => {
@@ -232,169 +202,152 @@ input:checked ~ .monthly-yearly-bg {
       })
 
 
-      if (monthlyPrice && monthlyElem) {
-        monthlyElem.innerHTML = monthlyPrice
-      }
-
-      if (yearlyPrice && yearlyElem) {
-        yearlyElem.innerHTML = yearlyPrice
+      if (monthlyElem) {
+        if (monthlyPrice) {
+          monthlyElem.innerHTML = monthlyPrice
+        } else if (yearlyPrice) {
+          monthlyElem.innerHTML = yearlyPrice
+        }
       }
     })
   }
 
-  const generateCurrencyIconElem = (symbol: string) => {
-    const iconElem = document.createElement('span')
-    iconElem.classList.add('text-lg', 'pr-4', 'w-[3rem]')
-    iconElem.innerHTML = symbol
+  async function fetchPrices(term) {
+    if (!monthlyPriceIds.length || !yearlyPriceIds.length) {
+      throw new Error('No monthly or yearly prices available')
+    }
+
+    if (cachedResponses[term]) {
+      return cachedResponses[term]
+    }
+
+    const priceIds = term === 'monthly' ? monthlyPriceIds : yearlyPriceIds
+
+    // eslint-disable-next-line no-undef
+    const previewData = await Paddle.PricePreview({
+      items: priceIds.map((id) => ({
+        priceId: id,
+        quantity: 1,
+      })),
+    })
+
+    const pricesByProduct = {};
+
     
-    return iconElem
-  }
+    const { details, currencyCode } = previewData.data;
 
-  const generateCurrencyElem = (code: string, symbol: string) => {
-    const containerElem = document.createElement('span')
-    containerElem.classList.add('flex', 'items-center', 'gap-x-1.5')
-    const iconElem = generateCurrencyIconElem(symbol)
+    // const previewData.data.currencyCode
+    for (let i = 0; i < details.lineItems.length; i += 1) {
+      const {
+        formattedTotals,
+        product,
+        price: { billingCycle, id: priceId },
+      } = previewData.data.details.lineItems[i];
+      const useProductId = product.customData?.key;
 
-    const textElem = document.createElement('span')
-    textElem.classList.add('font-semibold')
-    textElem.innerHTML = code
+      if (!billingCycle || !useProductId) {
+        continue;
+      }
 
-    if (iconElem) {
-      containerElem.appendChild(iconElem)
+      const formattedPrice = {
+        id: priceId,
+        interval: billingCycle.interval,
+        formattedPrice: formattedTotals.total.endsWith('.00') ? formattedTotals.total.slice(0, -3) : formattedTotals.total,
+        currencyCode,
+      };
+
+      const prices = pricesByProduct[useProductId]?.prices;
+
+      if (!prices) {
+        pricesByProduct[useProductId] = {
+          id: useProductId,
+          name: PRODUCT_NAMES[useProductId],
+          prices: [formattedPrice],
+        };
+      } else {
+        prices.push(formattedPrice);
+      }
     }
 
-    containerElem.appendChild(textElem)
-
-    return containerElem
-  }
-
-  function populateCurrencies(currencies: Array<{code: string, symbol: string}>) {
-    if (currencyList) {
-      currencyList.innerHTML = ''
+    const toReturn = {
+      products: pricesByProduct
     }
 
-    for (let i = 0; i < currencies.length; ++i) {
-      const c = currencies[i]
+    cachedResponses[term] = toReturn
+  
+    return toReturn
+  }
 
-      const currencyMenuItem = document.createElement('div')
-      currencyMenuItem.classList.add('py-1', 'first:pt-0', 'last:pb-0')
-      const currencyMenuLink = document.createElement('a')
-      currencyMenuLink.classList.add('flex', 'items-center', 'gap-x-3.5', 'py-1', 'px-3', 'rounded-md', 'text-sm', 'text-gray-800', 'hover:bg-gray-100', 'focus:ring-2', 'focus:ring-blue-500', 'dark:text-gray-300', 'dark:hover:bg-gray-700', 'dark:hover:text-gray-300', 'cursor-pointer', 'select-none')
+  async function fetchAndSetDisplayPrices(term) {
+    document.querySelectorAll('.loading-price').forEach((elem) => {
+      elem.classList.remove('hidden')
+    })
 
-      currencyMenuLink.appendChild(generateCurrencyElem(c.code, c.symbol))
+    document.querySelectorAll('.price-number').forEach((elem) => {
+      elem.classList.add('hidden')
+    })
+
+    const { products } = await fetchPrices(term)
+
+    document.querySelectorAll('.loading-price').forEach((elem) => {
+      elem.classList.add('hidden')
+    })
+
+    document.querySelectorAll('.price-number').forEach((elem) => {
+      elem.classList.remove('hidden')
+    })
+
+    const productsArray = Object.values(products)
+
+    setPriceDisplays(productsArray)
+
+    productsArray.forEach(({id, prices}) => {
+      const priceId = prices[0].id;
+
+      const buttonElement = document.getElementById(`price-cta-${id}`)
+
+      if (!buttonElement) {
+        return
+      }
+
+      buttonElement.href = `https://my.monitorss.xyz/settings?priceId=${priceId}`
+    })
+  }
+
+  function changeTerms(isYearly) {
+    fetchAndSetDisplayPrices(isYearly ? 'yearly' : 'monthly')
+    // monthlyElems.forEach((elem) => {
+    //   if (isYearly) {
+    //     elem.classList.add('hidden')
+    //   } else {
+    //     elem.classList.remove('hidden')
+    //   }
+    // })
+
+    // const yearlyElems = document.querySelectorAll('.yearly-price')
+
+    // yearlyElems.forEach((elem) => {
+    //   if (isYearly) {
+    //     elem.classList.remove('hidden')
+    //   } else {
+    //     elem.classList.add('hidden')
+    //   }
+    // })
+  }
+
+
+  window.addEventListener('load', function () {
+    
+    const termToggle = document.getElementById('termToggle');
+      // console.log('hello', termToggle, document.getElementById('termToggle'))
       
-      currencyMenuItem.appendChild(currencyMenuLink)
+    termToggle?.addEventListener('change', function() {
+      const isYearly = this.checked
 
-      currencyList?.appendChild(currencyMenuItem)
+      changeTerms(isYearly)
+    });
 
-      currencyMenuLink.addEventListener('click', function() {
-        fetchAndSetDisplayPrices(c.code, c.symbol)
 
-        localStorage.setItem('currencyCode', c.code)
-        localStorage.setItem('currencySymbol', c.symbol)
-      })
-    }
-  }
-
-  async function fetchPrices(currencyCode: string) {
-    const res = await fetch(`https://my.monitorss.xyz/api/v1/subscription-products?currency=${currencyCode}`)
-    const json: ProductsResponse = await res.json()
-
-    if (!initializedCurrencies) {
-      while (currencyList?.firstChild) {
-        currencyList.removeChild(currencyList.lastChild as never)
-      }
-
-      populateCurrencies(json.data.currencies)
-
-      initializedCurrencies = true
-    }
-
-    cacheData.productsByCurrency[currencyCode] = json.data.products.map((p) => ({
-      ...p,
-      prices: p.prices.map((pr) => ({
-        ...pr,
-        formattedPrice: pr.formattedPrice.endsWith('.00') ? pr.formattedPrice.slice(0, -3) : pr.formattedPrice
-      }))
-    }))
-
-    return {
-      products: json.data.products,
-    }
-  }
-
-  async function fetchAndSetDisplayPrices(currencyCode: string, currencySymbol: string) {
-    const productsOfCurrency = cacheData.productsByCurrency[currencyCode]
-
-    if (productsOfCurrency) {
-      setPriceDisplays(productsOfCurrency)
-    } else {
-      const currencyDropdownBtn = document.querySelector('#curreny-dropdown-text')
-
-      if (currencyDropdownBtn) {
-        currencyDropdownBtn.innerHTML = ''
-        currencyDropdownBtn.appendChild(generateCurrencyElem(currencyCode, currencySymbol))
-      }
-
-      document.querySelectorAll('.loading-price').forEach((elem) => {
-        elem.classList.remove('hidden')
-      })
-
-      document.querySelectorAll('.price-number').forEach((elem) => {
-        elem.classList.add('hidden')
-      })
-
-      const { products } = await fetchPrices(currencyCode)
-
-      document.querySelectorAll('.loading-price').forEach((elem) => {
-        elem.classList.add('hidden')
-      })
-
-      document.querySelectorAll('.price-number').forEach((elem) => {
-        elem.classList.remove('hidden')
-      })
-
-      setPriceDisplays(products)
-    }
-  }
-
-  function changeTerms(isYearly: boolean) {
-    const monthlyElems = document.querySelectorAll('.monthly-price')
-
-    monthlyElems.forEach((elem) => {
-      if (isYearly) {
-        elem.classList.add('hidden')
-      } else {
-        elem.classList.remove('hidden')
-      }
-    })
-
-    const yearlyElems = document.querySelectorAll('.yearly-price')
-
-    yearlyElems.forEach((elem) => {
-      if (isYearly) {
-        elem.classList.remove('hidden')
-      } else {
-        elem.classList.add('hidden')
-      }
-    })
-  }
-
-  termToggle?.addEventListener('change', function() {
-    const isYearly = this.checked
-
-    changeTerms(isYearly)
-  });
-
-  const isSetToYearly = termToggle?.checked
-
-  changeTerms(isSetToYearly || false)
-
-  const storedCurrency = localStorage.getItem('currencyCode')
-  const storedSymbol = localStorage.getItem('currencySymbol')
-  if (storedCurrency && storedSymbol) {
-    await fetchAndSetDisplayPrices(storedCurrency, storedSymbol)
-  } else {
-    await fetchAndSetDisplayPrices('USD', '$')
-  }
+    fetchAndSetDisplayPrices(termToggle?.checked ? 'yearly' : 'monthly')
+  })
 </script>

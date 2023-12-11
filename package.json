@@ -24,6 +24,7 @@
     "@iconify-json/flat-color-icons": "^1.1.6",
     "@iconify-json/ri": "^1.1.10",
     "@iconify-json/tabler": "^1.1.85",
+    "@paddle/paddle-js": "^0.5.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/lodash.merge": "^4.6.7",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
