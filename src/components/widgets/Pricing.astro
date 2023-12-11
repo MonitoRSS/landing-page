@@ -135,24 +135,24 @@ input:checked ~ .monthly-yearly-bg {
 
 <script is:inline type="text/javascript">
 
-  const PRODUCT_NAMES = {
+  var PRODUCT_NAMES = {
     'tier1': "Tier 1",
     'tier2': "Tier 2",
     'tier3': "Tier 3",
   };
 
-  const monthlyPriceIds = [
+  var monthlyPriceIds = [
     'pri_01hb3f68thdjksrra9c9aky680',
     'pri_01hbnmmra6kxk0k8c8arkqv6xf',
     'pri_01hbnmp0rzdq7jntqwsqvew3kc'
   ]
-  const yearlyPriceIds = [
+  var yearlyPriceIds = [
     'pri_01hbnmkcspvd0nqaw5jecxagna',
     'pri_01hbnmnb33yp8symhtn9zdvgh3',
     'pri_01hbnmpc9zh8gyjdsx5qv0g946'
   ]
 
-  const cachedResponses = {}
+  var cachedResponses = {}
 
   // eslint-disable-next-line no-undef
   Paddle.Setup({ 
@@ -160,8 +160,8 @@ input:checked ~ .monthly-yearly-bg {
   });
   
 
-  const getCurrentTextClass = (elem) => {
-    const currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'))
+  var getCurrentTextClass = (elem) => {
+    var currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'))
 
     return currentTextClass
   }
@@ -171,9 +171,9 @@ input:checked ~ .monthly-yearly-bg {
       return
     }
     
-    const maxYearlyCharLength = Math.max(...productsOfCurrency.flatMap((p) => p.prices.filter((p) => p.interval === 'year')).map((p) => p.formattedPrice.length))
+    var maxYearlyCharLength = Math.max(...productsOfCurrency.flatMap((p) => p.prices.filter((p) => p.interval === 'year')).map((p) => p.formattedPrice.length))
 
-    const getTextSizeFromLength = () => {
+    var getTextSizeFromLength = () => {
       if (maxYearlyCharLength < 9) {
         return 'text-6xl'
       } else if (maxYearlyCharLength < 10) {
@@ -183,16 +183,16 @@ input:checked ~ .monthly-yearly-bg {
       }
     }
 
-    const idealFontSize = getTextSizeFromLength()
+    var idealFontSize = getTextSizeFromLength()
 
     productsOfCurrency.forEach((product) => {
-      const monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
-      const yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
-      const monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
-      const allPriceElems = document.querySelectorAll(`.price-number`)
+      var monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
+      var yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
+      var monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
+      var allPriceElems = document.querySelectorAll(`.price-number`)
 
       allPriceElems.forEach((elem) => {
-        const currentTextClass = getCurrentTextClass(elem)
+        var currentTextClass = getCurrentTextClass(elem)
 
         if (currentTextClass) {
           elem.classList.remove(currentTextClass)
@@ -221,42 +221,42 @@ input:checked ~ .monthly-yearly-bg {
       return cachedResponses[term]
     }
 
-    const priceIds = term === 'monthly' ? monthlyPriceIds : yearlyPriceIds
+    var priceIds = term === 'monthly' ? monthlyPriceIds : yearlyPriceIds
 
     // eslint-disable-next-line no-undef
-    const previewData = await Paddle.PricePreview({
+    var previewData = await Paddle.PricePreview({
       items: priceIds.map((id) => ({
         priceId: id,
         quantity: 1,
       })),
     })
 
-    const pricesByProduct = {};
+    var pricesByProduct = {};
 
     
-    const { details, currencyCode } = previewData.data;
+    var { details, currencyCode } = previewData.data;
 
-    // const previewData.data.currencyCode
+    // var previewData.data.currencyCode
     for (let i = 0; i < details.lineItems.length; i += 1) {
-      const {
+      var {
         formattedTotals,
         product,
         price: { billingCycle, id: priceId },
       } = previewData.data.details.lineItems[i];
-      const useProductId = product.customData?.key;
+      var useProductId = product.customData?.key;
 
       if (!billingCycle || !useProductId) {
         continue;
       }
 
-      const formattedPrice = {
+      var formattedPrice = {
         id: priceId,
         interval: billingCycle.interval,
         formattedPrice: formattedTotals.total.endsWith('.00') ? formattedTotals.total.slice(0, -3) : formattedTotals.total,
         currencyCode,
       };
 
-      const prices = pricesByProduct[useProductId]?.prices;
+      var prices = pricesByProduct[useProductId]?.prices;
 
       if (!prices) {
         pricesByProduct[useProductId] = {
@@ -269,7 +269,7 @@ input:checked ~ .monthly-yearly-bg {
       }
     }
 
-    const toReturn = {
+    var toReturn = {
       products: pricesByProduct
     }
 
@@ -287,7 +287,7 @@ input:checked ~ .monthly-yearly-bg {
       elem.classList.add('hidden')
     })
 
-    const { products } = await fetchPrices(term)
+    var { products } = await fetchPrices(term)
 
     document.querySelectorAll('.loading-price').forEach((elem) => {
       elem.classList.add('hidden')
@@ -297,14 +297,14 @@ input:checked ~ .monthly-yearly-bg {
       elem.classList.remove('hidden')
     })
 
-    const productsArray = Object.values(products)
+    var productsArray = Object.values(products)
 
     setPriceDisplays(productsArray)
 
     productsArray.forEach(({id, prices}) => {
-      const priceId = prices[0].id;
+      var priceId = prices[0].id;
 
-      const buttonElement = document.getElementById(`price-cta-${id}`)
+      var buttonElement = document.getElementById(`price-cta-${id}`)
 
       if (!buttonElement) {
         return
@@ -324,7 +324,7 @@ input:checked ~ .monthly-yearly-bg {
     //   }
     // })
 
-    // const yearlyElems = document.querySelectorAll('.yearly-price')
+    // var yearlyElems = document.querySelectorAll('.yearly-price')
 
     // yearlyElems.forEach((elem) => {
     //   if (isYearly) {
@@ -338,11 +338,11 @@ input:checked ~ .monthly-yearly-bg {
 
   window.addEventListener('load', function () {
     
-    const termToggle = document.getElementById('termToggle');
+    var termToggle = document.getElementById('termToggle');
       // console.log('hello', termToggle, document.getElementById('termToggle'))
       
     termToggle?.addEventListener('change', function() {
-      const isYearly = this.checked
+      var isYearly = this.checked
 
       changeTerms(isYearly)
     });
