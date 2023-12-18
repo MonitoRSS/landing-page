@@ -84,15 +84,22 @@ export const headerData = {
       href: getPermalink('/pricing'),
     },
     {
-      text: 'Support',
-      href: 'https://discord.gg/pudv7Rx',
-      target: '_blank',
-      external: true,
-    },
-    {
       text: 'Github',
       href: 'https://github.com/synzen/monitorss',
       external: true
+    },
+    {
+      text: 'Support',
+      href: 'https://discord.gg/pudv7Rx',
+      links: [{
+        text: 'Discord Server',
+        href: 'https://discord.gg/pudv7Rx',
+        external: true
+      }, {
+        text: 'Helpdesk',
+        href: 'https://support.monitorss.xyz',
+        external: true
+      }],
     },
   ],
   actions: [{ type: 'button', text: 'Control Panel', href: 'https://my.monitorss.xyz' }],
@@ -111,10 +118,16 @@ export const footerData = {
     {
       title: 'Useful Links',
       links: [
-        { text: 'Support Server', href: 'https://discord.gg/pudv7Rx', external: true },
+        { text: 'Discord Support Server', href: 'https://discord.gg/pudv7Rx', external: true },
         { text: 'GitHub', href: 'https://github.com/synzen/monitorss', external: true },
       ],
     },
+    {
+      title: 'Contact Us',
+      links: [{
+        text: 'support@monitorss.xyz', href: 'mailto:support@monitorss.xyz'
+      }]
+    }
     // {
     //   title: 'Platform',
     //   links: [
