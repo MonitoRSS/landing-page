@@ -315,6 +315,15 @@ input:checked ~ .monthly-yearly-bg {
 
   function changeTerms(isYearly) {
     fetchAndSetDisplayPrices(isYearly ? 'yearly' : 'monthly')
+    const termElems = document.querySelectorAll('.price-term')
+
+    termElems.forEach((elem) => {
+      if (isYearly) {
+        elem.innerHTML = 'Per Year'
+      } else {
+        elem.innerHTML = 'Per Month'
+      }
+    })
     // monthlyElems.forEach((elem) => {
     //   if (isYearly) {
     //     elem.classList.add('hidden')
