@@ -16,29 +16,25 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props as Pricing;
-
 ---
+
 <style>
+  input:checked ~ .dot {
+    transform: translateX(100%);
+  }
 
-input:checked ~ .dot {
-  transform: translateX(100%);
-}
-
-input:checked ~ .monthly-yearly-bg {
-  background: rgb(34 197 94);
-}
-
+  input:checked ~ .monthly-yearly-bg {
+    background: rgb(34 197 94);
+  }
 </style>
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <label for="termToggle" class="flex items-center cursor-pointer gap-x-2 justify-center">
-    <div>
-      Monthly
-    </div>
+    <div>Monthly</div>
     <!-- toggle -->
     <div class="relative">
       <!-- input -->
-      <input type="checkbox" id="termToggle" class="sr-only">
+      <input type="checkbox" id="termToggle" class="sr-only" />
       <!-- line -->
       <div class="monthly-yearly-bg block bg-slate-700 w-14 h-8 rounded-full transition"></div>
       <!-- dot -->
@@ -50,181 +46,234 @@ input:checked ~ .monthly-yearly-bg {
       <!-- <span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15%!</span> -->
     </div>
   </label>
-  <div  class="flex justify-center text-sm text-green-300 mt-2 mb-16">
-    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15% with a yearly plan!</span>
+  <div class="flex justify-center text-sm text-green-300 mt-2 mb-16">
+    <span
+      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+      >Save 15% with a yearly plan!</span
+    >
   </div>
   <div class="flex items-stretch justify-center">
-    <div class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div
+      class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
       {
         prices &&
-          prices.map(({ id, title, subtitle, priceMonthly, priceYearly, items, callToAction, hasRibbon = false, ribbonTitle }) => (
-            <div class="col-span-3 mx-auto flex sm:w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
-              {priceMonthly && priceYearly && (
-                <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
-                  {hasRibbon && ribbonTitle && (
-                    <div class="absolute right-[-5px] 2xl:right-[-8px] rtl:right-auto rtl:left-[-8px] rtl:2xl:left-[-10px] top-[-5px] 2xl:top-[-10px] z-[1] h-[100px] w-[100px] overflow-hidden text-right">
-                      <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-green-700 text-center text-[10px] font-bold uppercase leading-5 text-white shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-green-800 before:border-t-green-800 before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-green-800 after:border-t-green-800 after:content-['']">
-                        {ribbonTitle}
-                      </span>
-                    </div>
-                  )}
-                  <div class="px-2 py-0">
-                    {title && (
-                      <h3 class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mb-2">{title}</h3>
-                    )}
-                    {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
-                    <div class="my-8 monthly-price">
-                      <div class="flex items-center justify-center text-center mb-1">
-                        <div role="status" class="loading-price">
-                          <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                          </svg>
-                          <span class="sr-only">loading...</span>
-                        </div>
-                        <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number hidden`}>${priceMonthly}</span>
+          prices.map(
+            ({
+              id,
+              title,
+              subtitle,
+              priceMonthly,
+              priceYearly,
+              items,
+              callToAction,
+              hasRibbon = false,
+              ribbonTitle,
+            }) => (
+              <div class="col-span-3 mx-auto flex sm:w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
+                {priceMonthly && priceYearly && (
+                  <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
+                    {hasRibbon && ribbonTitle && (
+                      <div class="absolute right-[-5px] 2xl:right-[-8px] rtl:right-auto rtl:left-[-8px] rtl:2xl:left-[-10px] top-[-5px] 2xl:top-[-10px] z-[1] h-[100px] w-[100px] overflow-hidden text-right">
+                        <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-green-700 text-center text-[10px] font-bold uppercase leading-5 text-white shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-green-800 before:border-t-green-800 before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-green-800 after:border-t-green-800 after:content-['']">
+                          {ribbonTitle}
+                        </span>
                       </div>
-                      <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">Per Month</span>
-                    </div>
-                    {items && (
-                      <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
-                        {items.map(
-                          ({ description, icon, unavailable, partlyAvailable }) =>
-                            description && (
-                              <li class="mb-1.5 flex items-start space-x-3 leading-7">
-                                {!unavailable && !partlyAvailable && <div class="rounded-full bg-primary mt-1">
-                                  <Icon name={icon ? icon : 'tabler:check'} class="w-5 h-5 font-bold p-1 text-white" />
-                                </div>}
-                                {unavailable && <div class="rounded-full bg-muted mt-1 w-min">
-                                  <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-white" />
-                                </div>}
-                                {partlyAvailable && <div class="rounded-full bg-amber-600 mt-1 w-min">
-                                  <Icon name={'tabler:exclamation-mark'} class="w-5 h-5 font-bold p-1 text-white" />
-                                </div>}
-                                <span>{description}</span>
-                              </li>
-                            )
-                        )}
-                      </ul>
                     )}
-                  </div>
-                  {callToAction && (
-                    <div class={`flex justify-center`}>
-                      {typeof callToAction === 'string' ? (
-                        <Fragment set:html={callToAction} />
-                      ) : (
-                        callToAction && callToAction.href && <Button {...hasRibbon ? { variant:'primary' } : {}} {...callToAction} id={`price-cta-${id}`} target="_blank" />
+                    <div class="px-2 py-0">
+                      {title && (
+                        <h3 class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mb-2">
+                          {title}
+                        </h3>
+                      )}
+                      {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
+                      <div class="my-8 monthly-price">
+                        <div class="flex items-center justify-center text-center mb-1">
+                          <div role="status" class="loading-price">
+                            <svg
+                              aria-hidden="true"
+                              class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                              viewBox="0 0 100 101"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor"
+                              />
+                              <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill"
+                              />
+                            </svg>
+                            <span class="sr-only">loading...</span>
+                          </div>
+                          <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number hidden`}>
+                            ${priceMonthly}
+                          </span>
+                        </div>
+                        <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">
+                          Per Month
+                        </span>
+                      </div>
+                      {items && (
+                        <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
+                          {items.map(
+                            ({ description, icon, unavailable, partlyAvailable }) =>
+                              description && (
+                                <li class="mb-1.5 flex items-start space-x-3 leading-7">
+                                  {!unavailable && !partlyAvailable && (
+                                    <div class="rounded-full bg-primary mt-1">
+                                      <Icon
+                                        name={icon ? icon : 'tabler:check'}
+                                        class="w-5 h-5 font-bold p-1 text-white"
+                                      />
+                                    </div>
+                                  )}
+                                  {unavailable && (
+                                    <div class="rounded-full bg-muted mt-1 w-min">
+                                      <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-white" />
+                                    </div>
+                                  )}
+                                  {partlyAvailable && (
+                                    <div class="rounded-full bg-amber-600 mt-1 w-min">
+                                      <Icon name={'tabler:exclamation-mark'} class="w-5 h-5 font-bold p-1 text-white" />
+                                    </div>
+                                  )}
+                                  <span>{description}</span>
+                                </li>
+                              )
+                          )}
+                        </ul>
                       )}
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-          ))
+                    {callToAction && (
+                      <div class={`flex justify-center`}>
+                        {typeof callToAction === 'string' ? (
+                          <Fragment set:html={callToAction} />
+                        ) : (
+                          callToAction &&
+                          callToAction.href && (
+                            <Button
+                              {...(hasRibbon ? { variant: 'primary' } : {})}
+                              {...callToAction}
+                              id={`price-cta-${id}`}
+                              target="_blank"
+                            />
+                          )
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )
+          )
       }
     </div>
-    
   </div>
-  
+
   <div class="text-center text-muted mt-4 text-xs">
     * Scraping external links is currently limited to feeds with fewer than 51 articles
-  </div >
+  </div>
 
   <div class="text-center text-muted mt-4">
-    The checkout process is handled by our reseller and Merchant of Record, Paddle.com, who also handles subscription-related inquiries.
-  </div >
-
+    The checkout process is handled by our reseller and Merchant of Record, Paddle.com, who also handles
+    subscription-related inquiries.
+  </div>
 </WidgetWrapper>
 <script is:inline src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 
 <script is:inline>
   var PRODUCT_NAMES = {
-    'tier1': "Tier 1",
-    'tier2': "Tier 2",
-    'tier3': "Tier 3",
+    tier1: 'Tier 1',
+    tier2: 'Tier 2',
+    tier3: 'Tier 3',
   };
 
   var monthlyPriceIds = [
     'pri_01hb3f68thdjksrra9c9aky680',
     'pri_01hbnmmra6kxk0k8c8arkqv6xf',
-    'pri_01hbnmp0rzdq7jntqwsqvew3kc'
-  ]
+    'pri_01hbnmp0rzdq7jntqwsqvew3kc',
+  ];
   var yearlyPriceIds = [
     'pri_01hbnmkcspvd0nqaw5jecxagna',
     'pri_01hbnmnb33yp8symhtn9zdvgh3',
-    'pri_01hbnmpc9zh8gyjdsx5qv0g946'
-  ]
+    'pri_01hbnmpc9zh8gyjdsx5qv0g946',
+  ];
 
-  var cachedResponses = {}
+  var cachedResponses = {};
 
   // eslint-disable-next-line no-undef
-  Paddle.Setup({ 
+  Paddle.Setup({
     token: 'live_fb886090792caaa1fd734939496',
   });
-  
 
   var getCurrentTextClass = (elem) => {
-    var currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'))
+    var currentTextClass = Array.from(elem.classList ?? []).find((c) => c.startsWith('text-'));
 
-    return currentTextClass
-  }
+    return currentTextClass;
+  };
 
   function setPriceDisplays(productsOfCurrency) {
     if (!productsOfCurrency?.length) {
-      return
+      return;
     }
-    
-    var maxYearlyCharLength = Math.max(...productsOfCurrency.flatMap((p) => p.prices.filter((p) => p.interval === 'year')).map((p) => p.formattedPrice.length))
+
+    var maxYearlyCharLength = Math.max(
+      ...productsOfCurrency
+        .flatMap((p) => p.prices.filter((p) => p.interval === 'year'))
+        .map((p) => p.formattedPrice.length)
+    );
 
     var getTextSizeFromLength = () => {
       if (maxYearlyCharLength < 9) {
-        return 'text-6xl'
+        return 'text-6xl';
       } else if (maxYearlyCharLength < 10) {
-        return 'text-5xl'
+        return 'text-5xl';
       } else {
-        return 'text-4xl'
+        return 'text-4xl';
       }
-    }
+    };
 
-    var idealFontSize = getTextSizeFromLength()
+    var idealFontSize = getTextSizeFromLength();
 
     productsOfCurrency.forEach((product) => {
-      var monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice
-      var yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice
-      var monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`)
-      var allPriceElems = document.querySelectorAll(`.price-number`)
+      var monthlyPrice = product?.prices.find((p) => p.interval === 'month')?.formattedPrice;
+      var yearlyPrice = product?.prices.find((p) => p.interval === 'year')?.formattedPrice;
+      var monthlyElem = document.querySelector(`#price-monthly-number-${product.id}`);
+      var allPriceElems = document.querySelectorAll(`.price-number`);
 
       allPriceElems.forEach((elem) => {
-        var currentTextClass = getCurrentTextClass(elem)
+        var currentTextClass = getCurrentTextClass(elem);
 
         if (currentTextClass) {
-          elem.classList.remove(currentTextClass)
+          elem.classList.remove(currentTextClass);
         }
 
-        elem.classList.add(idealFontSize)
-      })
-
+        elem.classList.add(idealFontSize);
+      });
 
       if (monthlyElem) {
         if (monthlyPrice) {
-          monthlyElem.innerHTML = monthlyPrice
+          monthlyElem.innerHTML = monthlyPrice;
         } else if (yearlyPrice) {
-          monthlyElem.innerHTML = yearlyPrice
+          monthlyElem.innerHTML = yearlyPrice;
         }
       }
-    })
+    });
   }
 
   async function fetchPrices(term) {
     if (!monthlyPriceIds.length || !yearlyPriceIds.length) {
-      throw new Error('No monthly or yearly prices available')
+      throw new Error('No monthly or yearly prices available');
     }
 
     if (cachedResponses[term]) {
-      return cachedResponses[term]
+      return cachedResponses[term];
     }
 
-    var priceIds = term === 'monthly' ? monthlyPriceIds : yearlyPriceIds
+    var priceIds = term === 'monthly' ? monthlyPriceIds : yearlyPriceIds;
 
     // eslint-disable-next-line no-undef
     var previewData = await Paddle.PricePreview({
@@ -232,11 +281,10 @@ input:checked ~ .monthly-yearly-bg {
         priceId: id,
         quantity: 1,
       })),
-    })
+    });
 
     var pricesByProduct = {};
 
-    
     var { details, currencyCode } = previewData.data;
 
     // var previewData.data.currencyCode
@@ -255,7 +303,9 @@ input:checked ~ .monthly-yearly-bg {
       var formattedPrice = {
         id: priceId,
         interval: billingCycle.interval,
-        formattedPrice: formattedTotals.total.endsWith('.00') ? formattedTotals.total.slice(0, -3) : formattedTotals.total,
+        formattedPrice: formattedTotals.total.endsWith('.00')
+          ? formattedTotals.total.slice(0, -3)
+          : formattedTotals.total,
         currencyCode,
       };
 
@@ -273,61 +323,61 @@ input:checked ~ .monthly-yearly-bg {
     }
 
     var toReturn = {
-      products: pricesByProduct
-    }
+      products: pricesByProduct,
+    };
 
-    cachedResponses[term] = toReturn
-  
-    return toReturn
+    cachedResponses[term] = toReturn;
+
+    return toReturn;
   }
 
   async function fetchAndSetDisplayPrices(term) {
     document.querySelectorAll('.loading-price').forEach((elem) => {
-      elem.classList.remove('hidden')
-    })
+      elem.classList.remove('hidden');
+    });
 
     document.querySelectorAll('.price-number').forEach((elem) => {
-      elem.classList.add('hidden')
-    })
+      elem.classList.add('hidden');
+    });
 
-    var { products } = await fetchPrices(term)
+    var { products } = await fetchPrices(term);
 
     document.querySelectorAll('.loading-price').forEach((elem) => {
-      elem.classList.add('hidden')
-    })
+      elem.classList.add('hidden');
+    });
 
     document.querySelectorAll('.price-number').forEach((elem) => {
-      elem.classList.remove('hidden')
-    })
+      elem.classList.remove('hidden');
+    });
 
-    var productsArray = Object.values(products)
+    var productsArray = Object.values(products);
 
-    setPriceDisplays(productsArray)
+    setPriceDisplays(productsArray);
 
-    productsArray.forEach(({id, prices}) => {
+    productsArray.forEach(({ id, prices }) => {
       var priceId = prices[0].id;
 
-      var buttonElement = document.getElementById(`price-cta-${id}`)
+      var buttonElement = document.getElementById(`price-cta-${id}`);
 
       if (!buttonElement) {
-        return
+        return;
       }
 
-      buttonElement.href = `https://my.monitorss.xyz/settings?priceId=${priceId}`
-    })
+      buttonElement.href = `https://my.monitorss.xyz/settings?priceId=${priceId}`;
+    });
   }
 
   function changeTerms(isYearly) {
-    fetchAndSetDisplayPrices(isYearly ? 'yearly' : 'monthly')
-    const termElems = document.querySelectorAll('.price-term')
+    fetchAndSetDisplayPrices(isYearly ? 'yearly' : 'monthly');
+    const termElems = document.querySelectorAll('.price-term');
 
     termElems.forEach((elem) => {
       if (isYearly) {
-        elem.innerHTML = 'Per Year'
+        elem.innerHTML = 'Per Year';
       } else {
-        elem.innerHTML = 'Per Month'
+        elem.innerHTML = 'Per Month';
       }
-    })
+    });
     // monthlyElems.forEach((elem) => {
     //   if (isYearly) {
     //     elem.classList.add('hidden')
@@ -347,19 +397,16 @@ input:checked ~ .monthly-yearly-bg {
     // })
   }
 
-
   window.addEventListener('load', function () {
-    
     var termToggle = document.getElementById('termToggle');
-      // console.log('hello', termToggle, document.getElementById('termToggle'))
-      
-    termToggle?.addEventListener('change', function() {
-      var isYearly = this.checked
+    // console.log('hello', termToggle, document.getElementById('termToggle'))
 
-      changeTerms(isYearly)
+    termToggle?.addEventListener('change', function () {
+      var isYearly = this.checked;
+
+      changeTerms(isYearly);
     });
 
-
-    fetchAndSetDisplayPrices(termToggle?.checked ? 'yearly' : 'monthly')
-  })
+    fetchAndSetDisplayPrices(termToggle?.checked ? 'yearly' : 'monthly');
+  });
 </script>

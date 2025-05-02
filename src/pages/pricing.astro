@@ -7,7 +7,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import PricingTable from '../components/widgets/PricingTable.astro';
 
 const metadata = {
-  title: "Pricing",
+  title: 'Pricing',
 };
 
 enum Price {
@@ -24,7 +24,6 @@ enum Feature {
   ArticleLimit = 'Maximum Daily Articles',
   CustomPlaceholders = 'Transform article content',
 }
-
 ---
 
 <Layout metadata={metadata}>
@@ -33,154 +32,154 @@ enum Feature {
     subtitle="MonitoRSS is free to use and self-host, but you can show your support for the open-source development/hosting of MonitoRSS and get access to better features!"
     prices={[
       {
-        "id": "free",
-        "title": Price.Free,
-        "priceMonthly": "0",
-        "priceYearly": "0",
-        "items": [
+        id: 'free',
+        title: Price.Free,
+        priceMonthly: '0',
+        priceYearly: '0',
+        items: [
           {
-            "description": "Track 5 news feeds",
-            "icon": "tabler:check"
+            description: 'Track 3 news feeds',
+            icon: 'tabler:check',
           },
           {
-            "description": "50 daily articles per feed",
-            "icon": "tabler:check"
+            description: '50 daily articles per feed',
+            icon: 'tabler:check',
           },
           {
-            "description": "Custom name/avatar with webhooks",
-            "unavailable": true,
+            description: 'Custom name/avatar with webhooks',
+            unavailable: true,
           },
           {
-            "description": "Transform article content",
-            "unavailable": true,
+            description: 'Transform article content',
+            unavailable: true,
           },
           {
-            "description": "10 minute refresh rate",
-            "unavailable": true,
+            description: '20 minute refresh rate',
+            unavailable: true,
           },
           {
-            "description": "Scrape external links*",
-            "unavailable": true,
+            description: 'Scrape external links*',
+            unavailable: true,
           },
         ],
-        "callToAction": {
-          "target": "_blank",
-          "text": "Get Started",
-          "href": "https://my.monitorss.xyz",
-          "class": "dark:hover:border-slate-600"
+        callToAction: {
+          target: '_blank',
+          text: 'Get Started',
+          href: 'https://my.monitorss.xyz',
+          class: 'dark:hover:border-slate-600',
         },
       },
       {
-        "id": "tier1",
-        "title": Price.Tier1,
-        "priceMonthly": "5",
-        "priceYearly": 51,
-        "items": [
+        id: 'tier1',
+        title: Price.Tier1,
+        priceMonthly: '5',
+        priceYearly: 51,
+        items: [
           {
-            "description": "Track 35 news feeds",
-            "icon": "tabler:check"
+            description: 'Track 35 news feeds',
+            icon: 'tabler:check',
           },
           {
-            "description": "1000 daily articles per feed",
-            "icon": "tabler:check"
+            description: '1000 daily articles per feed',
+            icon: 'tabler:check',
           },
           {
-            "description": "Custom name/avatar with webhooks",
-            "icon": "tabler:check"
+            description: 'Custom name/avatar with webhooks',
+            icon: 'tabler:check',
           },
           {
-            "description": "Transform article content",
-            "icon": "tabler:check"
+            description: 'Transform article content',
+            icon: 'tabler:check',
           },
           {
-            "description": "2 minute refresh rate",
+            description: '2 minute refresh rate',
           },
           {
-            "description": "Scrape external links*",
-            "unavailable": true,
+            description: 'Scrape external links*',
+            unavailable: true,
           },
         ],
-        "callToAction": {
-          "text": "Choose Plan",
-          "href": "#",
-          "class": "dark:hover:border-slate-600"
-        }, 
-        "hasRibbon": true,
-        "ribbonTitle": "popular"
+        callToAction: {
+          text: 'Choose Plan',
+          href: '#',
+          class: 'dark:hover:border-slate-600',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'popular',
       },
       {
-        "id": "tier2",
-        "title": Price.Tier2,
-        "priceMonthly": 10,
-        "priceYearly": 102,
-        "items": [
+        id: 'tier2',
+        title: Price.Tier2,
+        priceMonthly: 10,
+        priceYearly: 102,
+        items: [
           {
-            "description": "Track 70 news feeds",
-            "icon": "tabler:check"
+            description: 'Track 70 news feeds',
+            icon: 'tabler:check',
           },
           {
-            "description": "1000 daily articles per feed",
-            "icon": "tabler:check"
+            description: '1000 daily articles per feed',
+            icon: 'tabler:check',
           },
           {
-            "description": "Custom name/avatar with webhooks",
-            "icon": "tabler:check"
+            description: 'Custom name/avatar with webhooks',
+            icon: 'tabler:check',
           },
           {
-            "description": "Transform article content",
-            "icon": "tabler:check"
+            description: 'Transform article content',
+            icon: 'tabler:check',
           },
           {
-            "description": "2 minute refresh rate",
-            "icon": "tabler:check"
+            description: '2 minute refresh rate',
+            icon: 'tabler:check',
           },
           {
-            "description": "Scrape external links*",
-            "icon": "tabler:check"
+            description: 'Scrape external links*',
+            icon: 'tabler:check',
           },
         ],
-        "callToAction": {
-          "text": "Choose Plan",
-          "href": "#",
-          "class": "dark:hover:border-slate-600"
-        }
+        callToAction: {
+          text: 'Choose Plan',
+          href: '#',
+          class: 'dark:hover:border-slate-600',
+        },
       },
       {
-        "id": "tier3",
-        "title": Price.Tier3,
-        "priceMonthly": 20,
-        "priceYearly": 204,
-        "items": [
+        id: 'tier3',
+        title: Price.Tier3,
+        priceMonthly: 20,
+        priceYearly: 204,
+        items: [
           {
-            "description": "Track 140 news feeds",
-            "icon": "tabler:check"
+            description: 'Track 140 news feeds',
+            icon: 'tabler:check',
           },
           {
-            "description": "1000 daily articles per feed",
-            "icon": "tabler:check"
+            description: '1000 daily articles per feed',
+            icon: 'tabler:check',
           },
           {
-            "description": "Custom name/avatar with webhooks",
-            "icon": "tabler:check"
+            description: 'Custom name/avatar with webhooks',
+            icon: 'tabler:check',
           },
           {
-            "description": "Transform article content",
-            "icon": "tabler:check"
+            description: 'Transform article content',
+            icon: 'tabler:check',
           },
           {
-            "description": "2 minute refresh rate",
-            "icon": "tabler:check"
+            description: '2 minute refresh rate',
+            icon: 'tabler:check',
           },
           {
-            "description": "Scrape external links*",
-            "icon": "tabler:check"
+            description: 'Scrape external links*',
+            icon: 'tabler:check',
           },
         ],
-        "callToAction": {
-          "text": "Choose Plan",
-          "href": "#",
-          "class": "dark:hover:border-slate-600"
-        }
+        callToAction: {
+          text: 'Choose Plan',
+          href: '#',
+          class: 'dark:hover:border-slate-600',
+        },
       },
     ]}
   />
@@ -238,35 +237,35 @@ enum Feature {
           'Yes! You can easily upgrade or downgrade your plan, at any time. If you upgrade, the amount you have already paid for the current period will be pro-rated and applied to the new plan. If you downgrade, the amount you have already paid for the current period will be pro-rated and applied as a credit to the new plan.',
       },
       {
-        title: "Can I cancel my subscription at any time?",
-        description: "Yes, you can cancel your subscription at any time from your account page. Your subscription will remain active until the end of the period you have paid for, and will then expire with no further charges.",
+        title: 'Can I cancel my subscription at any time?',
+        description:
+          'Yes, you can cancel your subscription at any time from your account page. Your subscription will remain active until the end of the period you have paid for, and will then expire with no further charges.',
       },
       {
-        title: "Can I get a refund?",
-        description: 'We may offer a refund on a case-by-case basis depending on the situation. For more information, please see our <a class="text-blue-300" href="/terms">Terms and Conditions</a>. In any case, please do not hesitate to contact us if you have any questions or concerns.',
+        title: 'Can I get a refund?',
+        description:
+          'We may offer a refund on a case-by-case basis depending on the situation. For more information, please see our <a class="text-blue-300" href="/terms">Terms and Conditions</a>. In any case, please do not hesitate to contact us if you have any questions or concerns.',
       },
       {
         title: 'What payment methods are supported?',
-        description: `Cards (Mastercard, Visa, Maestro, American Express, Discover, Diners Club, JCB, UnionPay, and Mada), PayPal, Google Pay (only on Google Chrome), and Apple Pay (only on Safari).`
+        description: `Cards (Mastercard, Visa, Maestro, American Express, Discover, Diners Club, JCB, UnionPay, and Mada), PayPal, Google Pay (only on Google Chrome), and Apple Pay (only on Safari).`,
       },
       {
         title: 'How many Discord servers does my subscription apply to?',
-        description:
-          'Your subscription applies to all the feeds that you own, regardless of what server it is in.',
+        description: 'Your subscription applies to all the feeds that you own, regardless of what server it is in.',
       },
       {
         title: 'Can I apply my benefits to someone else?',
-        description: `While you can't transfer or apply your benefits to someone else's feeds, you can share your feeds for them to co-manage it with you. They will have full access to manage the feeds that you share with them.`
+        description: `While you can't transfer or apply your benefits to someone else's feeds, you can share your feeds for them to co-manage it with you. They will have full access to manage the feeds that you share with them.`,
       },
       {
         title: 'What if I have more requirements?',
-        description:
-          'Please contact us and we will be happy to discuss a custom plan.',
+        description: 'Please contact us and we will be happy to discuss a custom plan.',
       },
       {
         title: 'Who/what is Paddle?',
-        description: `Paddle (paddle.com) is our reseller and Merchant of Record. They handle the checkout and billing process. All emails related to billing will be sent from Paddle.`
-      }
+        description: `Paddle (paddle.com) is our reseller and Merchant of Record. They handle the checkout and billing process. All emails related to billing will be sent from Paddle.`,
+      },
     ]}
   />
 
@@ -279,16 +278,12 @@ enum Feature {
   >
     <Fragment slot="title">
       <span class="block sm:hidden">
-        Ready to get <br/> started?
+        Ready to get <br /> started?
       </span>
-      <span class="hidden sm:block">
-        Ready to get started?
-      </span>
+      <span class="hidden sm:block"> Ready to get started?</span>
       <!-- Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">{" "}started?</span> -->
     </Fragment>
 
-    <Fragment slot="subtitle">
-      It only take a couple of minutes to start getting your news delivered!
-    </Fragment>
+    <Fragment slot="subtitle">It only take a couple of minutes to start getting your news delivered!</Fragment>
   </CallToAction>
 </Layout>
