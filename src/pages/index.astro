@@ -9,7 +9,7 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: "MonitoRSS — Free RSS Feed Delivery Bot",
+  title: 'MonitoRSS — Free RSS Feed Delivery Bot',
   dontUseTitleTemplate: true,
 };
 ---
@@ -18,7 +18,11 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    callToAction={{ text: 'Invite Me', href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456', icon: 'tabler:user-plus' }}
+    callToAction={{
+      text: 'Invite Me',
+      href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
+      icon: 'tabler:user-plus',
+    }}
     callToAction2={{ text: 'Control Panel', href: 'https://my.monitorss.xyz' }}
     image={{ src: import('~/assets/images/discord.png'), alt: 'MonitoRSS articles in Discord' }}
   >
@@ -30,9 +34,11 @@ const metadata = {
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        <span class="font-semibold">MonitoRSS</span> is a free and open-source bot that automatically delivers customized news straight to your Discord server.</span
+        <span class="font-semibold">MonitoRSS</span> is a free and open-source bot that automatically delivers
+        customized news straight to your Discord server.</span
       >
-      Connect popular news sources like YouTube, Reddit, or traditional news outlets to keep your communities up to date.
+       Connect popular news sources like YouTube, Reddit, or traditional news outlets to keep your communities up to
+      date.
     </Fragment>
   </Hero>
 
@@ -50,7 +56,6 @@ const metadata = {
     ]}
   />
 
-
   <!-- Features Widget *************** -->
 
   <Features
@@ -61,32 +66,27 @@ const metadata = {
     items={[
       {
         title: 'Article Filtering',
-        description:
-          'Use filters to filter out articles you don\'t want in your feed.',
+        description: "Use filters to filter out articles you don't want in your feed.",
         icon: 'tabler:filter',
       },
       {
         title: 'Notifications',
-        description:
-          'Mention users or roles when an article of their liking comes in with the use of filters.',
+        description: 'Mention users or roles when an article of their liking comes in with the use of filters.',
         icon: 'tabler:at',
       },
       {
         title: 'Property Placeholders',
-        description:
-          'Extract information from each articles to add article-specific information into each message.',
+        description: 'Extract information from each articles to add article-specific information into each message.',
         icon: 'tabler:copy',
       },
       {
         title: 'Filtered Message Formats',
-        description:
-          'Customize the message of any given article based on the contents of the article.',
+        description: 'Customize the message of any given article based on the contents of the article.',
         icon: 'tabler:tools',
       },
       {
         title: 'Reliability',
-        description:
-          'Active for over 6 years, you can count on your articles getting delivered.',
+        description: 'Active for over 6 years, you can count on your articles getting delivered.',
         icon: 'tabler:shield-check-filled',
       },
       {
@@ -120,7 +120,7 @@ const metadata = {
       {
         title: 'Traditional News',
         description:
-          'Stay up to date on everything that\'s happening in your local community, or just the world in general.',
+          "Stay up to date on everything that's happening in your local community, or just the world in general.",
         icon: 'flat-color-icons:news',
       },
       {
@@ -131,14 +131,12 @@ const metadata = {
       },
       {
         title: 'Weather',
-        description:
-          'Plan ahead by getting weather forecasts or alerts to stay safe.',
+        description: 'Plan ahead by getting weather forecasts or alerts to stay safe.',
         icon: 'flat-color-icons:landscape',
       },
       {
         title: 'Anime',
-        description:
-          'Get notified when a new episode of your favorite anime is released.',
+        description: 'Get notified when a new episode of your favorite anime is released.',
         icon: 'flat-color-icons:reading-ebook',
       },
     ]}
@@ -226,19 +224,17 @@ const metadata = {
       },
       {
         title: 'Step 2: <span class="font-medium">Find a valid RSS feed</em>',
-        description:
-          'All it takes is some Googling - an example feed would be https://www.gameinformer.com/news.xml.',
+        description: 'All it takes is some Googling - an example feed would be https://www.gameinformer.com/news.xml.',
         icon: 'tabler:search',
       },
       {
         title: 'Step 3: <span class="font-medium">Add the feed</span>',
-        description:
-          'Log into the control panel and add the feed to a server channel.',
+        description: 'Log into the control panel and add the feed to a server channel.',
         icon: 'tabler:plus',
       },
       {
         title: 'Done!',
-        description: 'You\'re all set! New articles will be delivered automatically.',
+        description: "You're all set! New articles will be delivered automatically.",
         icon: 'tabler:check',
       },
     ]}
@@ -266,32 +262,32 @@ const metadata = {
     items={[
       {
         title: 'How much will it cost me to use?',
-        description:
-          'Nothing - it\'s completely free for up to 5 feeds.',
+        description: "Nothing - it's completely free for up to 3 feeds.",
       },
       {
         title: 'How do I use the bot?',
         description:
-          "You can explore all the controls for managing your feeds within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!",
+          'You can explore all the controls for managing your feeds within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!',
       },
       {
-        title: "Are there any restrictions if I self-host?",
-        description:
-          "Nope! You can host the bot on your own server and have as many feeds as you want.",
+        title: 'Are there any restrictions if I self-host?',
+        description: 'Nope! You can host the bot on your own server and have as many feeds as you want.',
       },
       {
-        title: "I have a suggestion and/or feedback! Where can I post it?",
+        title: 'I have a suggestion and/or feedback! Where can I post it?',
         description:
           "We'd love to hear it! You can join the Discord Server and post your suggestion, submit it via the Help button at the bottom right of this very page, or create an issue on GitHub.",
       },
       {
         title: 'Are articles delivered automatically?',
-        description: 'Yes! After a feed is added, as soon as a new article is found on the feed, it will automatically be delivered.'
+        description:
+          'Yes! After a feed is added, as soon as a new article is found on the feed, it will automatically be delivered.',
       },
       {
         title: 'How often are new articles delivered?',
-        description: 'Every 10 minutes for free. For paying supporters, they have the option to decrease it to 2 minutes. If you require an even faster rate, contact us for to see if we can meet your needs!'
-      }
+        description:
+          'Every 20 minutes for free. For paying supporters, they have the option to decrease it to 2 minutes. If you require an even faster rate, contact us for to see if we can meet your needs!',
+      },
     ]}
   />
 
@@ -306,24 +302,27 @@ const metadata = {
   >
     <Fragment slot="title">
       <span class="block sm:hidden">
-        Ready to get <br/> started?
+        Ready to get <br /> started?
       </span>
-      <span class="hidden sm:block">
-        Ready to get started?
-      </span>
+      <span class="hidden sm:block"> Ready to get started?</span>
       <!-- Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">{" "}started?</span> -->
     </Fragment>
 
-    <Fragment slot="subtitle">
-      It only take a couple of minutes to start getting your news delivered!
-    </Fragment>
+    <Fragment slot="subtitle">It only take a couple of minutes to start getting your news delivered!</Fragment>
   </CallToAction>
 </Layout>
 
 <script>
-	window.fwSettings={
-	'widget_id':151000004380
-	};
-	!function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+  window.fwSettings = {
+    widget_id: 151000004380,
+  };
+  !(function () {
+    if ('function' != typeof window.FreshworksWidget) {
+      var n = function () {
+        n.q.push(arguments);
+      };
+      (n.q = []), (window.FreshworksWidget = n);
+    }
+  })();
 </script>
-<script type='text/javascript' src='https://widget.freshworks.com/widgets/151000004380.js' async defer></script>
+<script type="text/javascript" src="https://widget.freshworks.com/widgets/151000004380.js" async defer></script>
