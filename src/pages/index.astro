@@ -9,7 +9,7 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'MonitoRSS — Free RSS Feed Delivery Bot',
+  title: 'MonitoRSS — Free Discord RSS Bot | Auto-Deliver News to Discord',
   dontUseTitleTemplate: true,
 };
 ---
@@ -19,22 +19,29 @@ const metadata = {
 
   <Hero
     callToAction={{
-      text: 'Invite Me',
+      text: 'Add to Discord',
       href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
       icon: 'tabler:user-plus',
+    }}
+    callToAction2={{
+      text: 'See How It Works',
+      href: '#steps',
     }}
     image={{ src: import('~/assets/images/discord.png'), alt: 'MonitoRSS articles in Discord' }}
   >
     <Fragment slot="title">
-      Get news delivered, automagically.
+      Automate your Discord news feed.
       <!-- Free template for <span class="hidden xl:inline">creating websites with</span>
       <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS -->
     </Fragment>
 
     <Fragment slot="subtitle">
+      <span class="sm:hidden">
+        Auto-deliver news from YouTube, Reddit & more to Discord. Free for 3 feeds.
+      </span>
       <span class="hidden sm:inline">
-        Get popular news from places like YouTube, Reddit, or traditional news outlets straight to your Discord server.</span
-      >
+        Get news from places like YouTube, Reddit, or traditional news outlets straight to your Discord servers for free.
+      </span>
     </Fragment>
   </Hero>
 
@@ -45,10 +52,11 @@ const metadata = {
   <!-- Stats Widget ****************** -->
 
   <Stats
+    subtitle="Since 2017"
     items={[
       { name: 'Communities', value: '70k' },
-      { name: 'Sources of news registered', value: '75k' },
-      { name: 'Articles delivered', value: '500m' },
+      { name: 'Sources of news registered', value: '99k' },
+      { name: 'Articles delivered', value: '750m' },
     ]}
   />
 
@@ -62,27 +70,27 @@ const metadata = {
     items={[
       {
         title: 'Article Filtering',
-        description: "Use filters to filter out articles you don't want in your feed.",
+        description: "Only get relevant content—filter by keywords, author, or topic to keep your feed focused.",
         icon: 'tabler:filter',
       },
       {
         title: 'Notifications',
-        description: 'Mention users or roles when an article of their liking comes in with the use of filters.',
+        description: 'Alert specific members when their interests are mentioned—perfect for mod teams and topic experts.',
         icon: 'tabler:at',
       },
       {
         title: 'Content Extraction',
-        description: 'Extract information from each articles to add article-specific information into each message.',
+        description: 'Pull titles, images, authors, or custom data from any article.',
         icon: 'tabler:copy',
       },
       {
         title: 'Custom Formats',
-        description: 'Create message formats based on the contents of the article.',
+        description: 'Match your server\'s style with embeds, plain text, or rich formatting.',
         icon: 'tabler:tools',
       },
       {
         title: 'Reliability',
-        description: 'Active for over 6 years, you can count on your articles getting delivered.',
+        description: '7+ years uptime, 500M+ articles delivered. Your feeds won\'t break.',
         icon: 'tabler:shield-check-filled',
       },
       {
@@ -210,6 +218,7 @@ const metadata = {
   <!-- Steps Widget ****************** -->
 
   <Steps
+    id="steps"
     title="Set up your feeds in no time."
     items={[
       {
@@ -263,7 +272,7 @@ const metadata = {
       {
         title: 'How do I use the bot?',
         description:
-          'Once you\'ve invited the bot to your server, add an RSS feed and tell MonitoRSS what channel you wnat it in. Once new articles are detected, they\'ll start flowing in automatically.',
+          'Once you\'ve invited the bot to your server, add an RSS feed and tell MonitoRSS what channel you want it in. Once new articles are detected, they\'ll start flowing in automatically.',
       },
       {
         title: 'Are there any restrictions if I self-host?',
@@ -291,7 +300,7 @@ const metadata = {
 
   <CallToAction
     callToAction={{
-      text: 'Invite Me',
+      text: 'Add to Discord',
       href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
       icon: 'tabler:user-plus',
     }}
@@ -304,7 +313,7 @@ const metadata = {
       <!-- Ready to get<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">{" "}started?</span> -->
     </Fragment>
 
-    <Fragment slot="subtitle">It only take a couple of minutes to start getting your news delivered!</Fragment>
+    <Fragment slot="subtitle">It only takes a couple of minutes to start getting your news delivered!</Fragment>
   </CallToAction>
 </Layout>
 
