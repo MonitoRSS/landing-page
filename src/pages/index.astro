@@ -23,7 +23,6 @@ const metadata = {
       href: 'https://discord.com/oauth2/authorize?client_id=268478587651358721&scope=bot&permissions=19456',
       icon: 'tabler:user-plus',
     }}
-    callToAction2={{ text: 'Control Panel', href: 'https://my.monitorss.xyz' }}
     image={{ src: import('~/assets/images/discord.png'), alt: 'MonitoRSS articles in Discord' }}
   >
     <Fragment slot="title">
@@ -34,11 +33,8 @@ const metadata = {
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        <span class="font-semibold">MonitoRSS</span> is a free and open-source bot that automatically delivers
-        customized news straight to your Discord server.</span
+        Get popular news from places like YouTube, Reddit, or traditional news outlets straight to your Discord server.</span
       >
-       Connect popular news sources like YouTube, Reddit, or traditional news outlets to keep your communities up to
-      date.
     </Fragment>
   </Hero>
 
@@ -75,13 +71,13 @@ const metadata = {
         icon: 'tabler:at',
       },
       {
-        title: 'Property Placeholders',
+        title: 'Content Extraction',
         description: 'Extract information from each articles to add article-specific information into each message.',
         icon: 'tabler:copy',
       },
       {
-        title: 'Filtered Message Formats',
-        description: 'Customize the message of any given article based on the contents of the article.',
+        title: 'Custom Formats',
+        description: 'Create message formats based on the contents of the article.',
         icon: 'tabler:tools',
       },
       {
@@ -267,14 +263,14 @@ const metadata = {
       {
         title: 'How do I use the bot?',
         description:
-          'You can explore all the controls for managing your feeds within the Control Panel. If you require more assistance, please visit the official Discord Server or submit a ticket using the Help button on the bottom right of this page!',
+          'Once you\'ve invited the bot to your server, add an RSS feed and tell MonitoRSS what channel you wnat it in. Once new articles are detected, they\'ll start flowing in automatically.',
       },
       {
         title: 'Are there any restrictions if I self-host?',
         description: 'Nope! You can host the bot on your own server and have as many feeds as you want.',
       },
       {
-        title: 'I have a suggestion and/or feedback! Where can I post it?',
+        title: 'I have a suggestion and/or feedback. Where can I post it?',
         description:
           "We'd love to hear it! You can join the Discord Server and post your suggestion, submit it via the Help button at the bottom right of this very page, or create an issue on GitHub.",
       },
@@ -286,7 +282,7 @@ const metadata = {
       {
         title: 'How often are new articles delivered?',
         description:
-          'Every 20 minutes for free. For paying supporters, they have the option to decrease it to 2 minutes. If you require an even faster rate, contact us for to see if we can meet your needs!',
+          'Every 20 minutes for free. For paying supporters, they have the option to decrease it to 2 minutes.',
       },
     ]}
   />
