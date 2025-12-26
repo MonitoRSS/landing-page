@@ -71,8 +71,19 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
-        {/* <ToggleTheme /> */}
+      <div class="flex items-center md:hidden gap-2">
+        {
+          actions?.length ? (
+            actions.map(({ text, href, class: className }) => (
+              <a
+                class:list={["btn btn-secondary py-2 px-3 text-sm font-semibold shadow-none", className]}
+                href={href}
+              >
+                {text}
+              </a>
+            ))
+          ) : null
+        }
         <ToggleMenu />
       </div>
     </div>

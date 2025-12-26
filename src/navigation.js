@@ -107,7 +107,7 @@ export const headerData = {
     //   }],
     // },
   ],
-  actions: [{ type: 'button', text: 'Control Panel', href: 'https://my.monitorss.xyz' }],
+  actions: [{ type: 'button', text: 'Dashboard', href: 'https://my.monitorss.xyz' }],
 };
 
 export const footerData = {
