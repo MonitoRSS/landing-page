@@ -18,7 +18,7 @@ enum Price {
 }
 
 enum Feature {
-  Webhooks = 'Custom Usernames/Avatars with Webhooks',
+  BrandedDelivery = 'Branded message delivery',
   Feeds = 'Feeds',
   RefreshRate = 'Refresh Rate',
   ArticleLimit = 'Maximum Daily Articles',
@@ -46,7 +46,7 @@ enum Feature {
             icon: 'tabler:check',
           },
           {
-            description: 'Custom name/avatar with webhooks',
+            description: 'Branded message delivery',
             unavailable: true,
           },
           {
@@ -84,7 +84,7 @@ enum Feature {
             icon: 'tabler:check',
           },
           {
-            description: 'Custom name/avatar with webhooks',
+            description: 'Branded message delivery',
             icon: 'tabler:check',
           },
           {
@@ -122,7 +122,7 @@ enum Feature {
             icon: 'tabler:check',
           },
           {
-            description: 'Custom name/avatar with webhooks',
+            description: 'Branded message delivery',
             icon: 'tabler:check',
           },
           {
@@ -159,7 +159,7 @@ enum Feature {
             icon: 'tabler:check',
           },
           {
-            description: 'Custom name/avatar with webhooks',
+            description: 'Branded message delivery',
             icon: 'tabler:check',
           },
           {
@@ -197,7 +197,7 @@ enum Feature {
       }, {
         id: Price.Tier1,
         features: new Map<string, {detail: string} | true>([
-          [Feature.Webhooks, true],
+          [Feature.BrandedDelivery, true],
           [Feature.Feeds, {detail: '15'}],
           [Feature.RefreshRate, {detail: '10 minutes'}],
           [Feature.ArticleLimit, {detail: '200'}],
@@ -206,7 +206,7 @@ enum Feature {
       }, {
         id: Price.Tier2,
         features: new Map<string, {detail: string} | true>([
-          [Feature.Webhooks, true],
+          [Feature.BrandedDelivery, true],
           [Feature.Feeds, {detail: '40'}],
           [Feature.RefreshRate, {detail: '2 minutes'}],
           [Feature.ArticleLimit, {detail: '500'}],
@@ -215,7 +215,7 @@ enum Feature {
       }, {
         id: Price.Tier3,
         features: new Map<string, {detail: string} | true>([
-          [Feature.Webhooks, true],
+          [Feature.BrandedDelivery, true],
           [Feature.Feeds, {detail: '100'}],
           [Feature.RefreshRate, {detail: '2 minutes'}],
           [Feature.ArticleLimit, {detail: '1000'}],
