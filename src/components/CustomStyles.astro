@@ -20,35 +20,49 @@ import '@fontsource-variable/inter';
 ---
 
 <style is:inline is:global>
-  :root {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: var(--aw-font-sans);
-    --aw-font-heading: var(--aw-font-sans);
-
-    --aw-color-primary: rgb(30 64 175);
-    --aw-color-secondary: rgb(30 58 138);
-    --aw-color-accent: rgb(109 40 217);
-
-    --aw-color-text-heading: rgb(0 0 0); 
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
-
-    --aw-color-bg-page-dark: rgb(15, 23, 42);
-  }
-
+  /*
+   * MonitoRSS COBALT scheme — ported from the app's committed theme
+   * (services/backend-api/client/src/utils/theme.ts, ACTIVE_SCHEME = "cobalt";
+   * see docs/adr/007-styling-roles-tiers-contrast.md). The landing page is
+   * dark-only (config theme: "dark:only") to match the app's forcedTheme="dark",
+   * so :root and .dark carry the same cobalt values.
+   *
+   * role-not-hue (ADR §1): call sites name a ROLE (bg-page / bg-panel / text-muted /
+   * border-control / brand / text-link). The literal cobalt hex lives ONLY here. To
+   * reskin, edit these vars — they are the landing page's analogue of theme.ts's
+   * single swap point. Status hues stay distinct from the accent (ADR §2).
+   */
+  :root,
   .dark {
     --aw-font-sans: 'Inter Variable';
     --aw-font-serif: var(--aw-font-sans);
     --aw-font-heading: var(--aw-font-sans);
 
-    --aw-color-primary: rgb(37 99 235);
-    --aw-color-secondary: rgb(29 78 216);
-    --aw-color-accent: rgb(109 40 217);
+    /* Accent (brand) — single cobalt accent; purple retired (ADR: one accent, by role). */
+    --aw-color-primary: rgb(37 99 235); /* brandSolid #2563eb */
+    --aw-color-secondary: rgb(29 78 216); /* darker cobalt #1d4ed8 */
+    --aw-color-accent: rgb(37 99 235); /* collapsed onto cobalt brand */
+    --aw-color-link: rgb(163 207 255); /* brandFg #a3cfff — accent text on dark */
 
-    --aw-color-text-heading: rgb(0 0 0); 
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: var(--aw-color-bg-page-dark);
+    /* Text ladder — cobalt zinc (contrast-gated in theme.ts). */
+    --aw-color-text-heading: rgb(250 250 250); /* fg #fafafa */
+    --aw-color-text-default: rgb(250 250 250); /* fg #fafafa */
+    --aw-color-text-muted: rgb(161 161 170); /* fg.muted #a1a1aa */
+    --aw-color-text-subtle: rgb(113 113 122); /* fg.subtle #71717a */
+
+    /* Surface ladder — page → card/panel → chip. */
+    --aw-color-bg-page: rgb(24 24 27); /* bg #18181b */
+    --aw-color-bg-page-dark: rgb(24 24 27);
+    --aw-color-bg-panel: rgb(33 33 36); /* bg.subtle === bg.panel #212124 */
+    --aw-color-bg-emphasized: rgb(46 46 50); /* bg.emphasized #2e2e32 */
+
+    /* Edges — quiet divider vs control outline (ADR §controlBorder). */
+    --aw-color-border: rgb(58 58 64); /* border #3a3a40 */
+    --aw-color-border-control: rgb(122 122 131); /* controlBorder #7a7a83 (≥3:1) */
+
+    /* Status — vivid .300 shades, distinct from accent (ADR §2). */
+    --aw-color-error: rgb(252 165 165); /* red.300 */
+    --aw-color-success: rgb(134 239 172); /* green.300 */
+    --aw-color-warning: rgb(253 186 116); /* orange.300 */
   }
 </style>

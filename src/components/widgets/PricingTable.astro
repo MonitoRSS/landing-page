@@ -18,9 +18,9 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`overflow-auto max-w-7xl mx-auto ${classes?.container ?? ''} items-center`}>
-  <Button text="View Detailed Comparison" variant="link" icon="tabler:chevron-down" class="font-semibold select-none expand-button text-blue-500 hover:text-blue-300 block text-center mb-8" />
+  <Button text="View Detailed Comparison" variant="link" icon="tabler:chevron-down" class="font-semibold select-none expand-button text-link hover:text-default block text-center mb-8" />
   <table class="w-full table-auto hidden">
-    <thead class="bg-slate-800">
+    <thead class="bg-panel">
       <tr>
         <th class="text-start py-3 px-4 font-semibold text-sm">Feature</th>
         {prices.map((p) => (
@@ -31,7 +31,7 @@ const {
     <tbody>
       {features.map((f) => (
         <tr>
-          <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">{f.name}</td>
+          <td class="border-b border-slate-100 dark:border-border-default p-4 text-sm">{f.name}</td>
           {prices.map((p) => {
             const featureDetail = p.features?.get(f.id);
             let cellContent: any = null;
@@ -48,7 +48,7 @@ const {
               </div>
             }
 
-            return <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-sm">
+            return <td class="border-b border-slate-100 dark:border-border-default p-4 text-sm">
               {cellContent}
             </td>
           })}

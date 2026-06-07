@@ -36,7 +36,7 @@ const {
       <!-- input -->
       <input type="checkbox" id="termToggle" class="sr-only" />
       <!-- line -->
-      <div class="monthly-yearly-bg block bg-slate-700 w-14 h-8 rounded-full transition"></div>
+      <div class="monthly-yearly-bg block bg-emphasized w-14 h-8 rounded-full transition"></div>
       <!-- dot -->
       <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
     </div>
@@ -46,15 +46,15 @@ const {
       <!-- <span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Save 15%!</span> -->
     </div>
   </label>
-  <div class="flex justify-center text-sm text-green-300 mt-2 mb-16">
+  <div class="flex justify-center text-sm text-success mt-2 mb-16">
     <span
-      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+      class="inline-flex items-center rounded-md bg-emphasized px-2 py-1 text-sm font-medium text-success ring-1 ring-inset ring-success"
       >Save 15% with a yearly plan!</span
     >
   </div>
   <div class="flex items-stretch justify-center">
     <div
-      class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-default sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
     >
       {
         prices &&
@@ -72,10 +72,10 @@ const {
             }) => (
               <div class="col-span-3 mx-auto flex sm:w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
                 {priceMonthly && priceYearly && (
-                  <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
+                  <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-border-default bg-white dark:bg-panel shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
                     {hasRibbon && ribbonTitle && (
                       <div class="absolute right-[-5px] 2xl:right-[-8px] rtl:right-auto rtl:left-[-8px] rtl:2xl:left-[-10px] top-[-5px] 2xl:top-[-10px] z-[1] h-[100px] w-[100px] overflow-hidden text-right">
-                        <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-green-700 text-center text-[10px] font-bold uppercase leading-5 text-white shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-green-800 before:border-t-green-800 before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-green-800 after:border-t-green-800 after:content-['']">
+                        <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-success text-center text-[10px] font-bold uppercase leading-5 text-page shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-success before:border-t-success before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-success after:border-t-success after:content-['']">
                           {ribbonTitle}
                         </span>
                       </div>
@@ -86,13 +86,13 @@ const {
                           {title}
                         </h3>
                       )}
-                      {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
+                      {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-muted">{subtitle}</p>}
                       <div class="my-8 monthly-price">
                         <div class="flex items-center justify-center text-center mb-1">
                           <div role="status" class="loading-price">
                             <svg
                               aria-hidden="true"
-                              class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                              class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-subtle fill-primary"
                               viewBox="0 0 100 101"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ const {
                             ${priceMonthly}
                           </span>
                         </div>
-                        <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400 price-term">
+                        <span class="text-base leading-6 lowercase text-gray-600 dark:text-muted price-term">
                           Per Month
                         </span>
                       </div>
@@ -131,13 +131,13 @@ const {
                                     </div>
                                   )}
                                   {unavailable && (
-                                    <div class="rounded-full bg-muted mt-1 w-min">
-                                      <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-white" />
+                                    <div class="rounded-full bg-emphasized mt-1 w-min">
+                                      <Icon name={'tabler:x'} class="w-5 h-5 font-bold p-1 text-muted" />
                                     </div>
                                   )}
                                   {partlyAvailable && (
-                                    <div class="rounded-full bg-amber-600 mt-1 w-min">
-                                      <Icon name={'tabler:exclamation-mark'} class="w-5 h-5 font-bold p-1 text-white" />
+                                    <div class="rounded-full bg-warning mt-1 w-min">
+                                      <Icon name={'tabler:exclamation-mark'} class="w-5 h-5 font-bold p-1 text-page" />
                                     </div>
                                   )}
                                   <span>{description}</span>
