@@ -145,10 +145,20 @@ export interface Price {
   description?: string;
   priceMonthly?: number;
   priceYearly?: number;
+  // Small word shown before the price (e.g. "from") for capacity-scaled plans
+  // whose displayed price is a starting point, not a fixed amount.
+  pricePrefix?: string;
+  // Capacity line shown under the price (e.g. "70 to 500 feeds").
+  priceNote?: string;
+  // When set, renders a static capacity-scale visual (the workspace detents) so
+  // the marketing card conveys "this scales" without the app's live slider.
+  capacityScale?: Array<number>;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;
   ribbonTitle?: string;
+  // Draws the emphasized 2px brand border (used for the dominant Team card).
+  isHighlighted?: boolean;
 }
 
 export interface Testimonial {

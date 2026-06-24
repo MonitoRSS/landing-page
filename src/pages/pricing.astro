@@ -12,17 +12,8 @@ const metadata = {
 
 enum Price {
   Free = 'Free',
-  Tier1 = 'Tier 1',
-  Tier2 = 'Tier 2',
-  Tier3 = 'Tier 3',
-}
-
-enum Feature {
-  BrandedDelivery = 'Branded message delivery',
-  Feeds = 'Feeds',
-  RefreshRate = 'Refresh Rate',
-  ArticleLimit = 'Maximum Daily Articles',
-  CustomPlaceholders = 'Transform article content',
+  Personal = 'Personal',
+  Team = 'Team',
 }
 ---
 
@@ -36,13 +27,18 @@ enum Feature {
         title: Price.Free,
         priceMonthly: '0',
         priceYearly: '0',
+        subtitle: 'Try it out, no strings attached.',
         items: [
           {
-            description: 'Track 3 news feeds',
+            description: 'Track up to 3 feeds',
             icon: 'tabler:check',
           },
           {
-            description: '50 daily articles per feed',
+            description: '50 articles per day, per feed',
+            icon: 'tabler:check',
+          },
+          {
+            description: 'Feeds checked every 20 minutes',
             icon: 'tabler:check',
           },
           {
@@ -50,15 +46,7 @@ enum Feature {
             unavailable: true,
           },
           {
-            description: 'Transform article content',
-            unavailable: true,
-          },
-          {
-            description: '20 minute refresh rate',
-            unavailable: true,
-          },
-          {
-            description: 'Scrape external links*',
+            description: 'Custom placeholders',
             unavailable: true,
           },
         ],
@@ -71,16 +59,21 @@ enum Feature {
       },
       {
         id: 'tier1',
-        title: Price.Tier1,
+        title: Price.Personal,
         priceMonthly: '5',
         priceYearly: 51,
+        subtitle: 'Track feeds on your own.',
         items: [
           {
-            description: 'Track 35 news feeds',
+            description: 'Track 35 feeds',
             icon: 'tabler:check',
           },
           {
-            description: '1000 daily articles per feed',
+            description: '1,000 articles per day, per feed',
+            icon: 'tabler:check',
+          },
+          {
+            description: 'Feeds checked every 2 minutes',
             icon: 'tabler:check',
           },
           {
@@ -88,20 +81,16 @@ enum Feature {
             icon: 'tabler:check',
           },
           {
-            description: 'Transform article content',
+            description: 'Custom placeholders',
             icon: 'tabler:check',
-          },
-          {
-            description: '2 minute refresh rate',
-          },
-          {
-            description: 'Scrape external links*',
-            unavailable: true,
           },
         ],
         callToAction: {
-          text: 'Choose Plan',
-          href: '#',
+          target: '_blank',
+          text: 'Choose Personal',
+          // The runtime rewrites this to a .../settings?priceId=… checkout deep
+          // link once Paddle prices load; this is only the no-JS fallback.
+          href: 'https://my.monitorss.xyz',
           class: 'hover:border-border-control',
         },
         hasRibbon: true,
@@ -109,75 +98,30 @@ enum Feature {
       },
       {
         id: 'tier2',
-        title: Price.Tier2,
+        title: Price.Team,
         priceMonthly: 10,
         priceYearly: 102,
+        pricePrefix: 'from',
+        subtitle: 'Open a shared workspace your team manages together.',
+        capacityScale: [70, 100, 140, 200, 300, 500],
         items: [
           {
-            description: 'Track 70 news feeds',
+            description: 'Everything in Personal',
             icon: 'tabler:check',
           },
           {
-            description: '1000 daily articles per feed',
+            description: 'Add unlimited teammates, free',
             icon: 'tabler:check',
           },
           {
-            description: 'Branded message delivery',
-            icon: 'tabler:check',
-          },
-          {
-            description: 'Transform article content',
-            icon: 'tabler:check',
-          },
-          {
-            description: '2 minute refresh rate',
-            icon: 'tabler:check',
-          },
-          {
-            description: 'Scrape external links*',
+            description: 'Rich content from article pages*',
             icon: 'tabler:check',
           },
         ],
         callToAction: {
-          text: 'Choose Plan',
-          href: '#',
-          class: 'hover:border-border-control',
-        },
-      },
-      {
-        id: 'tier3',
-        title: Price.Tier3,
-        priceMonthly: 20,
-        priceYearly: 204,
-        items: [
-          {
-            description: 'Track 140 news feeds',
-            icon: 'tabler:check',
-          },
-          {
-            description: '1000 daily articles per feed',
-            icon: 'tabler:check',
-          },
-          {
-            description: 'Branded message delivery',
-            icon: 'tabler:check',
-          },
-          {
-            description: 'Transform article content',
-            icon: 'tabler:check',
-          },
-          {
-            description: '2 minute refresh rate',
-            icon: 'tabler:check',
-          },
-          {
-            description: 'Scrape external links*',
-            icon: 'tabler:check',
-          },
-        ],
-        callToAction: {
-          text: 'Choose Plan',
-          href: '#',
+          target: '_blank',
+          text: 'Create a workspace',
+          href: 'https://my.monitorss.xyz',
           class: 'hover:border-border-control',
         },
       },
@@ -232,6 +176,11 @@ enum Feature {
     columns={1}
     items={[
       {
+        title: "Is a workspace overkill if it's just me?",
+        description:
+          'Not at all. A workspace with a single member gives you the same feed capacity as a solo plan, plus the option to invite people whenever you’re ready. Same feeds, same price, with no commitment to add anyone.',
+      },
+      {
         title: 'Can I switch between plans?',
         description:
           'Yes! You can easily upgrade or downgrade your plan, at any time. If you upgrade, the amount you have already paid for the current period will be pro-rated and applied to the new plan. If you downgrade, the amount you have already paid for the current period will be pro-rated and applied as a credit to the new plan.',
@@ -256,7 +205,11 @@ enum Feature {
       },
       {
         title: 'Can I apply my benefits to someone else?',
-        description: `While you can't transfer or apply your benefits to someone else's feeds, you can share your feeds for them to co-manage it with you. They will have full access to manage the feeds that you share with them.`,
+        description: `While you can't transfer or apply your personal benefits to someone else's feeds, you can share your feeds for them to co-manage it with you. They will have full access to manage the feeds that you share with them, though each shared feed counts toward the feed limit of the person who accepts it. If you want a fully shared space instead, open a workspace on the Team plan: every member manages the workspace's feeds together, the bill is shared, and feeds count against the workspace's limit only.`,
+      },
+      {
+        title: "In a workspace, do feeds share the workspace's plan?",
+        description: `Yes. Every feed in a workspace draws on the workspace's plan, no matter which member created it, and all of them count toward the workspace's shared total. (Co-management shares a single feed; a workspace shares a whole space through membership instead.)`,
       },
       {
         title: 'What if I have more requirements?',

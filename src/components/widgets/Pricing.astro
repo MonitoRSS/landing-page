@@ -16,6 +16,13 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props as Pricing;
+
+// The capacity sizer lives inside the Team card as a collapsible disclosure
+// ("Size your plan"), so it reads as part of Team rather than an orphaned band,
+// while staying collapsed by default to keep capacity demoted under the
+// collaboration pitch. It renders for the plan that declares capacityScale (the
+// Team tier); the live price is filled in by the inline script from precomputed
+// Paddle previews.
 ---
 
 <style>
@@ -25,6 +32,15 @@ const {
 
   input:checked ~ .monthly-yearly-bg {
     background: rgb(34 197 94);
+  }
+
+  /* Rotate the disclosure chevron when the sizer is open. */
+  .capacity-disclosure[open] .capacity-chevron {
+    transform: rotate(180deg);
+  }
+
+  .capacity-disclosure summary::-webkit-details-marker {
+    display: none;
   }
 </style>
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -54,7 +70,7 @@ const {
   </div>
   <div class="flex items-stretch justify-center">
     <div
-      class="flex flex-wrap sm:grid grid-cols-4 gap-4 dark:text-default sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      class="flex flex-wrap sm:grid grid-cols-3 gap-4 dark:text-default sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
     >
       {
         prices &&
@@ -65,14 +81,20 @@ const {
               subtitle,
               priceMonthly,
               priceYearly,
+              pricePrefix,
+              priceNote,
               items,
               callToAction,
+              capacityScale,
               hasRibbon = false,
               ribbonTitle,
+              isHighlighted = false,
             }) => (
-              <div class="col-span-3 mx-auto flex sm:w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1">
+              <div class="col-span-3 mx-auto flex w-full justify-center sm:col-span-1 sm:justify-stretch md:col-span-1 lg:col-span-1 xl:col-span-1">
                 {priceMonthly && priceYearly && (
-                  <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-border-default bg-white dark:bg-panel shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
+                  <div
+                    class={`rounded-lg backdrop-blur border bg-white dark:bg-panel shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center ${isHighlighted ? 'border-2 border-primary' : 'border-gray-200 dark:border-border-default'}`}
+                  >
                     {hasRibbon && ribbonTitle && (
                       <div class="absolute right-[-5px] 2xl:right-[-8px] rtl:right-auto rtl:left-[-8px] rtl:2xl:left-[-10px] top-[-5px] 2xl:top-[-10px] z-[1] h-[100px] w-[100px] overflow-hidden text-right">
                         <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-success text-center text-[10px] font-bold uppercase leading-5 text-page shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-success before:border-t-success before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-success after:border-t-success after:content-['']">
@@ -86,8 +108,15 @@ const {
                           {title}
                         </h3>
                       )}
-                      {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-muted">{subtitle}</p>}
+                      {subtitle && (
+                        <p class="font-light sm:text-base text-gray-600 dark:text-muted min-h-[3rem]">{subtitle}</p>
+                      )}
                       <div class="my-8 monthly-price">
+                        {pricePrefix && (
+                          <span class="block text-base lowercase text-center text-gray-600 dark:text-muted">
+                            {pricePrefix}
+                          </span>
+                        )}
                         <div class="flex items-center justify-center text-center mb-1">
                           <div role="status" class="loading-price">
                             <svg
@@ -108,13 +137,18 @@ const {
                             </svg>
                             <span class="sr-only">loading...</span>
                           </div>
-                          <span id={`price-monthly-number-${id}`} class={`text-6xl font-extrabold price-number hidden`}>
+                          <span
+                            id={`price-monthly-number-${id}`}
+                            class={`text-6xl font-extrabold price-number hidden`}
+                            data-free-amount={priceMonthly === 0 || priceMonthly === '0' ? '0' : undefined}
+                          >
                             ${priceMonthly}
                           </span>
                         </div>
                         <span class="text-base leading-6 lowercase text-gray-600 dark:text-muted price-term">
                           Per Month
                         </span>
+                        {priceNote && <p class="mt-2 text-sm text-gray-600 dark:text-muted">{priceNote}</p>}
                       </div>
                       {items && (
                         <ul role="list" class="my-8 md:my-10 space-y-2 text-left">
@@ -146,6 +180,60 @@ const {
                           )}
                         </ul>
                       )}
+                      {capacityScale && capacityScale.length > 0 && (
+                        <details
+                          class="capacity-disclosure mb-6 rounded-lg border border-gray-200 bg-gray-50 text-left dark:border-border-default dark:bg-emphasized"
+                          data-capacity-card={id}
+                          data-detents={JSON.stringify(capacityScale)}
+                        >
+                          <summary class="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-sm font-medium">
+                            <span>
+                              Size your plan &middot;{' '}
+                              <span class="capacity-summary-price text-link">from &hellip;</span>
+                            </span>
+                            <svg
+                              class="capacity-chevron h-4 w-4 text-muted transition-transform"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </summary>
+                          <div class="border-t border-gray-200 px-4 pb-4 pt-3 dark:border-border-default">
+                            <label for={`capacity-slider-${id}`} class="block text-sm text-gray-600 dark:text-muted">
+                              <span class="capacity-feeds font-semibold text-link">{capacityScale[0]}</span> feeds for{' '}
+                              <span class="capacity-price font-semibold text-link">&hellip;</span>{' '}
+                              <span class="capacity-term lowercase">per month</span>
+                            </label>
+                            <input
+                              type="range"
+                              id={`capacity-slider-${id}`}
+                              class="capacity-slider mt-3 w-full accent-primary"
+                              min="0"
+                              max={capacityScale.length - 1}
+                              step="1"
+                              value="0"
+                              aria-label="Team feed capacity"
+                            />
+                            <div class="mt-2 flex justify-between text-xs text-gray-600 dark:text-muted">
+                              {capacityScale.map((count, i) => (
+                                <span>
+                                  {count}
+                                  {i === capacityScale.length - 1 ? '+' : ''}
+                                </span>
+                              ))}
+                            </div>
+                            <p class="mt-3 text-xs text-gray-600 dark:text-muted">
+                              Set your capacity when you create the workspace. Works solo, invite people later.
+                            </p>
+                          </div>
+                        </details>
+                      )}
                     </div>
                     {callToAction && (
                       <div class={`flex justify-center`}>
@@ -174,7 +262,8 @@ const {
   </div>
 
   <div class="text-center text-muted mt-4 text-xs">
-    * Scraping external links is currently limited to feeds with fewer than 51 articles
+    * Rich content from article pages pulls extra images, links, or thumbnails from each linked article's own
+    webpage. Available on feeds with fewer than 51 articles.
   </div>
 
   <div class="text-center text-muted mt-4">
@@ -186,21 +275,27 @@ const {
 
 <script is:inline>
   var PRODUCT_NAMES = {
-    tier1: 'Tier 1',
-    tier2: 'Tier 2',
-    tier3: 'Tier 3',
+    tier1: 'Personal',
+    tier2: 'Team',
   };
 
-  var monthlyPriceIds = [
-    'pri_01hb3f68thdjksrra9c9aky680',
-    'pri_01hbnmmra6kxk0k8c8arkqv6xf',
-    'pri_01hbnmp0rzdq7jntqwsqvew3kc',
-  ];
-  var yearlyPriceIds = [
-    'pri_01hbnmkcspvd0nqaw5jecxagna',
-    'pri_01hbnmnb33yp8symhtn9zdvgh3',
-    'pri_01hbnmpc9zh8gyjdsx5qv0g946',
-  ];
+  // tier1 = Personal base price; tier2 = Team base price (the 70-feed workspace).
+  // The Team card shows the tier2 base as its "from" anchor; the live capacity
+  // slider (and the per-feed overage pricing) lives in the app.
+  var monthlyPriceIds = ['pri_01hb3f68thdjksrra9c9aky680', 'pri_01hbnmmra6kxk0k8c8arkqv6xf'];
+  var yearlyPriceIds = ['pri_01hbnmkcspvd0nqaw5jecxagna', 'pri_01hbnmnb33yp8symhtn9zdvgh3'];
+
+  // The live Team capacity slider prices each detent as the Team base (tier2)
+  // plus a per-feed add-on for the overage above the base detent, the same
+  // basket the in-app slider buys. These are the production Paddle price ids by
+  // interval. The detent feed counts come from the rendered slider's
+  // data-detents attribute (single source of truth with capacityScale), and the
+  // base feed count is detents[0] — nothing about the ladder is hardcoded here.
+  var TEAM_BASE_PRICE_IDS = { month: 'pri_01hbnmmra6kxk0k8c8arkqv6xf', year: 'pri_01hbnmnb33yp8symhtn9zdvgh3' };
+  var TEAM_FEED_ADDON_PRICE_IDS = { month: 'pri_01jzdyaa7sr427yre37j0m1h74', year: 'pri_01jzdybc83226zq2ea8cs0csd5' };
+  // Precomputed formatted prices per detent index, keyed by interval. Filled once
+  // per term so dragging the snap-to-detents slider is instant with no per-drag call.
+  var teamDetentPrices = { month: [], year: [] };
 
   var cachedResponses = {};
 
@@ -290,7 +385,7 @@ const {
     // var previewData.data.currencyCode
     for (let i = 0; i < details.lineItems.length; i += 1) {
       var {
-        formattedTotals,
+        totals,
         product,
         price: { billingCycle, id: priceId },
       } = previewData.data.details.lineItems[i];
@@ -303,9 +398,9 @@ const {
       var formattedPrice = {
         id: priceId,
         interval: billingCycle.interval,
-        formattedPrice: formattedTotals.total.endsWith('.00')
-          ? formattedTotals.total.slice(0, -3)
-          : formattedTotals.total,
+        // Format from the minor-unit total via the shared helper so card prices
+        // and the Team capacity slider use one identical currency format.
+        formattedPrice: formatMinorUnitTotal(parseInt(totals.total, 10), currencyCode),
         currencyCode,
       };
 
@@ -324,6 +419,7 @@ const {
 
     var toReturn = {
       products: pricesByProduct,
+      currencyCode,
     };
 
     cachedResponses[term] = toReturn;
@@ -340,7 +436,7 @@ const {
       elem.classList.add('hidden');
     });
 
-    var { products } = await fetchPrices(term);
+    var { products, currencyCode } = await fetchPrices(term);
 
     document.querySelectorAll('.loading-price').forEach((elem) => {
       elem.classList.add('hidden');
@@ -350,11 +446,32 @@ const {
       elem.classList.remove('hidden');
     });
 
+    // Free cards aren't Paddle products, so they have no localized preview. Format
+    // their amount (0) with the same currency Paddle detected for the paid tiers,
+    // through the shared helper, so the symbol matches the rest of the page
+    // instead of the hardcoded "$0".
+    if (currencyCode) {
+      document.querySelectorAll('.price-number[data-free-amount]').forEach((elem) => {
+        var amount = parseInt(elem.dataset.freeAmount, 10) || 0;
+        elem.innerHTML = formatMinorUnitTotal(amount, currencyCode);
+      });
+    }
+
     var productsArray = Object.values(products);
 
     setPriceDisplays(productsArray);
 
     productsArray.forEach(({ id, prices }) => {
+      // A capacity-scaled card (it renders the in-app sizing slider) prices off
+      // the workspace base, but the chosen capacity is set on the in-app slider,
+      // so its CTA stays a plain link into the app rather than a single-price
+      // checkout deep link. Detect that from the rendered slider rather than a
+      // hardcoded product id so a tier rename can't silently re-enable the
+      // deep link.
+      if (document.querySelector(`.capacity-disclosure[data-capacity-card="${id}"]`)) {
+        return;
+      }
+
       var priceId = prices[0].id;
 
       var buttonElement = document.getElementById(`price-cta-${id}`);
@@ -378,35 +495,179 @@ const {
         elem.innerHTML = 'Per Month';
       }
     });
-    // monthlyElems.forEach((elem) => {
-    //   if (isYearly) {
-    //     elem.classList.add('hidden')
-    //   } else {
-    //     elem.classList.remove('hidden')
-    //   }
-    // })
+  }
 
-    // var yearlyElems = document.querySelectorAll('.yearly-price')
+  // Format a minor-unit (e.g. cents) integer total as a localized currency
+  // string, deriving the currency's fraction digits so zero-decimal currencies
+  // (e.g. JPY) are handled. Drops a trailing ".00" to match the card prices.
+  // The card prices flow through this same helper (see fetchPrices), so the
+  // Team slider and the card "from" anchor can never format inconsistently.
+  var currencyFormatters = {};
 
-    // yearlyElems.forEach((elem) => {
-    //   if (isYearly) {
-    //     elem.classList.remove('hidden')
-    //   } else {
-    //     elem.classList.add('hidden')
-    //   }
-    // })
+  function formatMinorUnitTotal(minorUnitTotal, currencyCode) {
+    var formatter = currencyFormatters[currencyCode];
+
+    if (!formatter) {
+      formatter = new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: currencyCode,
+      });
+      currencyFormatters[currencyCode] = formatter;
+    }
+
+    var fractionDigits = formatter.resolvedOptions().maximumFractionDigits;
+    var majorUnitTotal = minorUnitTotal / Math.pow(10, fractionDigits);
+    var formatted = formatter.format(majorUnitTotal);
+
+    return formatted.endsWith('.00') ? formatted.slice(0, -3) : formatted;
+  }
+
+  // Read the detent feed counts from the rendered slider's data-detents
+  // attribute. This is the single source of truth (it mirrors capacityScale in
+  // the page data), so the script never hardcodes the ladder or the base count.
+  function getTeamDetents() {
+    var disclosure = document.querySelector('.capacity-disclosure[data-detents]');
+
+    if (!disclosure) {
+      return [];
+    }
+
+    try {
+      var detents = JSON.parse(disclosure.dataset.detents);
+
+      return Array.isArray(detents) ? detents : [];
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Invalid capacity detents', disclosure.dataset.detents, err);
+
+      return [];
+    }
+  }
+
+  // Preview every detent's price in a SINGLE Paddle.PricePreview call. We send
+  // the base (qty 1) plus the add-on at the largest overage, then read each
+  // line item's PER-UNIT minor-unit amount (unitTotals.total). Every detent's
+  // total is base + overage*addonUnit, computed locally — no per-detent network
+  // call, and the base line item is the same basket the card already previews.
+  async function previewTeamDetentPrices(interval, detents) {
+    var baseFeeds = detents[0];
+    var maxOverage = Math.max(0, detents[detents.length - 1] - baseFeeds);
+
+    var items = [{ priceId: TEAM_BASE_PRICE_IDS[interval], quantity: 1 }];
+
+    if (maxOverage > 0) {
+      items.push({ priceId: TEAM_FEED_ADDON_PRICE_IDS[interval], quantity: maxOverage });
+    }
+
+    // eslint-disable-next-line no-undef
+    var previewData = await Paddle.PricePreview({ items: items });
+    var currencyCode = previewData.data.currencyCode;
+    var lineItems = previewData.data.details.lineItems;
+
+    var baseUnit = parseInt(lineItems[0].unitTotals.total, 10);
+    var addonUnit = lineItems[1] ? parseInt(lineItems[1].unitTotals.total, 10) : 0;
+
+    return detents.map(function (feeds) {
+      var overage = Math.max(0, feeds - baseFeeds);
+
+      return formatMinorUnitTotal(baseUnit + overage * addonUnit, currencyCode);
+    });
+  }
+
+  function renderTeamCapacity(index, interval) {
+    var disclosure = document.querySelector('.capacity-disclosure');
+
+    if (!disclosure) {
+      return;
+    }
+
+    var feedsElem = disclosure.querySelector('.capacity-feeds');
+    var priceElem = disclosure.querySelector('.capacity-price');
+    var termElem = disclosure.querySelector('.capacity-term');
+
+    if (!feedsElem || !priceElem || !termElem) {
+      return;
+    }
+
+    var detents = getTeamDetents();
+    var feeds = detents[index];
+
+    feedsElem.textContent = index === detents.length - 1 ? feeds + '+' : String(feeds);
+    termElem.textContent = interval === 'year' ? 'per year' : 'per month';
+
+    var cached = teamDetentPrices[interval][index];
+    priceElem.textContent = cached || '…';
+
+    // The collapsed disclosure summary always shows the entry price ("from
+    // $X"), i.e. the lowest detent, so the cost is visible without opening it.
+    var summaryPriceElem = disclosure.querySelector('.capacity-summary-price');
+
+    if (summaryPriceElem) {
+      var lowest = teamDetentPrices[interval][0];
+      summaryPriceElem.textContent = lowest ? 'from ' + lowest : 'from …';
+    }
+  }
+
+  // Precompute the detent prices for the term once, then dragging is instant.
+  // Re-run while any detent is still unpriced (length short, or a prior attempt
+  // left blanks after a transient failure) so a single network blip doesn't
+  // permanently poison a detent for the session.
+  async function precomputeTeamDetentPrices(interval) {
+    var detents = getTeamDetents();
+
+    if (!detents.length) {
+      return;
+    }
+
+    var current = teamDetentPrices[interval];
+
+    if (current.length === detents.length && current.every(Boolean)) {
+      return;
+    }
+
+    try {
+      teamDetentPrices[interval] = await previewTeamDetentPrices(interval, detents);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to preview Team capacity prices', interval, err);
+    }
+  }
+
+  async function setupTeamCapacitySlider(interval) {
+    var slider = document.querySelector('.capacity-slider');
+
+    if (!slider) {
+      return;
+    }
+
+    renderTeamCapacity(parseInt(slider.value, 10), interval);
+    await precomputeTeamDetentPrices(interval);
+    // Re-read the live term after the await: a rapid toggle may have changed it
+    // while this interval's prices were loading, and rendering the captured
+    // interval would repaint the disclosure with the wrong term's prices.
+    var liveInterval = document.getElementById('termToggle')?.checked ? 'year' : 'month';
+    renderTeamCapacity(parseInt(slider.value, 10), liveInterval);
+
+    if (!slider.dataset.bound) {
+      slider.dataset.bound = 'true';
+      slider.addEventListener('input', function () {
+        var currentInterval = document.getElementById('termToggle')?.checked ? 'year' : 'month';
+        renderTeamCapacity(parseInt(this.value, 10), currentInterval);
+      });
+    }
   }
 
   window.addEventListener('load', function () {
     var termToggle = document.getElementById('termToggle');
-    // console.log('hello', termToggle, document.getElementById('termToggle'))
 
     termToggle?.addEventListener('change', function () {
       var isYearly = this.checked;
 
       changeTerms(isYearly);
+      setupTeamCapacitySlider(isYearly ? 'year' : 'month');
     });
 
     fetchAndSetDisplayPrices(termToggle?.checked ? 'yearly' : 'monthly');
+    setupTeamCapacitySlider(termToggle?.checked ? 'year' : 'month');
   });
 </script>
