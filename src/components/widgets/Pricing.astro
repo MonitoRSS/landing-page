@@ -17,12 +17,9 @@ const {
   bg = await Astro.slots.render('bg'),
 } = Astro.props as Pricing;
 
-// The capacity sizer lives inside the Team card as a collapsible disclosure
-// ("Size your plan"), so it reads as part of Team rather than an orphaned band,
-// while staying collapsed by default to keep capacity demoted under the
-// collaboration pitch. It renders for the plan that declares capacityScale (the
-// Team tier); the live price is filled in by the inline script from precomputed
-// Paddle previews.
+// Capacity stays in the Team card, where it belongs. The live price below uses
+// the same Team base and per-feed add-on basket as the app, including an exact
+// whole-number capacity between the advertised minimum and maximum.
 ---
 
 <style>
@@ -184,11 +181,13 @@ const {
                         <details
                           class="capacity-disclosure mb-6 rounded-lg border border-gray-200 bg-gray-50 text-left dark:border-border-default dark:bg-emphasized"
                           data-capacity-card={id}
-                          data-detents={JSON.stringify(capacityScale)}
+                          data-capacity-options={JSON.stringify(capacityScale)}
+                          data-min-capacity={capacityScale[0]}
+                          data-max-capacity={capacityScale[capacityScale.length - 1]}
                         >
                           <summary class="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-sm font-medium">
                             <span>
-                              Size your plan &middot;{' '}
+                              Add more feeds &middot;{' '}
                               <span class="capacity-summary-price text-link">from &hellip;</span>
                             </span>
                             <svg
@@ -205,31 +204,54 @@ const {
                             </svg>
                           </summary>
                           <div class="border-t border-gray-200 px-4 pb-4 pt-3 dark:border-border-default">
-                            <label for={`capacity-slider-${id}`} class="block text-sm text-gray-600 dark:text-muted">
+                            <p class="block text-sm text-gray-600 dark:text-muted">
                               <span class="capacity-feeds font-semibold text-link">{capacityScale[0]}</span> feeds for{' '}
                               <span class="capacity-price font-semibold text-link">&hellip;</span>{' '}
                               <span class="capacity-term lowercase">per month</span>
-                            </label>
-                            <input
-                              type="range"
-                              id={`capacity-slider-${id}`}
-                              class="capacity-slider mt-3 w-full accent-primary"
-                              min="0"
-                              max={capacityScale.length - 1}
-                              step="1"
-                              value="0"
-                              aria-label="Team feed capacity"
-                            />
-                            <div class="mt-2 flex justify-between text-xs text-gray-600 dark:text-muted">
-                              {capacityScale.map((count, i) => (
-                                <span>
-                                  {count}
-                                  {i === capacityScale.length - 1 ? '+' : ''}
-                                </span>
-                              ))}
+                            </p>
+                            <p class="capacity-announcement sr-only" aria-live="polite" aria-atomic="true"></p>
+                            <div class="capacity-picker mt-3" role="radiogroup" aria-label="Team feed capacity">
+                              <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                                {capacityScale.map((count, i) => (
+                                  <label class="cursor-pointer">
+                                    <input
+                                      type="radio"
+                                      class="capacity-option peer sr-only"
+                                      name={`capacity-${id}`}
+                                      value={count}
+                                      checked={i === 0}
+                                    />
+                                    <span class="flex min-h-[2.5rem] items-center justify-center rounded-md border border-gray-200 bg-white px-2 text-sm font-medium transition peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary dark:border-border-default dark:bg-panel">
+                                      {count.toLocaleString('en-US')}
+                                    </span>
+                                  </label>
+                                ))}
+                                <label class="cursor-pointer">
+                                  <input type="radio" class="capacity-option peer sr-only" name={`capacity-${id}`} value="custom" />
+                                  <span class="flex min-h-[2.5rem] items-center justify-center rounded-md border border-gray-200 bg-white px-2 text-sm font-medium transition peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary dark:border-border-default dark:bg-panel">Custom</span>
+                                </label>
+                              </div>
+                              <div class="capacity-custom hidden mt-3 border-l-2 border-primary pl-3">
+                                <label for={`capacity-input-${id}`} class="block text-sm text-gray-600 dark:text-muted">
+                                  Or enter an exact feed capacity
+                                </label>
+                                <input
+                                  id={`capacity-input-${id}`}
+                                  class="capacity-input mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-default shadow-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary dark:border-border-default dark:bg-panel"
+                                  type="number"
+                                  min={capacityScale[0]}
+                                  max={capacityScale[capacityScale.length - 1]}
+                                  step="1"
+                                  value={capacityScale[0]}
+                                  inputmode="numeric"
+                                />
+                                <p class="capacity-helper mt-1 text-xs text-gray-600 dark:text-muted" aria-live="polite">
+                                  Choose a whole number from {capacityScale[0]} to {capacityScale[capacityScale.length - 1].toLocaleString('en-US')} feeds.
+                                </p>
+                              </div>
                             </div>
                             <p class="mt-3 text-xs text-gray-600 dark:text-muted">
-                              Set your capacity when you create the workspace. Works solo, invite people later.
+                              Set your capacity when you create the workspace. Works solo; invite people later.
                             </p>
                           </div>
                         </details>
@@ -280,23 +302,15 @@ const {
   };
 
   // tier1 = Personal base price; tier2 = Team base price (the 70-feed workspace).
-  // The Team card shows the tier2 base as its "from" anchor; the live capacity
-  // slider (and the per-feed overage pricing) lives in the app.
+  // The Team card shows tier2 as its "from" anchor and adds the same per-feed
+  // overage used by the app's capacity picker.
   var monthlyPriceIds = ['pri_01hb3f68thdjksrra9c9aky680', 'pri_01hbnmmra6kxk0k8c8arkqv6xf'];
   var yearlyPriceIds = ['pri_01hbnmkcspvd0nqaw5jecxagna', 'pri_01hbnmnb33yp8symhtn9zdvgh3'];
 
-  // The live Team capacity slider prices each detent as the Team base (tier2)
-  // plus a per-feed add-on for the overage above the base detent, the same
-  // basket the in-app slider buys. These are the production Paddle price ids by
-  // interval. The detent feed counts come from the rendered slider's
-  // data-detents attribute (single source of truth with capacityScale), and the
-  // base feed count is detents[0] — nothing about the ladder is hardcoded here.
+  // The Team capacity picker prices the Team base plus a per-feed add-on for
+  // every feed above 70. These are the production Paddle price ids by interval.
   var TEAM_BASE_PRICE_IDS = { month: 'pri_01hbnmmra6kxk0k8c8arkqv6xf', year: 'pri_01hbnmnb33yp8symhtn9zdvgh3' };
   var TEAM_FEED_ADDON_PRICE_IDS = { month: 'pri_01jzdyaa7sr427yre37j0m1h74', year: 'pri_01jzdybc83226zq2ea8cs0csd5' };
-  // Precomputed formatted prices per detent index, keyed by interval. Filled once
-  // per term so dragging the snap-to-detents slider is instant with no per-drag call.
-  var teamDetentPrices = { month: [], year: [] };
-
   var cachedResponses = {};
 
   // eslint-disable-next-line no-undef
@@ -399,7 +413,7 @@ const {
         id: priceId,
         interval: billingCycle.interval,
         // Format from the minor-unit total via the shared helper so card prices
-        // and the Team capacity slider use one identical currency format.
+        // and the Team capacity picker use one identical currency format.
         formattedPrice: formatMinorUnitTotal(parseInt(totals.total, 10), currencyCode),
         currencyCode,
       };
@@ -462,10 +476,10 @@ const {
     setPriceDisplays(productsArray);
 
     productsArray.forEach(({ id, prices }) => {
-      // A capacity-scaled card (it renders the in-app sizing slider) prices off
-      // the workspace base, but the chosen capacity is set on the in-app slider,
+      // A capacity-scaled card prices off the workspace base, but the chosen
+      // capacity is set on its capacity picker,
       // so its CTA stays a plain link into the app rather than a single-price
-      // checkout deep link. Detect that from the rendered slider rather than a
+      // checkout deep link. Detect that from the rendered picker rather than a
       // hardcoded product id so a tier rename can't silently re-enable the
       // deep link.
       if (document.querySelector(`.capacity-disclosure[data-capacity-card="${id}"]`)) {
@@ -501,7 +515,7 @@ const {
   // string, deriving the currency's fraction digits so zero-decimal currencies
   // (e.g. JPY) are handled. Drops a trailing ".00" to match the card prices.
   // The card prices flow through this same helper (see fetchPrices), so the
-  // Team slider and the card "from" anchor can never format inconsistently.
+  // Team picker and the card "from" anchor can never format inconsistently.
   var currencyFormatters = {};
 
   function formatMinorUnitTotal(minorUnitTotal, currencyCode) {
@@ -522,139 +536,166 @@ const {
     return formatted.endsWith('.00') ? formatted.slice(0, -3) : formatted;
   }
 
-  // Read the detent feed counts from the rendered slider's data-detents
-  // attribute. This is the single source of truth (it mirrors capacityScale in
-  // the page data), so the script never hardcodes the ladder or the base count.
-  function getTeamDetents() {
-    var disclosure = document.querySelector('.capacity-disclosure[data-detents]');
+  // The picker mirrors the app: a few useful anchors plus any whole number from
+  // the Team base capacity through its 2,000-feed ceiling. The price still comes
+  // from one Paddle preview per billing interval; we read its per-feed unit cost
+  // once and calculate the selected total locally.
+  var teamCapacityPricing = { month: null, year: null };
 
-    if (!disclosure) {
-      return [];
-    }
+  function getTeamCapacityConfig() {
+    var disclosure = document.querySelector('.capacity-disclosure[data-capacity-options]');
 
-    try {
-      var detents = JSON.parse(disclosure.dataset.detents);
+    if (!disclosure) return null;
 
-      return Array.isArray(detents) ? detents : [];
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Invalid capacity detents', disclosure.dataset.detents, err);
+    var min = parseInt(disclosure.dataset.minCapacity, 10);
+    var max = parseInt(disclosure.dataset.maxCapacity, 10);
 
-      return [];
-    }
+    return Number.isFinite(min) && Number.isFinite(max) ? { disclosure: disclosure, min: min, max: max } : null;
   }
 
-  // Preview every detent's price in a SINGLE Paddle.PricePreview call. We send
-  // the base (qty 1) plus the add-on at the largest overage, then read each
-  // line item's PER-UNIT minor-unit amount (unitTotals.total). Every detent's
-  // total is base + overage*addonUnit, computed locally — no per-detent network
-  // call, and the base line item is the same basket the card already previews.
-  async function previewTeamDetentPrices(interval, detents) {
-    var baseFeeds = detents[0];
-    var maxOverage = Math.max(0, detents[detents.length - 1] - baseFeeds);
+  async function previewTeamCapacityPricing(interval, config) {
+    if (teamCapacityPricing[interval]) return teamCapacityPricing[interval];
 
     var items = [{ priceId: TEAM_BASE_PRICE_IDS[interval], quantity: 1 }];
+    var maxOverage = config.max - config.min;
 
-    if (maxOverage > 0) {
-      items.push({ priceId: TEAM_FEED_ADDON_PRICE_IDS[interval], quantity: maxOverage });
-    }
+    if (maxOverage > 0) items.push({ priceId: TEAM_FEED_ADDON_PRICE_IDS[interval], quantity: maxOverage });
 
     // eslint-disable-next-line no-undef
     var previewData = await Paddle.PricePreview({ items: items });
-    var currencyCode = previewData.data.currencyCode;
     var lineItems = previewData.data.details.lineItems;
+    var pricing = {
+      base: parseInt(lineItems[0].unitTotals.total, 10),
+      addOn: lineItems[1] ? parseInt(lineItems[1].unitTotals.total, 10) : 0,
+      currencyCode: previewData.data.currencyCode,
+    };
 
-    var baseUnit = parseInt(lineItems[0].unitTotals.total, 10);
-    var addonUnit = lineItems[1] ? parseInt(lineItems[1].unitTotals.total, 10) : 0;
+    teamCapacityPricing[interval] = pricing;
 
-    return detents.map(function (feeds) {
-      var overage = Math.max(0, feeds - baseFeeds);
-
-      return formatMinorUnitTotal(baseUnit + overage * addonUnit, currencyCode);
-    });
+    return pricing;
   }
 
-  function renderTeamCapacity(index, interval) {
-    var disclosure = document.querySelector('.capacity-disclosure');
+  function renderTeamCapacity(feeds, interval, shouldAnnounce) {
+    var config = getTeamCapacityConfig();
 
-    if (!disclosure) {
-      return;
-    }
+    if (!config) return;
 
-    var feedsElem = disclosure.querySelector('.capacity-feeds');
-    var priceElem = disclosure.querySelector('.capacity-price');
-    var termElem = disclosure.querySelector('.capacity-term');
+    var feedsElem = config.disclosure.querySelector('.capacity-feeds');
+    var priceElem = config.disclosure.querySelector('.capacity-price');
+    var termElem = config.disclosure.querySelector('.capacity-term');
+    var summaryPriceElem = config.disclosure.querySelector('.capacity-summary-price');
+    var pricing = teamCapacityPricing[interval];
 
-    if (!feedsElem || !priceElem || !termElem) {
-      return;
-    }
+    if (!feedsElem || !priceElem || !termElem) return;
 
-    var detents = getTeamDetents();
-    var feeds = detents[index];
-
-    feedsElem.textContent = index === detents.length - 1 ? feeds + '+' : String(feeds);
+    feedsElem.textContent = new Intl.NumberFormat().format(feeds);
     termElem.textContent = interval === 'year' ? 'per year' : 'per month';
 
-    var cached = teamDetentPrices[interval][index];
-    priceElem.textContent = cached || '…';
+    if (!pricing) {
+      priceElem.textContent = '…';
+      if (summaryPriceElem) summaryPriceElem.textContent = 'from …';
+      if (shouldAnnounce) config.disclosure.dataset.announceOnPrice = String(feeds);
+      return;
+    }
 
-    // The collapsed disclosure summary always shows the entry price ("from
-    // $X"), i.e. the lowest detent, so the cost is visible without opening it.
-    var summaryPriceElem = disclosure.querySelector('.capacity-summary-price');
+    var formattedPrice = formatMinorUnitTotal(
+      pricing.base + Math.max(0, feeds - config.min) * pricing.addOn,
+      pricing.currencyCode,
+    );
+    priceElem.textContent = formattedPrice;
+    if (summaryPriceElem) summaryPriceElem.textContent = 'from ' + formatMinorUnitTotal(pricing.base, pricing.currencyCode);
 
-    if (summaryPriceElem) {
-      var lowest = teamDetentPrices[interval][0];
-      summaryPriceElem.textContent = lowest ? 'from ' + lowest : 'from …';
+    if (shouldAnnounce) {
+      var announcement = config.disclosure.querySelector('.capacity-announcement');
+
+      if (announcement) {
+        announcement.textContent =
+          new Intl.NumberFormat().format(feeds) +
+          ' feeds, ' +
+          formattedPrice +
+          (interval === 'year' ? ' per year.' : ' per month.');
+      }
     }
   }
 
-  // Precompute the detent prices for the term once, then dragging is instant.
-  // Re-run while any detent is still unpriced (length short, or a prior attempt
-  // left blanks after a transient failure) so a single network blip doesn't
-  // permanently poison a detent for the session.
-  async function precomputeTeamDetentPrices(interval) {
-    var detents = getTeamDetents();
+  function selectedTeamCapacity(config) {
+    var selected = config.disclosure.querySelector('.capacity-option:checked');
+    var customInput = config.disclosure.querySelector('.capacity-input');
 
-    if (!detents.length) {
-      return;
-    }
+    return selected?.value === 'custom' ? parseInt(customInput?.value, 10) : parseInt(selected?.value, 10);
+  }
 
-    var current = teamDetentPrices[interval];
+  async function setupTeamCapacityPicker(interval) {
+    var config = getTeamCapacityConfig();
 
-    if (current.length === detents.length && current.every(Boolean)) {
-      return;
-    }
+    if (!config) return;
+
+    var selected = selectedTeamCapacity(config) || config.min;
+    renderTeamCapacity(selected, interval);
 
     try {
-      teamDetentPrices[interval] = await previewTeamDetentPrices(interval, detents);
+      await previewTeamCapacityPricing(interval, config);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Failed to preview Team capacity prices', interval, err);
     }
-  }
 
-  async function setupTeamCapacitySlider(interval) {
-    var slider = document.querySelector('.capacity-slider');
-
-    if (!slider) {
-      return;
-    }
-
-    renderTeamCapacity(parseInt(slider.value, 10), interval);
-    await precomputeTeamDetentPrices(interval);
-    // Re-read the live term after the await: a rapid toggle may have changed it
-    // while this interval's prices were loading, and rendering the captured
-    // interval would repaint the disclosure with the wrong term's prices.
     var liveInterval = document.getElementById('termToggle')?.checked ? 'year' : 'month';
-    renderTeamCapacity(parseInt(slider.value, 10), liveInterval);
+    var selectedFeeds = selectedTeamCapacity(config) || config.min;
+    var shouldAnnounce = config.disclosure.dataset.announceOnPrice === String(selectedFeeds);
 
-    if (!slider.dataset.bound) {
-      slider.dataset.bound = 'true';
-      slider.addEventListener('input', function () {
-        var currentInterval = document.getElementById('termToggle')?.checked ? 'year' : 'month';
-        renderTeamCapacity(parseInt(this.value, 10), currentInterval);
-      });
+    if (shouldAnnounce) delete config.disclosure.dataset.announceOnPrice;
+    renderTeamCapacity(selectedFeeds, liveInterval, shouldAnnounce);
+
+    if (config.disclosure.dataset.bound) return;
+    config.disclosure.dataset.bound = 'true';
+
+    var customPanel = config.disclosure.querySelector('.capacity-custom');
+    var customInput = config.disclosure.querySelector('.capacity-input');
+    var helper = config.disclosure.querySelector('.capacity-helper');
+    var options = config.disclosure.querySelectorAll('.capacity-option');
+    var rangeMessage = 'Choose a whole number from ' + config.min + ' to ' + new Intl.NumberFormat().format(config.max) + ' feeds.';
+
+    function updateCurrentCapacity(feeds, shouldAnnounce) {
+      var currentInterval = document.getElementById('termToggle')?.checked ? 'year' : 'month';
+      renderTeamCapacity(feeds, currentInterval, shouldAnnounce);
     }
+
+    options.forEach(function (option) {
+      option.addEventListener('change', function () {
+        var isCustom = this.value === 'custom';
+        customPanel?.classList.toggle('hidden', !isCustom);
+
+        if (isCustom) {
+          updateCurrentCapacity(parseInt(customInput?.value, 10) || config.min, true);
+        } else {
+          if (helper) helper.textContent = rangeMessage;
+          updateCurrentCapacity(parseInt(this.value, 10), true);
+        }
+      });
+    });
+
+    function commitCustomCapacity() {
+      var entered = Number(customInput?.value);
+      var valid = Number.isInteger(entered) && entered >= config.min && entered <= config.max;
+
+      if (!valid) {
+        if (helper) helper.textContent = rangeMessage;
+        customInput?.setAttribute('aria-invalid', 'true');
+        customInput.value = String(Math.min(config.max, Math.max(config.min, Number.isFinite(entered) ? entered : config.min)));
+      } else {
+        customInput?.removeAttribute('aria-invalid');
+        if (helper) helper.textContent = rangeMessage;
+      }
+
+      updateCurrentCapacity(parseInt(customInput?.value, 10), true);
+    }
+
+    customInput?.addEventListener('change', commitCustomCapacity);
+    customInput?.addEventListener('blur', commitCustomCapacity);
+    customInput?.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') this.blur();
+    });
   }
 
   window.addEventListener('load', function () {
@@ -664,10 +705,10 @@ const {
       var isYearly = this.checked;
 
       changeTerms(isYearly);
-      setupTeamCapacitySlider(isYearly ? 'year' : 'month');
+      setupTeamCapacityPicker(isYearly ? 'year' : 'month');
     });
 
     fetchAndSetDisplayPrices(termToggle?.checked ? 'yearly' : 'monthly');
-    setupTeamCapacitySlider(termToggle?.checked ? 'year' : 'month');
+    setupTeamCapacityPicker(termToggle?.checked ? 'year' : 'month');
   });
 </script>

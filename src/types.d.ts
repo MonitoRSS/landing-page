@@ -148,10 +148,10 @@ export interface Price {
   // Small word shown before the price (e.g. "from") for capacity-scaled plans
   // whose displayed price is a starting point, not a fixed amount.
   pricePrefix?: string;
-  // Capacity line shown under the price (e.g. "70 to 500 feeds").
+  // Capacity line shown under the price (e.g. "70 to 2,000 feeds").
   priceNote?: string;
-  // When set, renders a static capacity-scale visual (the workspace detents) so
-  // the marketing card conveys "this scales" without the app's live slider.
+  // When set, renders the workspace's quick-pick capacity options. Visitors can
+  // also enter any whole-feed capacity within the plan's advertised range.
   capacityScale?: Array<number>;
   items?: Array<Item>;
   callToAction?: CallToAction;
