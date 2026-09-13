@@ -1,0 +1,45 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Legal Changelog',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-8 sm:px-6 mx-auto lg:px-8 max-w-4xl">
+    <h1 class="text-3xl font-bold tracking-tight">Legal changelog</h1>
+    <p class="mt-4 text-muted">
+      Log of our legal documents by date.
+    </p>
+
+    <h2 class="mt-10 text-xl font-bold">From October 19, 2026</h2>
+    <ul class="mt-4 space-y-2 text-muted">
+      <li>
+        <a class="text-link underline" href="/legal/privacy">Privacy Policy</a>: October 19, 2026
+      </li>
+      <li>
+        <a class="text-link underline" href="/legal/terms">Terms and Conditions</a>: October 19, 2026
+      </li>
+      <li>
+        <a class="text-link underline" href="/legal/cookie">Cookie Policy</a>: September 12, 2026
+      </li>
+    </ul>
+    <p class="mt-4 text-muted">
+      Continued use after October 19, 2026 is subject to the updated documents. Questions: support@relayvale.com.
+    </p>
+
+    <h2 class="mt-10 text-xl font-bold">Until October 19, 2026</h2>
+    <ul class="mt-4 space-y-2 text-muted">
+      <li>
+        <a class="text-link underline" href="/privacy-policy">Privacy Policy</a>: September 29, 2023
+      </li>
+      <li>
+        <a class="text-link underline" href="/cookie-policy">Cookie Policy</a>: August 02, 2023
+      </li>
+      <li>
+        <a class="text-link underline" href="/terms">Terms and Conditions</a>: June 11, 2026
+      </li>
+    </ul>
+  </section>
+</Layout>

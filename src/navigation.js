@@ -118,6 +118,7 @@ export const footerData = {
         { text: 'Terms and Conditions', href: '/terms' },
         { text: 'Privacy Policy', href: '/privacy-policy' },
         { text: 'Cookie Policy', href: '/cookie-policy' },
+        { text: 'Consent Preferences', href: '#', className: 'termly-display-preferences' },
       ],
     },
     {

@@ -8,7 +8,8 @@ interface Link {
   href?: string;
   ariaLabel?: string;
   icon?: string;
-  external?: boolean
+  external?: boolean;
+  className?: string;
 }
 
 interface Links {
@@ -60,10 +61,10 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
             <div class="dark:text-default font-medium mb-2">{title}</div>
             {links && Array.isArray(links) && links.length > 0 && (
               <ul class="text-sm">
-                {links.map(({ text, href, ariaLabel, external }) => (
+                {links.map(({ text, href, ariaLabel, external, className }) => (
                   <li class="mb-2">
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-muted transition duration-150 ease-in-out"
+                      class={`text-muted hover:text-gray-700 hover:underline dark:text-muted transition duration-150 ease-in-out${className ? ` ${className}` : ''}`}
                       href={href}
                       aria-label={ariaLabel}
                       target={`${external ? '_blank' : ''}`}
