@@ -5,3 +5,8 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+[[redirects]]
+  from = "/cookie-policy"
+  to = "/legal/cookie"
+  status = 301
+  force = true

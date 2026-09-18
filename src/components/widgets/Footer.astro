@@ -104,9 +104,35 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
       <div class="text-sm mr-4 dark:text-muted">
         <Fragment set:html={footNote} />
+        <span data-relayvale hidden>© 2026 Relayvale LLC. MonitoRSS is operated by Relayvale LLC.</span>
       </div>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var isDevHost = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+    var isPreview = params.has('relayvale');
+    var cutover = isDevHost || isPreview || new Date() >= new Date('2026-10-19T00:00:00Z');
+    function setHidden(el, hide) {
+      var li = el.closest ? el.closest('li') : null;
+      (li || el).style.display = hide ? 'none' : '';
+    }
+    document.querySelectorAll('[data-relayvale]').forEach(function (el) {
+      el.hidden = !cutover;
+    });
+    if (cutover) {
+      document.querySelectorAll('.monitorss-only').forEach(function (el) {
+        setHidden(el, true);
+      });
+      document.querySelectorAll('.relayvale-only').forEach(function (el) {
+        el.classList.remove('hidden');
+        setHidden(el, false);
+      });
+    }
+  })();
+</script>
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>

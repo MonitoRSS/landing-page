@@ -1,6 +1,18 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/cookie-policy",
+      "destination": "/legal/cookie",
+      "permanent": true
+    },
+    {
+      "source": "/legal/cookie-policy",
+      "destination": "/legal/cookie",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/_astro/(.*)",

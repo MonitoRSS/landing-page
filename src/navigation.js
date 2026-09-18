@@ -117,7 +117,7 @@ export const footerData = {
       links: [
         { text: 'Terms and Conditions', href: '/terms' },
         { text: 'Privacy Policy', href: '/privacy-policy' },
-        { text: 'Cookie Policy', href: '/cookie-policy' },
+        { text: 'Cookie Policy', href: '/legal/cookie' },
         { text: 'Consent Preferences', href: '#', className: 'termly-display-preferences' },
       ],
     },
@@ -125,7 +125,7 @@ export const footerData = {
       title: 'Useful Links',
       links: [
         { text: 'Discord Support Server', href: 'https://discord.gg/pudv7Rx', external: true },
-        { text: 'GitHub', href: 'https://github.com/synzen/monitorss', external: true },
+        { text: 'GitHub (Open Source)', href: 'https://github.com/synzen/monitorss', external: true },
       ],
     },
     {
@@ -134,6 +134,12 @@ export const footerData = {
         {
           text: 'support@monitorss.xyz',
           href: 'mailto:support@monitorss.xyz',
+          className: 'monitorss-only',
+        },
+        {
+          text: 'support@relayvale.com',
+          href: 'mailto:support@relayvale.com',
+          className: 'relayvale-only hidden',
         },
       ],
     },

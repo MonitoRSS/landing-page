@@ -5,6 +5,17 @@ layout: '~/layouts/MarkdownLayout.astro'
 
 _Last updated_: June 11, 2026
 
+<div class="rounded-lg border p-4 text-sm">
+<p><strong>Notice:</strong> This version stays in effect through October 18, 2026.</p>
+<p>A new version effective on or after October 19, 2026 is available here: <a href="/legal/terms">Terms and Conditions</a>. Continued use on or after October 19, 2026 is subject to the new version.</p>
+</div>
+
+<script>
+  if (new Date() >= new Date('2026-10-19T00:00:00Z')) {
+    window.location.replace('/legal/terms');
+  }
+</script>
+
 These terms and conditions outline the rules and regulations for the use of MonitoRSS's official Website, located at https://monitorss.xyz and all its subdomains.
 
 By accessing this website we assume you accept these terms and conditions. Do not continue to use MonitoRSS if you do not agree to take all of the terms and conditions stated on this page.
