@@ -10,3 +10,13 @@
   to = "/legal/cookie"
   status = 301
   force = true
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/legal/privacy"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/terms"
+  to = "/legal/terms"
+  status = 301
+  force = true

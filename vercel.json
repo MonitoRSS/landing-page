@@ -11,6 +11,16 @@
       "source": "/legal/cookie-policy",
       "destination": "/legal/cookie",
       "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/legal/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/legal/terms",
+      "permanent": true
     }
   ],
   "headers": [

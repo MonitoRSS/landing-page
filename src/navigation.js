@@ -115,8 +115,8 @@ export const footerData = {
     {
       title: 'Information',
       links: [
-        { text: 'Terms and Conditions', href: '/terms' },
-        { text: 'Privacy Policy', href: '/privacy-policy' },
+        { text: 'Terms and Conditions', href: '/legal/terms' },
+        { text: 'Privacy Policy', href: '/legal/privacy' },
         { text: 'Cookie Policy', href: '/legal/cookie' },
         { text: 'Consent Preferences', href: '#', className: 'termly-display-preferences' },
       ],
